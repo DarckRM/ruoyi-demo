@@ -1,4 +1,4 @@
-package com.ruoyi.system.controller;
+package com.ruoyi.web.controller.cinema;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.ruoyi.system.domain;
+package com.ruoyi.system.domain.cinema;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,16 +29,27 @@ public class Showtimes extends BaseEntity
     private Long auditoriumId;
 
     /** 放映时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "放映时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Excel(name = "放映时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm")
     private Date startTime;
 
     /** 退场时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "退场时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Excel(name = "退场时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm")
     private Date endTime;
 
-    public void setShowtimeId(Long showtimeId) 
+    public Showtimes(Long filmId, Long auditoriumId, Date startTime, Date endTime) {
+        this.filmId = filmId;
+        this.auditoriumId = auditoriumId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public Showtimes() {
+
+    }
+
+    public void setShowtimeId(Long showtimeId)
     {
         this.showtimeId = showtimeId;
     }

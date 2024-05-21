@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.Showtimes;
+import com.ruoyi.system.domain.cinema.Showtimes;
 
 /**
  * 放映Service接口

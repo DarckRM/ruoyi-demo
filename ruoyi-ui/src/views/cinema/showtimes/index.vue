@@ -20,7 +20,7 @@
       <el-form-item label="放映时间" prop="startTime">
         <el-date-picker clearable
           v-model="queryParams.startTime"
-          type="date"
+          type="datetime"
           value-format="yyyy-MM-dd"
           placeholder="请选择放映时间">
         </el-date-picker>
@@ -28,7 +28,7 @@
       <el-form-item label="退场时间" prop="endTime">
         <el-date-picker clearable
           v-model="queryParams.endTime"
-          type="date"
+          type="datetime"
           value-format="yyyy-MM-dd"
           placeholder="请选择退场时间">
         </el-date-picker>
@@ -92,12 +92,12 @@
       <el-table-column label="影厅 ID" align="center" prop="auditoriumId" />
       <el-table-column label="放映时间" align="center" prop="startTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="退场时间" align="center" prop="endTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.endTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.endTime, '{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -140,16 +140,16 @@
         <el-form-item label="放映时间" prop="startTime">
           <el-date-picker clearable
             v-model="form.startTime"
-            type="date"
-            value-format="yyyy-MM-dd"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择放映时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="退场时间" prop="endTime">
           <el-date-picker clearable
             v-model="form.endTime"
-            type="date"
-            value-format="yyyy-MM-dd"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择退场时间">
           </el-date-picker>
         </el-form-item>

@@ -1,4 +1,4 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.system.mapper.cinema;
 
 import java.util.List;
 import com.ruoyi.system.domain.Seats;
@@ -58,4 +58,11 @@ public interface SeatsMapper
      * @return 结果
      */
     public int deleteSeatsBySeatIds(Long[] seatIds);
+
+    /**
+     * 根据 auditoriumId 统计座位数
+     * @param auditoriumId 影厅 Id
+     * @return int
+     */
+    public int countSeatsByAuditorium(Long auditoriumId);
 }

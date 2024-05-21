@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.SeatsMapper">
-    
-    <resultMap type="Seats" id="SeatsResult">
+<mapper namespace="com.ruoyi.system.mapper.cinema.SeatsMapper">
+
+    <resultMap type="com.ruoyi.system.domain.Seats" id="SeatsResult">
         <result property="seatId"    column="seat_id"    />
         <result property="auditoriumId"    column="auditorium_id"    />
         <result property="rowNumber"    column="row_number"    />
@@ -12,28 +12,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectSeatsVo">
-        select seat_id, auditorium_id, row_number, seat_number from seats
+        select seat_id, auditorium_id, `row_number`, seat_number from seats
     </sql>
 
-    <select id="selectSeatsList" parameterType="Seats" resultMap="SeatsResult">
+    <select id="selectSeatsList" parameterType="com.ruoyi.system.domain.Seats" resultMap="SeatsResult">
         <include refid="selectSeatsVo"/>
-        <where>  
+        <where>
             <if test="auditoriumId != null "> and auditorium_id = #{auditoriumId}</if>
-            <if test="rowNumber != null "> and row_number = #{rowNumber}</if>
+            <if test="rowNumber != null "> and `row_number` = #{rowNumber}</if>
             <if test="seatNumber != null "> and seat_number = #{seatNumber}</if>
         </where>
     </select>
-    
+
     <select id="selectSeatsBySeatId" parameterType="Long" resultMap="SeatsResult">
         <include refid="selectSeatsVo"/>
         where seat_id = #{seatId}
     </select>
-        
-    <insert id="insertSeats" parameterType="Seats" useGeneratedKeys="true" keyProperty="seatId">
+
+    <insert id="insertSeats" parameterType="com.ruoyi.system.domain.Seats" useGeneratedKeys="true" keyProperty="seatId">
         insert into seats
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="auditoriumId != null">auditorium_id,</if>
-            <if test="rowNumber != null">row_number,</if>
+            <if test="rowNumber != null">`row_number`,</if>
             <if test="seatNumber != null">seat_number,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -43,11 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateSeats" parameterType="Seats">
+    <update id="updateSeats" parameterType="com.ruoyi.system.domain.Seats">
         update seats
         <trim prefix="SET" suffixOverrides=",">
             <if test="auditoriumId != null">auditorium_id = #{auditoriumId},</if>
-            <if test="rowNumber != null">row_number = #{rowNumber},</if>
+            <if test="rowNumber != null">`row_number` = #{rowNumber},</if>
             <if test="seatNumber != null">seat_number = #{seatNumber},</if>
         </trim>
         where seat_id = #{seatId}
@@ -58,9 +58,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSeatsBySeatIds" parameterType="String">
-        delete from seats where seat_id in 
+        delete from seats where seat_id in
         <foreach item="seatId" collection="array" open="(" separator="," close=")">
             #{seatId}
         </foreach>
     </delete>
+
+    <select id="countSeatsByAuditorium" parameterType="Long" resultType="Integer">
+        select count(seat_id) from seats where auditorium_id = #{auditoriumId}
+    </select>
 </mapper>

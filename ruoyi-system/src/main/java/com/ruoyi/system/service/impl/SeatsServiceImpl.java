@@ -1,9 +1,15 @@
 package com.ruoyi.system.service.impl;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+
+import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.system.domain.cinema.Auditoriums;
+import com.ruoyi.system.mapper.AuditoriumsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.SeatsMapper;
+import com.ruoyi.system.mapper.cinema.SeatsMapper;
 import com.ruoyi.system.domain.Seats;
 import com.ruoyi.system.service.ISeatsService;
 
@@ -18,6 +24,9 @@ public class SeatsServiceImpl implements ISeatsService
 {
     @Autowired
     private SeatsMapper seatsMapper;
+
+    @Autowired
+    private AuditoriumsMapper auditoriumsMapper;
 
     /**
      * 查询座位
@@ -52,7 +61,19 @@ public class SeatsServiceImpl implements ISeatsService
     @Override
     public int insertSeats(Seats seats)
     {
-        return seatsMapper.insertSeats(seats);
+        Auditoriums auditorium = auditoriumsMapper.selectAuditoriumsByAuditoriumId(seats.getAuditoriumId());
+        if (auditorium == null) {
+            throw new ServiceException("不存在的影厅");
+        }
+        int capacity = seatsMapper.countSeatsByAuditorium(seats.getAuditoriumId());
+        if (capacity >= auditorium.getCapacity()) {
+            throw new ServiceException("该影厅座位容量已满");
+        }
+        try {
+            return seatsMapper.insertSeats(seats);
+        } catch (DuplicateKeyException e) {
+            throw new ServiceException("该影厅中存在重复座位");
+        }
     }
 
     /**

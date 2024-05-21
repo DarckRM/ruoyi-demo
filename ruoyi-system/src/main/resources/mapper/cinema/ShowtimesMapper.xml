@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.ShowtimesMapper">
-    
-    <resultMap type="Showtimes" id="ShowtimesResult">
+<mapper namespace="com.ruoyi.system.mapper.cinema.ShowtimesMapper">
+
+    <resultMap type="com.ruoyi.system.domain.cinema.Showtimes" id="ShowtimesResult">
         <result property="showtimeId"    column="showtime_id"    />
         <result property="filmId"    column="film_id"    />
         <result property="auditoriumId"    column="auditorium_id"    />
@@ -18,19 +18,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectShowtimesList" parameterType="Showtimes" resultMap="ShowtimesResult">
         <include refid="selectShowtimesVo"/>
-        <where>  
+        <where>
             <if test="filmId != null "> and film_id = #{filmId}</if>
             <if test="auditoriumId != null "> and auditorium_id = #{auditoriumId}</if>
-            <if test="startTime != null "> and start_time = #{startTime}</if>
-            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="startTime != null and endTime != null">
+                and (start_time >= #{startTime}) and (end_time &lt;= #{endTime})
+            </if>
         </where>
     </select>
-    
+
     <select id="selectShowtimesByShowtimeId" parameterType="Long" resultMap="ShowtimesResult">
         <include refid="selectShowtimesVo"/>
         where showtime_id = #{showtimeId}
     </select>
-        
+
     <insert id="insertShowtimes" parameterType="Showtimes" useGeneratedKeys="true" keyProperty="showtimeId">
         insert into showtimes
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -63,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteShowtimesByShowtimeIds" parameterType="String">
-        delete from showtimes where showtime_id in 
+        delete from showtimes where showtime_id in
         <foreach item="showtimeId" collection="array" open="(" separator="," close=")">
             #{showtimeId}
         </foreach>

@@ -1,7 +1,7 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.system.mapper.cinema;
 
 import java.util.List;
-import com.ruoyi.system.domain.Showtimes;
+import com.ruoyi.system.domain.cinema.Showtimes;
 
 /**
  * 放映Mapper接口
