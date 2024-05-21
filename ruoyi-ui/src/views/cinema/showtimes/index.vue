@@ -2,34 +2,19 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="影片 ID" prop="filmId">
-        <el-input
-          v-model="queryParams.filmId"
-          placeholder="请输入影片 ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.filmId" placeholder="请输入影片 ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="影厅 ID" prop="auditoriumId">
-        <el-input
-          v-model="queryParams.auditoriumId"
-          placeholder="请输入影厅 ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.auditoriumId" placeholder="请输入影厅 ID" clearable
+          @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="放映时间" prop="startTime">
-        <el-date-picker clearable
-          v-model="queryParams.startTime"
-          type="datetime"
-          value-format="yyyy-MM-dd"
+        <el-date-picker clearable v-model="queryParams.startTime" type="datetime" value-format="yyyy-MM-dd"
           placeholder="请选择放映时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="退场时间" prop="endTime">
-        <el-date-picker clearable
-          v-model="queryParams.endTime"
-          type="datetime"
-          value-format="yyyy-MM-dd"
+        <el-date-picker clearable v-model="queryParams.endTime" type="datetime" value-format="yyyy-MM-dd"
           placeholder="请选择退场时间">
         </el-date-picker>
       </el-form-item>
@@ -41,46 +26,24 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          v-hasPermi="['cinema:showtimes:add']"
-        >新增</el-button>
+        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
+          v-hasPermi="['cinema:showtimes:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['cinema:showtimes:edit']"
-        >修改</el-button>
+        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
+          v-hasPermi="['cinema:showtimes:edit']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['cinema:showtimes:remove']"
-        >删除</el-button>
+        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['cinema:showtimes:remove']">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['cinema:showtimes:export']"
-        >导出</el-button>
+        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
+          v-hasPermi="['cinema:showtimes:export']">导出</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button type="mini" plain icon="el-icon-download" size="mini" @click="handleAutoArrange"
+          v-hasPermi="['cinema:arrange:auto']">自动排片</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -102,31 +65,16 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['cinema:showtimes:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['cinema:showtimes:remove']"
-          >删除</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+            v-hasPermi="['cinema:showtimes:edit']">修改</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
+            v-hasPermi="['cinema:showtimes:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+
+    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 添加或修改放映对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -138,18 +86,12 @@
           <el-input v-model="form.auditoriumId" placeholder="请输入影厅 ID" />
         </el-form-item>
         <el-form-item label="放映时间" prop="startTime">
-          <el-date-picker clearable
-            v-model="form.startTime"
-            type="datetime"
-            value-format="yyyy-MM-dd HH:mm"
+          <el-date-picker clearable v-model="form.startTime" type="datetime" value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择放映时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="退场时间" prop="endTime">
-          <el-date-picker clearable
-            v-model="form.endTime"
-            type="datetime"
-            value-format="yyyy-MM-dd HH:mm"
+          <el-date-picker clearable v-model="form.endTime" type="datetime" value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择退场时间">
           </el-date-picker>
         </el-form-item>
@@ -159,11 +101,78 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog title="自动排片" :visible.sync="openArrange" width="600px" append-to-body>
+      <el-form ref="arrangeSetting" :model="arrangeSetting" label-width="80px">
+        <el-form-item label="选择影厅">
+          <el-select v-model="arrangeSetting.auditoriumPool" multiple>
+            <el-option v-for="auditorium in rooms" :key="auditorium" :value="auditorium">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="选择影片">
+          <el-select value-key="filmId" v-model="arrangeSetting.filmPool" multiple>
+            <el-option v-for="film in films" :label="film.filmId" :key="film.filmId" :value="film">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="起始日">
+          <el-date-picker clearable v-model="arrangeSetting.periodStart" type="date" value-format="yyyy-MM-dd"
+            placeholder="请选择起始日">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="结束日">
+          <el-date-picker clearable v-model="arrangeSetting.periodEnd" type="date" value-format="yyyy-MM-dd"
+            placeholder="请选择结束日">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="入场时间" prop="prepareTime">
+          <el-input type="number" v-model="arrangeSetting.prepareTime" />
+        </el-form-item>
+        <el-form-item label="退场时间" prop="leaveTime">
+          <el-input type="number" v-model="arrangeSetting.leaveTime" />
+        </el-form-item>
+        <el-form-item label="开馆时间" prop="openTime">
+          <el-input v-model="arrangeSetting.openTime" />
+        </el-form-item>
+        <el-form-item label="闭馆时间" prop="closeTime">
+          <el-input v-model="arrangeSetting.closeTime" />
+        </el-form-item>
+      </el-form>
+      <el-button type="primary" @click="autoArrange">开始排片</el-button>
+      <el-button type="primary" @click="">确定</el-button>
+      <el-card title="预览" style="margin-top: 5px">
+        <div slot="header">
+          排片预览
+        </div>
+        <el-tabs>
+          <el-tab-pane style="max-height: 300px; overflow: auto;" v-for="room in arrangeSetting.auditoriumPool" :label="'影厅 ' + room"
+            :name="'影厅' + room">
+            <el-card style="margin: 5px" v-for="plan in arranges[room]">
+              <el-row>
+                <el-col :span="2">
+                  {{ plan.filmId }}
+                </el-col>
+                <el-col :span="5">
+                  {{ plan.duration }} 分钟
+                </el-col>
+                <el-col :span="8">
+                  {{ parseTime(plan.startTime, '{y}-{m}-{d} {h}:{i}') }}
+                </el-col>
+                <el-col :span="8">
+                  {{ parseTime(plan.endTime, '{y}-{m}-{d} {h}:{i}') }} <span style="color: red" v-if="plan.showtimeId != null">存在</span>
+                </el-col>
+              </el-row>
+            </el-card>
+          </el-tab-pane>
+        </el-tabs>
+      </el-card>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { listShowtimes, getShowtimes, delShowtimes, addShowtimes, updateShowtimes } from "@/api/cinema/showtimes";
+import { listShowtimes, getShowtimes, delShowtimes, addShowtimes, updateShowtimes, autoArrange } from "@/api/cinema/showtimes";
 
 export default {
   name: "Showtimes",
@@ -187,6 +196,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      openArrange: false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -196,6 +206,30 @@ export default {
         startTime: null,
         endTime: null
       },
+      arrangeSetting: {
+        auditoriumPool: [],
+        filmPool: []
+      },
+      arranges: {},
+      rooms: [1, 2],
+      films: [
+        {
+          filmId: 1,
+          duration: 120,
+          min: 0,
+          max: 0
+        }, {
+          filmId: 2,
+          duration: 240,
+          min: 0,
+          max: 0
+        }, {
+          filmId: 4,
+          duration: 143,
+          min: 0,
+          max: 0
+        }
+      ],
       // 表单参数
       form: {},
       // 表单校验
@@ -238,6 +272,20 @@ export default {
       };
       this.resetForm("form");
     },
+    handleAutoArrange() {
+      this.openArrange = true;
+    },
+    autoArrange() {
+      autoArrange(this.arrangeSetting).then(resp => {
+        resp.data.forEach((v) => {
+          if (this.arranges[v.auditoriumId] == undefined) {
+            this.arranges[v.auditoriumId] = []
+          }
+          this.arranges[v.auditoriumId].push(v)
+        })
+        console.log(this.arranges)
+      })
+    },
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
@@ -251,7 +299,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.showtimeId)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -293,12 +341,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const showtimeIds = row.showtimeId || this.ids;
-      this.$modal.confirm('是否确认删除放映编号为"' + showtimeIds + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除放映编号为"' + showtimeIds + '"的数据项？').then(function () {
         return delShowtimes(showtimeIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => { });
     },
     /** 导出按钮操作 */
     handleExport() {

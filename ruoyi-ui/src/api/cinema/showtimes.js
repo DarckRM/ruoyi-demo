@@ -42,3 +42,11 @@ export function delShowtimes(showtimeId) {
     method: 'delete'
   })
 }
+
+export function autoArrange(data) {
+  return request({
+    url: '/cinema/arrange/auto',
+    method: 'post',
+    data: data
+  })
+}

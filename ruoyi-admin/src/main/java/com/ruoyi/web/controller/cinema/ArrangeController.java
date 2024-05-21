@@ -25,26 +25,7 @@ public class ArrangeController {
 
     @PostMapping("/auto")
     public AjaxResult autoArrange(@RequestBody ArrangeSetting setting) {
-
-        List<Long> aPool = new ArrayList<>();
-        aPool.add(1L);
-        aPool.add(2L);
-        List<FilmRule> fPoll = new ArrayList<>();
-        fPoll.add(new FilmRule(1L, 120, 0, 0));
-        fPoll.add(new FilmRule(2L, 90, 0, 0));
-        fPoll.add(new FilmRule(3L, 160, 0, 0));
-        fPoll.add(new FilmRule(4L, 220, 0, 0));
-        setting.setAuditoriumPool(aPool);
-        setting.setFilmPool(fPoll);
-        setting.setCloseTime("20:00");
-        setting.setOpenTime("07:00");
-        setting.setPeriodStart(DateUtils.addHours(DateUtils.getNowDate(), -4));
-        setting.setPeriodEnd(DateUtils.getNowDate());
-        setting.setPrepareTime(5);
-        setting.setLeaveTime(5);
-
-        arrange(setting);
-        return null;
+        return AjaxResult.success(arrange(setting));
     }
 
     public List<Showtimes> arrange(ArrangeSetting setting) {
