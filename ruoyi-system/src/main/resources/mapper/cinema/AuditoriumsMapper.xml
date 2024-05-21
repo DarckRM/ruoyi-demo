@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.AuditoriumsMapper">
+    
+    <resultMap type="Auditoriums" id="AuditoriumsResult">
+        <result property="auditoriumId"    column="auditorium_id"    />
+        <result property="name"    column="name"    />
+        <result property="capacity"    column="capacity"    />
+    </resultMap>
+
+    <sql id="selectAuditoriumsVo">
+        select auditorium_id, name, capacity from auditoriums
+    </sql>
+
+    <select id="selectAuditoriumsList" parameterType="Auditoriums" resultMap="AuditoriumsResult">
+        <include refid="selectAuditoriumsVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="capacity != null "> and capacity = #{capacity}</if>
+        </where>
+    </select>
+    
+    <select id="selectAuditoriumsByAuditoriumId" parameterType="Long" resultMap="AuditoriumsResult">
+        <include refid="selectAuditoriumsVo"/>
+        where auditorium_id = #{auditoriumId}
+    </select>
+        
+    <insert id="insertAuditoriums" parameterType="Auditoriums" useGeneratedKeys="true" keyProperty="auditoriumId">
+        insert into auditoriums
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="capacity != null">capacity,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="capacity != null">#{capacity},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAuditoriums" parameterType="Auditoriums">
+        update auditoriums
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="capacity != null">capacity = #{capacity},</if>
+        </trim>
+        where auditorium_id = #{auditoriumId}
+    </update>
+
+    <delete id="deleteAuditoriumsByAuditoriumId" parameterType="Long">
+        delete from auditoriums where auditorium_id = #{auditoriumId}
+    </delete>
+
+    <delete id="deleteAuditoriumsByAuditoriumIds" parameterType="String">
+        delete from auditoriums where auditorium_id in 
+        <foreach item="auditoriumId" collection="array" open="(" separator="," close=")">
+            #{auditoriumId}
+        </foreach>
+    </delete>
+</mapper>

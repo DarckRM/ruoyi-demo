@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MembersMapper">
+    
+    <resultMap type="Members" id="MembersResult">
+        <result property="memberId"    column="member_id"    />
+        <result property="name"    column="name"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="membershipDate"    column="membership_date"    />
+    </resultMap>
+
+    <sql id="selectMembersVo">
+        select member_id, name, email, phone, membership_date from members
+    </sql>
+
+    <select id="selectMembersList" parameterType="Members" resultMap="MembersResult">
+        <include refid="selectMembersVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="membershipDate != null "> and membership_date = #{membershipDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectMembersByMemberId" parameterType="Long" resultMap="MembersResult">
+        <include refid="selectMembersVo"/>
+        where member_id = #{memberId}
+    </select>
+        
+    <insert id="insertMembers" parameterType="Members" useGeneratedKeys="true" keyProperty="memberId">
+        insert into members
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="email != null">email,</if>
+            <if test="phone != null">phone,</if>
+            <if test="membershipDate != null">membership_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="membershipDate != null">#{membershipDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMembers" parameterType="Members">
+        update members
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="membershipDate != null">membership_date = #{membershipDate},</if>
+        </trim>
+        where member_id = #{memberId}
+    </update>
+
+    <delete id="deleteMembersByMemberId" parameterType="Long">
+        delete from members where member_id = #{memberId}
+    </delete>
+
+    <delete id="deleteMembersByMemberIds" parameterType="String">
+        delete from members where member_id in 
+        <foreach item="memberId" collection="array" open="(" separator="," close=")">
+            #{memberId}
+        </foreach>
+    </delete>
+</mapper>

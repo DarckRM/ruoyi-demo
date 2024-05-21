@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ShowtimesMapper">
+    
+    <resultMap type="Showtimes" id="ShowtimesResult">
+        <result property="showtimeId"    column="showtime_id"    />
+        <result property="filmId"    column="film_id"    />
+        <result property="auditoriumId"    column="auditorium_id"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+    </resultMap>
+
+    <sql id="selectShowtimesVo">
+        select showtime_id, film_id, auditorium_id, start_time, end_time from showtimes
+    </sql>
+
+    <select id="selectShowtimesList" parameterType="Showtimes" resultMap="ShowtimesResult">
+        <include refid="selectShowtimesVo"/>
+        <where>  
+            <if test="filmId != null "> and film_id = #{filmId}</if>
+            <if test="auditoriumId != null "> and auditorium_id = #{auditoriumId}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectShowtimesByShowtimeId" parameterType="Long" resultMap="ShowtimesResult">
+        <include refid="selectShowtimesVo"/>
+        where showtime_id = #{showtimeId}
+    </select>
+        
+    <insert id="insertShowtimes" parameterType="Showtimes" useGeneratedKeys="true" keyProperty="showtimeId">
+        insert into showtimes
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="filmId != null">film_id,</if>
+            <if test="auditoriumId != null">auditorium_id,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="filmId != null">#{filmId},</if>
+            <if test="auditoriumId != null">#{auditoriumId},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateShowtimes" parameterType="Showtimes">
+        update showtimes
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="filmId != null">film_id = #{filmId},</if>
+            <if test="auditoriumId != null">auditorium_id = #{auditoriumId},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+        </trim>
+        where showtime_id = #{showtimeId}
+    </update>
+
+    <delete id="deleteShowtimesByShowtimeId" parameterType="Long">
+        delete from showtimes where showtime_id = #{showtimeId}
+    </delete>
+
+    <delete id="deleteShowtimesByShowtimeIds" parameterType="String">
+        delete from showtimes where showtime_id in 
+        <foreach item="showtimeId" collection="array" open="(" separator="," close=")">
+            #{showtimeId}
+        </foreach>
+    </delete>
+</mapper>

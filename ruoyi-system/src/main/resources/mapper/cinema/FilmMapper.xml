@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.cinema.FilmMapper">
+    
+    <resultMap type="com.ruoyi.system.domain.cinema.Film" id="FilmsResult">
+        <result property="filmId"    column="film_id"    />
+        <result property="title"    column="title"    />
+        <result property="genre"    column="genre"    />
+        <result property="duration"    column="duration"    />
+        <result property="releaseDate"    column="release_date"    />
+    </resultMap>
+
+    <sql id="selectFilmsVo">
+        select film_id, title, genre, duration, release_date from film
+    </sql>
+
+    <select id="selectFilmsList" parameterType="com.ruoyi.system.domain.cinema.Film" resultMap="FilmsResult">
+        <include refid="selectFilmsVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="genre != null  and genre != ''"> and genre = #{genre}</if>
+            <if test="duration != null "> and duration = #{duration}</if>
+            <if test="releaseDate != null "> and release_date = #{releaseDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectFilmsByFilmId" parameterType="Long" resultMap="FilmsResult">
+        <include refid="selectFilmsVo"/>
+        where film_id = #{filmId}
+    </select>
+        
+    <insert id="insertFilms" parameterType="com.ruoyi.system.domain.cinema.Film" useGeneratedKeys="true" keyProperty="filmId">
+        insert into film
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="genre != null">genre,</if>
+            <if test="duration != null">duration,</if>
+            <if test="releaseDate != null">release_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="genre != null">#{genre},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="releaseDate != null">#{releaseDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFilms" parameterType="com.ruoyi.system.domain.cinema.Film">
+        update film
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="genre != null">genre = #{genre},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="releaseDate != null">release_date = #{releaseDate},</if>
+        </trim>
+        where film_id = #{filmId}
+    </update>
+
+    <delete id="deleteFilmsByFilmId" parameterType="Long">
+        delete from film where film_id = #{filmId}
+    </delete>
+
+    <delete id="deleteFilmsByFilmIds" parameterType="String">
+        delete from film where film_id in
+        <foreach item="filmId" collection="array" open="(" separator="," close=")">
+            #{filmId}
+        </foreach>
+    </delete>
+</mapper>
