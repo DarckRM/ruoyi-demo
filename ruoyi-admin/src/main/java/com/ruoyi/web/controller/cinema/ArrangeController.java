@@ -38,7 +38,7 @@ public class ArrangeController {
         setting.setFilmPool(fPoll);
         setting.setCloseTime("20:00");
         setting.setOpenTime("07:00");
-        setting.setPeriodStart(DateUtils.addHours(DateUtils.getNowDate(), -50));
+        setting.setPeriodStart(DateUtils.addHours(DateUtils.getNowDate(), -4));
         setting.setPeriodEnd(DateUtils.getNowDate());
         setting.setPrepareTime(5);
         setting.setLeaveTime(5);
@@ -60,15 +60,18 @@ public class ArrangeController {
             Date begin = DateUtils.parseDate(thatDay + setting.getOpenTime());
             Date end = DateUtils.parseDate(thatDay + setting.getCloseTime());
 
-            // 查询该天内存在的排片计划
-            Showtimes show = new Showtimes();
-            show.setStartTime(begin);
-            show.setEndTime(end);
-            List<Showtimes> shows = new ArrayList<>(showtimesService.selectShowtimesList(show));
+            // 查询该天内某影厅存在的排片计划
+            for (long room : setting.getAuditoriumPool()) {
+                Showtimes show = new Showtimes();
+                show.setAuditoriumId(room);
+                show.setStartTime(begin);
+                show.setEndTime(end);
+                List<Showtimes> shows = new ArrayList<>(showtimesService.selectShowtimesList(show));
 
-            arrangeByDay(shows, setting, begin, end);
+                shows = arrangeByDay(shows, setting, begin, end, room);
+                allShows.addAll(shows);
+            }
 
-            allShows.addAll(shows);
             days -= 1;
             offset += 1;
         }
@@ -76,61 +79,91 @@ public class ArrangeController {
         return allShows;
     }
 
-    private List<Showtimes> arrangeByDay(List<Showtimes> shows, ArrangeSetting setting, Date begin, Date end) {
-        // 格式化时间
-        String prefix = "YYYY-MM-dd ";
+    private List<Showtimes> arrangeByDay(List<Showtimes> showsIn, ArrangeSetting setting, Date begin, Date end, long room) {
+        if (setting.getFilmPool().isEmpty())
+            return showsIn;
+
         // 按照放映时间排序
         Date todayBegin = begin;
         Date todayEnd = end;
+        // 一些全局控制用的变量
+        int minDuration = setting.getFilmPool().stream().min(Comparator.comparing(FilmRule::getDuration)).get().getDuration();
+        int allDuration = (int) ((todayEnd.getTime() - todayBegin.getTime()) / 1000 / 60);
 
-        if (shows.size() != 0) {
-            shows = shows.stream().sorted(Comparator.comparing(Showtimes::getStartTime)).collect(Collectors.toList());
+        if (!showsIn.isEmpty()) {
+            // 在有未知的放映安排下预校验
+            for (Showtimes show : showsIn)
+                allDuration -= show.getDuration();
+            if (allDuration < minDuration)
+                return showsIn;
+
+            showsIn = showsIn.stream().sorted(Comparator.comparing(Showtimes::getStartTime)).collect(Collectors.toList());
             // 更新一次排片特殊规则
-            for (Showtimes show : shows)
+            for (Showtimes show : showsIn)
                 updateRule(setting, show.getFilmId());
         }
 
-        for (Long room : setting.getAuditoriumPool()) {
-            int duration = 1;
-            int index = 0;
-            begin = todayBegin;
+        List<Showtimes> shows = new ArrayList<>();
+        int duration = 1;
+        int index = 0;
+        begin = todayBegin;
 
-            // 对于存在已有拍片计划的情况，移标的首次末尾是拍片计划最早的放映时间
+        // 对于存在已有拍片计划的情况，移标的首次末尾是拍片计划最早的放映时间
+        if (!showsIn.isEmpty()) {
+            shows.addAll(showsIn);
             end = shows.get(0).getStartTime();
+        }
 
-            while (duration >= 0) {
-                // 以分钟为单位
+        while (true) {
+            // 插入了新的放映计划
+            boolean insert = false;
+            // 以分钟为单位
+            for (FilmRule rule : setting.getFilmPool()) {
                 duration = (int) ((end.getTime() - begin.getTime()) / 1000 / 60);
-                for (FilmRule rule : setting.getFilmPool()) {
-                    if (rule.getDuration() > duration)
-                        continue;
+                if (setting.getPrepareTime() + rule.getDuration() + setting.getLeaveTime() > duration)
+                    continue;
 
-                    // 加上入场散场时间
-                    long showDuration = (setting.getPrepareTime() + rule.getDuration() + setting.getLeaveTime());
-                    Date next = new Date(begin.getTime() + showDuration * 60 * 1000);
+                // 加上入场散场时间
+                long showDuration = (setting.getPrepareTime() + rule.getDuration() + setting.getLeaveTime());
+                Date next = new Date(begin.getTime() + showDuration * 60 * 1000);
 
-                    // 生成一个新的放映计划
-                    Showtimes show = new Showtimes(rule.getFilmId(), room, begin, next);
-                    shows.add(index, show);
+                // 生成一个新的放映计划
+                Showtimes show = new Showtimes(rule.getFilmId(), room, begin, next);
+                shows.add(index, show);
+                insert = true;
 
-                    // 下一轮排片修正起始时间
-                    begin = show.getEndTime();
-                    index += 1;
+                // 下一轮排片修正游标
+                begin = show.getEndTime();
+                if (shows.size() - 1 > index) {
+                    end = shows.get(index + 1).getStartTime();
+                } else {
+                    end = todayEnd;
                 }
-                // 如果当前排片游标大于影院关门时间，说明还有余位
-                if (shows.get(index - 1).getEndTime().getTime() < todayEnd.getTime()) {
-                    // 处理存在其它排片计划的情况
-                    if (shows.size() - 1 > index) {
-                        begin = end;
-                        Showtimes show = shows.get(index + 1);
-                        end = show.getStartTime();
-                    } else {
-                        end = todayEnd;
-                    }
+                index += 1;
+            }
+
+            if (end == todayEnd && !insert)
+                return shows;
+            if (index == shows.size())
+                continue;
+
+            begin = shows.get(index).getEndTime();
+            if (shows.size() - 1 > index) {
+                end = shows.get(index + 1).getStartTime();
+                index += 1;
+            }
+            else {
+                Showtimes last = shows.get(index);
+                if (last.getEndTime().getTime() - todayEnd.getTime() < 0 && !insert) {
+                    begin = shows.get(index - 1).getEndTime();
+                    end = last.getStartTime();
+                } else {
+                    begin = last.getEndTime();
+                    end = todayEnd;
+                    index += 1;
                 }
             }
         }
-        return shows;
     }
 
     private ArrangeSetting updateRule(ArrangeSetting setting, Long filmId) {
