@@ -130,8 +130,11 @@
         <el-form-item label="会员 ID" prop="memberId">
           <el-input v-model="form.memberId" placeholder="请输入会员 ID" />
         </el-form-item>
-        <el-form-item label="放映 ID" prop="showtimeId">
-          <el-input v-model="form.showtimeId" placeholder="请输入放映 ID" />
+        <el-form-item label="选择场次">
+          <el-select @change="changeShow" v-model="form.showtimeId">
+            <el-option v-for="show in shows" :key="show.showtimeId" :value="show.showtimeId">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="座位 ID" prop="seatId">
           <el-input v-model="form.seatId" placeholder="请输入座位 ID" />
@@ -154,7 +157,7 @@
 </template>
 
 <script>
-import { listOrders, getOrders, delOrders, addOrders, updateOrders } from "@/api/cinema/orders";
+import { listOrders, getOrders, delOrders, addOrders, updateOrders, getSeats, getAvailableShow } from "@/api/cinema/orders";
 
 export default {
   name: "Orders",
@@ -191,11 +194,14 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      shows: [],
+      seats: {}
     };
   },
   created() {
     this.getList();
+    this.getShows();
   },
   methods: {
     /** 查询订单列表 */
@@ -222,6 +228,22 @@ export default {
         bookingTime: null
       };
       this.resetForm("form");
+    },
+    changeShow() {
+      getSeats(this.form.showtimeId).then(resp => {
+        resp.data.forEach((v) => {
+          if (this.seats[v.rowNmber] == undefined) {
+            this.seats[v.rowNumber] = []
+          }
+          this.seats[v.rowNumber].push(v.seatId)
+        })
+      })
+      console.log(this.seats)
+    },
+    getShows() {
+      getAvailableShow().then(resp => {
+        this.shows = resp.data
+      })
     },
     /** 搜索按钮操作 */
     handleQuery() {

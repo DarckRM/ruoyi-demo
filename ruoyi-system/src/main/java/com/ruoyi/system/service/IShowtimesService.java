@@ -58,4 +58,6 @@ public interface IShowtimesService
      * @return 结果
      */
     public int deleteShowtimesByShowtimeId(Long showtimeId);
+
+    public List<Showtimes> getAvailableShows(Showtimes showtimes);
 }

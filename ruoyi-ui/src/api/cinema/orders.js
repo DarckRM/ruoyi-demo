@@ -42,3 +42,17 @@ export function delOrders(orderId) {
     method: 'delete'
   })
 }
+
+export function getAvailableShow() {
+  return request({
+    url: '/cinema/orders/show',
+    method: 'get'
+  })
+}
+
+export function getSeats(showtimeId) {
+  return request({
+    url: '/cinema/orders/seats/' + showtimeId,
+    method: 'get',
+  })
+}

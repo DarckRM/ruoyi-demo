@@ -28,6 +28,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
+    <select id="selectShowtimesListAvailable" parameterType="Showtimes" resultMap="ShowtimesResult">
+        <include refid="selectShowtimesVo"/>
+        <where>
+            <if test="startTime != null">
+                and (start_time >= #{startTime})
+            </if>
+        </where>
+    </select>
+
     <select id="selectShowtimesByShowtimeId" parameterType="Long" resultMap="ShowtimesResult">
         <include refid="selectShowtimesVo"/>
         where showtime_id = #{showtimeId}

@@ -1,7 +1,14 @@
 package com.ruoyi.web.controller.cinema;
 
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.Seats;
+import com.ruoyi.system.domain.cinema.Showtimes;
+import com.ruoyi.system.service.ISeatsService;
+import com.ruoyi.system.service.IShowtimesService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +40,12 @@ public class TicketOrdersController extends BaseController
 {
     @Autowired
     private ITicketOrdersService ticketOrdersService;
+
+    @Autowired
+    private ISeatsService seatsService;
+
+    @Autowired
+    private IShowtimesService showtimesService;
 
     /**
      * 查询订单列表
@@ -100,5 +113,21 @@ public class TicketOrdersController extends BaseController
     public AjaxResult remove(@PathVariable Long[] orderIds)
     {
         return toAjax(ticketOrdersService.deleteTicketOrdersByOrderIds(orderIds));
+    }
+
+    @GetMapping("/show")
+    public AjaxResult getAvailableShows() {
+        Date now = DateUtils.getNowDate();
+        Showtimes show = new Showtimes();
+        show.setStartTime(now);
+        return success(showtimesService.getAvailableShows(show));
+    }
+
+    @GetMapping("/seats/{showtimeId}")
+    public AjaxResult getSeatsByShowtimeId(@PathVariable Long showtimeId) {
+        Showtimes show = showtimesService.selectShowtimesByShowtimeId(showtimeId);
+        Seats seat = new Seats();
+        seat.setAuditoriumId(show.getAuditoriumId());
+        return success(seatsService.selectSeatsList(seat));
     }
 }

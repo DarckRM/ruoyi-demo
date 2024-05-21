@@ -90,4 +90,9 @@ public class ShowtimesServiceImpl implements IShowtimesService
     {
         return showtimesMapper.deleteShowtimesByShowtimeId(showtimeId);
     }
+
+    @Override
+    public List<Showtimes> getAvailableShows(Showtimes showtimes) {
+        return showtimesMapper.selectShowtimesListAvailable(showtimes);
+    }
 }

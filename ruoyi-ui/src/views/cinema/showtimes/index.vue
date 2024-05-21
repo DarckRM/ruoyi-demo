@@ -276,6 +276,7 @@ export default {
       this.openArrange = true;
     },
     autoArrange() {
+      this.arranges = {}
       autoArrange(this.arrangeSetting).then(resp => {
         resp.data.forEach((v) => {
           if (this.arranges[v.auditoriumId] == undefined) {
@@ -283,7 +284,6 @@ export default {
           }
           this.arranges[v.auditoriumId].push(v)
         })
-        console.log(this.arranges)
       })
     },
     /** 搜索按钮操作 */
