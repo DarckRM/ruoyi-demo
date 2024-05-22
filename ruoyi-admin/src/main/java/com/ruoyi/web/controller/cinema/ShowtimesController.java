@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.cinema;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,6 +79,8 @@ public class ShowtimesController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody Showtimes showtimes)
     {
+        if (!showtimes.getEndTime().after(showtimes.getStartTime()))
+            return error("放映结束时间不能早于开始时间");
         return toAjax(showtimesService.insertShowtimes(showtimes));
     }
 
@@ -88,6 +92,8 @@ public class ShowtimesController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody Showtimes showtimes)
     {
+        if (!showtimes.getEndTime().after(showtimes.getStartTime()))
+            return error("放映结束时间不能早于开始时间");
         return toAjax(showtimesService.updateShowtimes(showtimes));
     }
 

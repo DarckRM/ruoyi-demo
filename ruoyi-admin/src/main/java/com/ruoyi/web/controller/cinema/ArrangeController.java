@@ -23,6 +23,15 @@ public class ArrangeController {
     @Autowired
     private IShowtimesService showtimesService;
 
+
+    @PostMapping("/confirm")
+    public AjaxResult confirmArrange(@RequestBody List<Showtimes> showtimes) {
+        for (Showtimes show : showtimes) {
+            showtimesService.forceInsertShowtimes(show);
+        }
+        return AjaxResult.success();
+    }
+
     @PostMapping("/auto")
     public AjaxResult autoArrange(@RequestBody ArrangeSetting setting) {
         return AjaxResult.success(arrange(setting));
@@ -123,42 +132,19 @@ public class ArrangeController {
                 index += 1;
             }
 
+            if (end == todayEnd && !insert)
+                return shows;
+
             if (end != todayEnd) {
                 begin = shows.get(index).getEndTime();
                 if (shows.size() - 1 > index)
                     end = shows.get(index + 1).getStartTime();
                 else
                     end = todayEnd;
-            }
-
-            if (end == todayEnd && !insert)
-                return shows;
-            if (index == shows.size())
-                continue;
-
-
-            if (shows.size() - 1 > index) {
-                end = shows.get(index + 1).getStartTime();
                 index += 1;
             }
-            else {
-                Showtimes last = shows.get(index);
-                if (last.getEndTime().getTime() - todayEnd.getTime() < 0 && !insert) {
-                    if (index == 0) {
-                        begin = shows.get(index).getEndTime();
-                        end = todayEnd;
-                    }
-                    else {
-                        begin = shows.get(index - 1).getEndTime();
-                        end = last.getStartTime();
-                    }
 
-                } else {
-                    begin = last.getEndTime();
-                    end = todayEnd;
-                    index += 1;
-                }
-            }
+
         }
     }
 

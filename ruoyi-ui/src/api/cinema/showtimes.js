@@ -50,3 +50,11 @@ export function autoArrange(data) {
     data: data
   })
 }
+
+export function confirmArrange(data) {
+  return request({
+    url: '/cinema/arrange/confirm',
+    method: 'post',
+    data: data
+  })
+}

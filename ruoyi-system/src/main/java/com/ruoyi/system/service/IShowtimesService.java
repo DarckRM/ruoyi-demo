@@ -35,6 +35,8 @@ public interface IShowtimesService
      */
     public int insertShowtimes(Showtimes showtimes);
 
+    public int forceInsertShowtimes(Showtimes showtimes);
+
     /**
      * 修改放映
      * 

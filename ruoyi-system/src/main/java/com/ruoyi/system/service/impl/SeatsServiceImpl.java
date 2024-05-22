@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.system.domain.cinema.Auditoriums;
+import com.ruoyi.system.domain.cinema.vo.IdleSeats;
 import com.ruoyi.system.mapper.AuditoriumsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -27,6 +28,11 @@ public class SeatsServiceImpl implements ISeatsService
 
     @Autowired
     private AuditoriumsMapper auditoriumsMapper;
+
+    @Override
+    public List<IdleSeats> getIdleSeates(Long showtimeId) {
+        return seatsMapper.selectIdleSeats(showtimeId);
+    }
 
     /**
      * 查询座位

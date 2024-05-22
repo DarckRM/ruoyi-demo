@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,17 @@ public class ShowtimesServiceImpl implements IShowtimesService
     @Override
     public int insertShowtimes(Showtimes showtimes)
     {
+        // 校验时间段是否存在影片
+        if (showtimesMapper.existShows(showtimes) > 0) {
+            throw new ServiceException("该时间段内存在放映计划");
+        }
+        int duration = (int) (showtimes.getEndTime().getTime() - showtimes.getStartTime().getTime()) / 1000 / 60;
+        showtimes.setDuration(duration);
+        return showtimesMapper.insertShowtimes(showtimes);
+    }
+
+    @Override
+    public int forceInsertShowtimes(Showtimes showtimes) {
         int duration = (int) (showtimes.getEndTime().getTime() - showtimes.getStartTime().getTime()) / 1000 / 60;
         showtimes.setDuration(duration);
         return showtimesMapper.insertShowtimes(showtimes);
@@ -68,6 +80,12 @@ public class ShowtimesServiceImpl implements IShowtimesService
     @Override
     public int updateShowtimes(Showtimes showtimes)
     {
+        // 校验时间段是否存在影片
+        if (showtimesMapper.existShows(showtimes) > 0) {
+            throw new ServiceException("该时间段内存在放映计划");
+        }
+        int duration = (int) (showtimes.getEndTime().getTime() - showtimes.getStartTime().getTime()) / 1000 / 60;
+        showtimes.setDuration(duration);
         return showtimesMapper.updateShowtimes(showtimes);
     }
 

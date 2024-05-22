@@ -81,4 +81,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{showtimeId}
         </foreach>
     </delete>
+
+    <select id="existShows" parameterType="Showtimes" resultType="Integer">
+        select exists(
+            select 1 from showtimes
+            where auditorium_id = #{auditoriumId}
+            and start_time between #{startTime} and #{endTime}
+            or end_time between #{startTime} and #{endTime}
+        ) as have_one
+    </select>
 </mapper>

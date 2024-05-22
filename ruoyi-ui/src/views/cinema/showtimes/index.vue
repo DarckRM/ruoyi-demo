@@ -146,14 +146,14 @@
         </el-form-item>
       </el-form>
       <el-button type="primary" @click="autoArrange">开始排片</el-button>
-      <el-button type="primary" @click="">确定</el-button>
+      <el-button type="success" @click="confirmArrange">确定</el-button>
       <el-card title="预览" style="margin-top: 5px">
         <div slot="header">
           排片预览
         </div>
         <el-tabs>
-          <el-tab-pane style="max-height: 300px; overflow: auto;" v-for="room in arrangeSetting.auditoriumPool" :label="'影厅 ' + room"
-            :name="'影厅' + room">
+          <el-tab-pane style="max-height: 300px; overflow: auto;" v-for="room in arrangeSetting.auditoriumPool"
+            :label="'影厅 ' + room" :name="'影厅' + room">
             <el-card style="margin: 5px" v-for="plan in arranges[room]">
               <el-row>
                 <el-col :span="2">
@@ -166,7 +166,8 @@
                   {{ parseTime(plan.startTime, '{y}-{m}-{d} {h}:{i}') }}
                 </el-col>
                 <el-col :span="8">
-                  {{ parseTime(plan.endTime, '{y}-{m}-{d} {h}:{i}') }} <span style="color: red" v-if="plan.showtimeId != null">存在</span>
+                  {{ parseTime(plan.endTime, '{y}-{m}-{d} {h}:{i}') }} <span style="color: red"
+                    v-if="plan.showtimeId != null">存在</span>
                 </el-col>
               </el-row>
             </el-card>
@@ -178,7 +179,7 @@
 </template>
 
 <script>
-import { listShowtimes, getShowtimes, delShowtimes, addShowtimes, updateShowtimes, autoArrange } from "@/api/cinema/showtimes";
+import { listShowtimes, getShowtimes, delShowtimes, addShowtimes, updateShowtimes, autoArrange, confirmArrange } from "@/api/cinema/showtimes";
 import { listFilms } from "@/api/cinema/films"
 
 export default {
@@ -215,7 +216,11 @@ export default {
       },
       arrangeSetting: {
         auditoriumPool: [],
-        filmPool: []
+        filmPool: [],
+        prepareTime: 5,
+        leaveTime: 5,
+        openTime: "07:00",
+        closeTime: "20:00"
       },
       arranges: {},
       rooms: [1, 2],
@@ -281,6 +286,20 @@ export default {
     },
     handleAutoArrange() {
       this.openArrange = true;
+    },
+    confirmArrange() {
+      let shows = []
+      for (var room in this.arranges) {
+        this.arranges[room].forEach(show => {
+          if (show.showtimeId == undefined)
+            shows.push(show)
+        })
+      }
+      confirmArrange(shows).then(resp => {
+        this.$modal.msgSuccess("新增成功");
+        this.open = false;
+        this.getList();
+      })
     },
     autoArrange() {
       this.arranges = {}

@@ -60,4 +60,6 @@ public interface ShowtimesMapper {
     public int deleteShowtimesByShowtimeIds(Long[] showtimeIds);
 
     public List<Showtimes> selectShowtimesListAvailable(Showtimes showtimes);
+
+    public int existShows(Showtimes showtimes);
 }

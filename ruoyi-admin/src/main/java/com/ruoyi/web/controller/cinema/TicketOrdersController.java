@@ -126,8 +126,11 @@ public class TicketOrdersController extends BaseController
     @GetMapping("/seats/{showtimeId}")
     public AjaxResult getSeatsByShowtimeId(@PathVariable Long showtimeId) {
         Showtimes show = showtimesService.selectShowtimesByShowtimeId(showtimeId);
+        if (show == null) {
+            return error("不存在的放映计划");
+        }
         Seats seat = new Seats();
         seat.setAuditoriumId(show.getAuditoriumId());
-        return success(seatsService.selectSeatsList(seat));
+        return success(seatsService.getIdleSeates(showtimeId));
     }
 }

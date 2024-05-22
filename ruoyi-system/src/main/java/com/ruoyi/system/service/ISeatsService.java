@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.Seats;
+import com.ruoyi.system.domain.cinema.vo.IdleSeats;
 
 /**
  * 座位Service接口
@@ -11,6 +12,7 @@ import com.ruoyi.system.domain.Seats;
  */
 public interface ISeatsService 
 {
+    public List<IdleSeats> getIdleSeates(Long showtimeId);
     /**
      * 查询座位
      * 

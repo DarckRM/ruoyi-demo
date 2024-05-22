@@ -77,12 +77,19 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="座位 ID" prop="seatId">
-          <el-input v-model="form.seatId" placeholder="请输入座位 ID" />
-          <el-card title="座位表">
-            <el-row v-for="row in seats" :key="row.seatId" :value="row.seatId">
-              <el-col :span="1" style="margin: 2px" v-for="seat in row" :key="seat" :value="seat">
-                {{ seat }}
+        <el-form-item label="座位表" prop="seatId">
+          <el-card v-if="seats">
+            <el-row style="margin-bottom: 5px" type="flex" justify="space-around" v-for="row in seats" :key="row.seatId" :value="row.seatId">
+              <el-col :span="3" v-for="seat in row" :key="seat.seatId" :value="seat.seatId">
+                <el-button @click="choseSeat(seat)" type="danger" v-if="seat.idle == 1">
+                  {{ seat.seatNumber }}
+                </el-button>
+                <el-button @click="choseSeat(seat)" type="success" v-if="seat.idle == 2">
+                  {{ seat.seatNumber }}
+                </el-button>
+                <el-button @click="choseSeat(seat)" type="warning" v-if="seat.idle == 3">
+                  {{ seat.seatNumber }}
+                </el-button>
               </el-col>
             </el-row>
           </el-card>
@@ -172,6 +179,7 @@ export default {
         seatId: null,
         bookingTime: null
       };
+      this.seats = {}
       this.resetForm("form");
     },
     changeShow() {
@@ -181,15 +189,31 @@ export default {
           if (this.seats[v.rowNumber] == undefined) {
             this.seats[v.rowNumber] = []
           }
-          this.seats[v.rowNumber].push(v.seatId)
+          this.seats[v.rowNumber].push(v)
         })
       })
-      console.log(this.seats)
     },
     getShows() {
       getAvailableShow().then(resp => {
         this.shows = resp.data
       })
+    },
+    choseSeat(seat) {
+      this.seats[seat.rowNumber].forEach(v => {
+        if (v.seatId == seat.seatId) {
+          if (v.idle == 1)
+            return
+          if (v.idle == 2) {
+            v.idle = 3
+            return
+          }
+          if (v.idle == 3) {
+            v.idle = 2
+            return
+          }
+        }
+      })
+      console.log(this.seats)
     },
     /** 搜索按钮操作 */
     handleQuery() {
@@ -234,11 +258,24 @@ export default {
               this.getList();
             });
           } else {
-            addOrders(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
-              this.open = false;
-              this.getList();
-            });
+            let seat = []
+            for (var row in this.seats) {
+              this.seats[row].forEach(v => {
+                if (v.idle == 3)
+                  seat.push(v)
+              })
+            }
+            if (seat.length <= 0)
+              return
+
+            seat.forEach(v => {
+              this.form.seatId = v.seatId
+              addOrders(this.form).then(response => {
+                this.$modal.msgSuccess("新增成功");
+                this.open = false;
+                this.getList();
+              });
+            })
           }
         }
       });
