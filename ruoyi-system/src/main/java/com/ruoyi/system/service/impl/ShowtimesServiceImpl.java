@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.cinema.ShowtimesMapper;
@@ -52,6 +54,8 @@ public class ShowtimesServiceImpl implements IShowtimesService
     @Override
     public int insertShowtimes(Showtimes showtimes)
     {
+        int duration = (int) (showtimes.getEndTime().getTime() - showtimes.getStartTime().getTime()) / 1000 / 60;
+        showtimes.setDuration(duration);
         return showtimesMapper.insertShowtimes(showtimes);
     }
 

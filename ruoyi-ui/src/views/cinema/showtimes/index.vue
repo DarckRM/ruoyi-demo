@@ -79,11 +79,17 @@
     <!-- 添加或修改放映对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="影片 ID" prop="filmId">
-          <el-input v-model="form.filmId" placeholder="请输入影片 ID" />
+        <el-form-item label="选择影厅">
+          <el-select v-model="form.auditoriumId">
+            <el-option v-for="auditorium in rooms" :key="auditorium" :value="auditorium">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="影厅 ID" prop="auditoriumId">
-          <el-input v-model="form.auditoriumId" placeholder="请输入影厅 ID" />
+        <el-form-item label="选择影片">
+          <el-select value-key="filmId" v-model="form.filmId">
+            <el-option v-for="film in films" :label="film.title" :key="film.filmId" :value="film.filmId">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="放映时间" prop="startTime">
           <el-date-picker clearable v-model="form.startTime" type="datetime" value-format="yyyy-MM-dd HH:mm"
@@ -112,7 +118,7 @@
         </el-form-item>
         <el-form-item label="选择影片">
           <el-select value-key="filmId" v-model="arrangeSetting.filmPool" multiple>
-            <el-option v-for="film in films" :label="film.filmId" :key="film.filmId" :value="film">
+            <el-option v-for="film in films" :label="film.title" :key="film.filmId" :value="film">
             </el-option>
           </el-select>
         </el-form-item>
@@ -151,7 +157,7 @@
             <el-card style="margin: 5px" v-for="plan in arranges[room]">
               <el-row>
                 <el-col :span="2">
-                  {{ plan.filmId }}
+                  {{ filmsMap[plan.filmId].title }}
                 </el-col>
                 <el-col :span="5">
                   {{ plan.duration }} 分钟
@@ -173,6 +179,7 @@
 
 <script>
 import { listShowtimes, getShowtimes, delShowtimes, addShowtimes, updateShowtimes, autoArrange } from "@/api/cinema/showtimes";
+import { listFilms } from "@/api/cinema/films"
 
 export default {
   name: "Showtimes",
@@ -212,24 +219,8 @@ export default {
       },
       arranges: {},
       rooms: [1, 2],
-      films: [
-        {
-          filmId: 1,
-          duration: 120,
-          min: 0,
-          max: 0
-        }, {
-          filmId: 2,
-          duration: 240,
-          min: 0,
-          max: 0
-        }, {
-          filmId: 4,
-          duration: 143,
-          min: 0,
-          max: 0
-        }
-      ],
+      films: [],
+      filmsMap: {},
       // 表单参数
       form: {},
       // 表单校验
@@ -245,8 +236,24 @@ export default {
   },
   created() {
     this.getList();
+    this.getFilms()
   },
   methods: {
+    getFilms() {
+      listFilms().then(resp => {
+        resp.rows.forEach((v) => {
+          let film = {
+            title: v.title,
+            filmId: v.filmId,
+            duration: v.duration,
+            min: 0,
+            max: 0
+          }
+          this.films.push(film)
+          this.filmsMap[v.filmId] = film
+        })
+      })
+    },
     /** 查询放映列表 */
     getList() {
       this.loading = true;

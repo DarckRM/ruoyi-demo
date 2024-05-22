@@ -49,12 +49,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="auditoriumId != null">auditorium_id,</if>
             <if test="startTime != null">start_time,</if>
             <if test="endTime != null">end_time,</if>
+            <if test="duration != null">duration,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="filmId != null">#{filmId},</if>
             <if test="auditoriumId != null">#{auditoriumId},</if>
             <if test="startTime != null">#{startTime},</if>
             <if test="endTime != null">#{endTime},</if>
+            <if test="duration != null">#{duration},</if>
          </trim>
     </insert>
 

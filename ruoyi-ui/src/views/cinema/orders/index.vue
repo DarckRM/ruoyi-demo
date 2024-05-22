@@ -2,34 +2,16 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="会员 ID" prop="memberId">
-        <el-input
-          v-model="queryParams.memberId"
-          placeholder="请输入会员 ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.memberId" placeholder="请输入会员 ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="放映 ID" prop="showtimeId">
-        <el-input
-          v-model="queryParams.showtimeId"
-          placeholder="请输入放映 ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.showtimeId" placeholder="请输入放映 ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="座位 ID" prop="seatId">
-        <el-input
-          v-model="queryParams.seatId"
-          placeholder="请输入座位 ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+        <el-input v-model="queryParams.seatId" placeholder="请输入座位 ID" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item label="预约时间" prop="bookingTime">
-        <el-date-picker clearable
-          v-model="queryParams.bookingTime"
-          type="date"
-          value-format="yyyy-MM-dd"
+        <el-date-picker clearable v-model="queryParams.bookingTime" type="date" value-format="yyyy-MM-dd"
           placeholder="请选择预约时间">
         </el-date-picker>
       </el-form-item>
@@ -41,46 +23,20 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          v-hasPermi="['cinema:orders:add']"
-        >新增</el-button>
+        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
+          v-hasPermi="['cinema:orders:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['cinema:orders:edit']"
-        >修改</el-button>
+        <el-button type="success" plain icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate"
+          v-hasPermi="['cinema:orders:edit']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['cinema:orders:remove']"
-        >删除</el-button>
+        <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['cinema:orders:remove']">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="warning"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['cinema:orders:export']"
-        >导出</el-button>
+        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
+          v-hasPermi="['cinema:orders:export']">导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -98,31 +54,16 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['cinema:orders:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['cinema:orders:remove']"
-          >删除</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+            v-hasPermi="['cinema:orders:edit']">修改</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
+            v-hasPermi="['cinema:orders:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
-      @pagination="getList"
-    />
+
+    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 添加或修改订单对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
@@ -138,12 +79,16 @@
         </el-form-item>
         <el-form-item label="座位 ID" prop="seatId">
           <el-input v-model="form.seatId" placeholder="请输入座位 ID" />
+          <el-card title="座位表">
+            <el-row v-for="row in seats" :key="row.seatId" :value="row.seatId">
+              <el-col :span="1" style="margin: 2px" v-for="seat in row" :key="seat" :value="seat">
+                {{ seat }}
+              </el-col>
+            </el-row>
+          </el-card>
         </el-form-item>
         <el-form-item label="预约时间" prop="bookingTime">
-          <el-date-picker clearable
-            v-model="form.bookingTime"
-            type="date"
-            value-format="yyyy-MM-dd"
+          <el-date-picker clearable v-model="form.bookingTime" type="date" value-format="yyyy-MM-dd"
             placeholder="请选择预约时间">
           </el-date-picker>
         </el-form-item>
@@ -230,9 +175,10 @@ export default {
       this.resetForm("form");
     },
     changeShow() {
+      this.seats = {}
       getSeats(this.form.showtimeId).then(resp => {
         resp.data.forEach((v) => {
-          if (this.seats[v.rowNmber] == undefined) {
+          if (this.seats[v.rowNumber] == undefined) {
             this.seats[v.rowNumber] = []
           }
           this.seats[v.rowNumber].push(v.seatId)
@@ -258,7 +204,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.orderId)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -300,12 +246,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const orderIds = row.orderId || this.ids;
-      this.$modal.confirm('是否确认删除订单编号为"' + orderIds + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除订单编号为"' + orderIds + '"的数据项？').then(function () {
         return delOrders(orderIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => { });
     },
     /** 导出按钮操作 */
     handleExport() {

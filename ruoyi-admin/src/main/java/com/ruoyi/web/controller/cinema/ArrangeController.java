@@ -123,12 +123,20 @@ public class ArrangeController {
                 index += 1;
             }
 
+            if (end != todayEnd) {
+                begin = shows.get(index).getEndTime();
+                if (shows.size() - 1 > index)
+                    end = shows.get(index + 1).getStartTime();
+                else
+                    end = todayEnd;
+            }
+
             if (end == todayEnd && !insert)
                 return shows;
             if (index == shows.size())
                 continue;
 
-            begin = shows.get(index).getEndTime();
+
             if (shows.size() - 1 > index) {
                 end = shows.get(index + 1).getStartTime();
                 index += 1;
@@ -136,8 +144,15 @@ public class ArrangeController {
             else {
                 Showtimes last = shows.get(index);
                 if (last.getEndTime().getTime() - todayEnd.getTime() < 0 && !insert) {
-                    begin = shows.get(index - 1).getEndTime();
-                    end = last.getStartTime();
+                    if (index == 0) {
+                        begin = shows.get(index).getEndTime();
+                        end = todayEnd;
+                    }
+                    else {
+                        begin = shows.get(index - 1).getEndTime();
+                        end = last.getStartTime();
+                    }
+
                 } else {
                     begin = last.getEndTime();
                     end = todayEnd;
