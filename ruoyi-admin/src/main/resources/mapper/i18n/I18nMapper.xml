@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.greatzc.mapper.I18nMapper">
+    
+    <resultMap type="I18n" id="I18nResult">
+        <result property="id"    column="id"    />
+        <result property="lang"    column="lang"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+
+    <sql id="selectI18nVo">
+        select id, lang, content from i18n
+    </sql>
+
+    <select id="selectI18nList" parameterType="I18n" resultMap="I18nResult">
+        <include refid="selectI18nVo"/>
+        <where>  
+            <if test="lang != null  and lang != ''"> and lang = #{lang}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectI18nById" parameterType="String" resultMap="I18nResult">
+        <include refid="selectI18nVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertI18n" parameterType="I18n">
+        insert into i18n
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="lang != null and lang != ''">lang,</if>
+            <if test="content != null">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="lang != null and lang != ''">#{lang},</if>
+            <if test="content != null">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateI18n" parameterType="I18n">
+        update i18n
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lang != null and lang != ''">lang = #{lang},</if>
+            <if test="content != null">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteI18nById" parameterType="String">
+        delete from i18n where id = #{id}
+    </delete>
+
+    <delete id="deleteI18nByIds" parameterType="String">
+        delete from i18n where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
