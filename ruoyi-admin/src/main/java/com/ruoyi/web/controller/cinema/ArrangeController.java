@@ -94,9 +94,8 @@ public class ArrangeController {
         }
 
         List<Showtimes> shows = new ArrayList<>();
-        int duration = 1;
+        int duration;
         int index = 0;
-        begin = todayBegin;
 
         // 对于存在已有拍片计划的情况，移标的首次末尾是拍片计划最早的放映时间
         if (!showsIn.isEmpty()) {
