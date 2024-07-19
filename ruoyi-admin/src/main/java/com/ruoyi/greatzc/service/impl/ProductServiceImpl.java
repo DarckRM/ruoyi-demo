@@ -2,6 +2,7 @@ package com.ruoyi.greatzc.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.greatzc.mapper.ProductMapper;
@@ -53,6 +54,7 @@ public class ProductServiceImpl implements IProductService
     @Override
     public int insertProduct(Product product)
     {
+        product. IdUtils.fastSimpleUUID()
         product.setCreateTime(DateUtils.getNowDate());
         return productMapper.insertProduct(product);
     }
