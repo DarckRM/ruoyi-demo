@@ -47,6 +47,7 @@
         insert into product
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
+            <if test="productId != null">product_id,</if>
             <if test="banner != null">banner,</if>
             <if test="lang!= null">lang,</if>
             <if test="name != null">`name`,</if>
@@ -60,6 +61,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
+            <if test="productId != null">#{productId},</if>
             <if test="banner != null">#{banner},</if>
             <if test="lang != null">#{lang},</if>
             <if test="name != null">#{name},</if>

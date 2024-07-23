@@ -1,6 +1,8 @@
 package com.ruoyi.greatzc.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.ruoyi.greatzc.domain.Product;
 
 /**
@@ -9,7 +11,7 @@ import com.ruoyi.greatzc.domain.Product;
  * @author akarin
  * @date 2024-07-14
  */
-public interface IProductService 
+public interface IProductService
 {
     /**
      * 查询产品信息
