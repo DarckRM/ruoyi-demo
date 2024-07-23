@@ -1,7 +1,10 @@
 package com.ruoyi.greatzc.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ruoyi.greatzc.domain.Product;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 产品信息Mapper接口
@@ -9,7 +12,8 @@ import com.ruoyi.greatzc.domain.Product;
  * @author akarin
  * @date 2024-07-14
  */
-public interface ProductMapper 
+@Mapper
+public interface ProductMapper extends BaseMapper<Product>
 {
     /**
      * 查询产品信息
