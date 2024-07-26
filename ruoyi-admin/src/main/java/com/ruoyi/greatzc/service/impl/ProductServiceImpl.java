@@ -1,12 +1,19 @@
 package com.ruoyi.greatzc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mchange.v1.util.ListUtils;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
+import com.ruoyi.greatzc.domain.relation.ProductCategory;
+import com.ruoyi.greatzc.mapper.relation.ProductCategoryMapper;
+import com.ruoyi.greatzc.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.greatzc.mapper.ProductMapper;
@@ -24,6 +31,9 @@ public class ProductServiceImpl implements IProductService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private ProductCategoryMapper categoryMapper;
+
     /**
      * 查询产品信息
      *
@@ -32,7 +42,12 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public Product selectProductById(Long id) {
-        return productMapper.selectProductById(id);
+        Product product = productMapper.selectProductById(id);
+
+        // 拼装分类信息
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(product);
+        return injectCategories(products).get(0);
     }
 
     /**
@@ -43,7 +58,24 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public List<Product> selectProductList(Product product) {
-        return productMapper.selectProductList(product);
+        List<Product> products = productMapper.selectProductList(product);
+        if (products.isEmpty())
+            return products;
+
+        // 拼装分类信息
+        return injectCategories(products);
+    }
+
+    private List<Product> injectCategories(List<Product> products) {
+        List<String> productIds = products.stream().map(Product::getProductId).collect(Collectors.toList());
+
+        productIds.stream()
+                .distinct()
+                .map(e -> categoryMapper.selectList(new QueryWrapper<ProductCategory>().eq("product_id", e)))
+                .collect(e -> new Collector<Map, e, >())
+
+
+        return products;
     }
 
     /**
@@ -56,7 +88,9 @@ public class ProductServiceImpl implements IProductService {
     public int insertProduct(Product product) {
         product.setProductId(IdUtils.fastSimpleUUID());
         product.setCreateTime(DateUtils.getNowDate());
-        return productMapper.insertProduct(product);
+
+        productMapper.insertProduct(product);
+        return updateCategory(product);
     }
 
     /**
@@ -73,11 +107,31 @@ public class ProductServiceImpl implements IProductService {
                 .eq("lang", product.getLang());
 
         product.setUpdateTime(DateUtils.getNowDate());
-        if (productMapper.exists(wrapper))
-            return productMapper.updateProduct(product);
+        if (productMapper.exists(wrapper)) {
+            productMapper.updateProduct(product);
+            return updateCategory(product);
+        }
+
+        List<ProductCategory> categories = product.getCategoryIndex().stream()
+                .map(item -> new ProductCategory(null, product.getProductId(), item))
+                .collect(Collectors.toList());
+
+        categoryMapper.insert(categories);
 
         product.setCreateTime(product.getUpdateTime());
-        return productMapper.insertProduct(product);
+        product.setId(null);
+        product.setCreateTime(DateUtils.getNowDate());
+        productMapper.insertProduct(product);
+        return updateCategory(product);
+    }
+
+    private int updateCategory(Product product) {
+        categoryMapper.deleteByIds(product.getCategoryIndex());
+        List<ProductCategory> categories = product.getCategoryIndex().stream()
+                .map(item -> new ProductCategory(null, product.getProductId(), item))
+                .collect(Collectors.toList());
+
+        return categoryMapper.insert(categories).size();
     }
 
     /**
@@ -88,7 +142,8 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public int deleteProductByIds(Long[] ids) {
-        return productMapper.deleteProductByIds(ids);
+        productMapper.deleteProductByIds(ids);
+        return categoryMapper.delete(new QueryWrapper<ProductCategory>().in("product_id", ids));
     }
 
     /**
@@ -99,6 +154,7 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public int deleteProductById(Long id) {
-        return productMapper.deleteProductById(id);
+        productMapper.deleteProductById(id);
+        return categoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", id));
     }
 }

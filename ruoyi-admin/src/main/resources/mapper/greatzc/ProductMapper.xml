@@ -15,10 +15,13 @@
         <result property="updateTime" column="update_time"/>
         <result property="status" column="status"/>
         <result property="show" column="show"/>
+        <result property="lang" column="lang"/>
     </resultMap>
 
     <sql id="selectProductVo">
-        select id, banner, name, order_no, title, content, create_time, update_time, status, `show` from product
+        select id, product_id, banner, name, order_no, title, content, create_time, update_time,
+        status, `show`, lang
+        FROM product
     </sql>
 
     <select id="selectProductList" parameterType="Product" resultMap="ProductResult">

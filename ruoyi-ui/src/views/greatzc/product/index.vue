@@ -4,13 +4,16 @@
       <el-form-item label="名称" prop="name">
         <el-input v-model="queryParams.name" placeholder="请输入名称" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
-      <el-form-item label="排序" prop="orderNo">
-        <el-input v-model="queryParams.orderNo" placeholder="请输入排序" clearable @keyup.enter.native="handleQuery" />
+      <el-form-item label="语种" prop="lang">
+        <el-select v-model="queryParams.lang" placeholder="请选择语种" clearable>
+          <el-option v-for="dict in dict.type.sys_language" :key="dict.value" :label="dict.label" :value="dict.value" />
+        </el-select>
+      </el-form-item>
       </el-form-item>
       <el-form-item label="标题" prop="title">
         <el-input v-model="queryParams.title" placeholder="请输入标题" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>
-      <el-form-item label="状态" prop="status">
+      <el-form-item label="是否启用" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable>
           <el-option v-for="dict in dict.type.sys_yes_no" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
@@ -48,16 +51,20 @@
 
     <el-table v-loading="loading" :data="productList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="ID" align="center" prop="id" />
       <el-table-column label="封面" align="center" prop="banner" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.banner" :width="50" :height="50" />
         </template>
       </el-table-column>
       <el-table-column label="名称" align="center" prop="name" />
-      <el-table-column label="排序" align="center" prop="orderNo" />
+      <el-table-column label="分类" align="center" prop="category" />
       <el-table-column label="标题" align="center" prop="title" />
       <el-table-column label="内容" align="center" prop="content" />
+      <el-table-column label="语种" align="center" prop="lang">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.sys_language" :value="scope.row.lang"></dict-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_yes_no" :value="scope.row.status" />
@@ -84,6 +91,9 @@
     <!-- 添加或修改产品信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item prop="productId">
+
+        </el-form-item>
         <el-form-item label="封面" prop="banner">
           <image-upload v-model="form.banner" />
         </el-form-item>
@@ -99,8 +109,8 @@
           <el-col :span="12">
             <el-form-item label="语种" prop="lang">
               <el-select v-model="form.lang">
-                <el-option v-for="dict in dict.type.sys_language" :key="dict.value"
-                  :label="dict.label" :value="dict.value">{{ dict.label }}</el-option>
+                <el-option v-for="dict in dict.type.sys_language" :key="dict.value" :label="dict.label"
+                  :value="dict.value">{{ dict.label }}</el-option>
               </el-select>
             </el-form-item>
           </el-col>

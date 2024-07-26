@@ -1,11 +1,13 @@
 package com.ruoyi.greatzc.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.ruoyi.greatzc.domain.relation.ProductCategory;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 产品信息对象 product
@@ -67,83 +69,13 @@ public class Product extends BaseEntity {
     @TableField(value = "`show`")
     private String show;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    /**
+     * 产品分类参数
+     */
+    @TableField(exist = false)
+    private List<Integer> categoryIndex = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
+    @TableField(exist = false)
+    private List<ProductCategory> categories = new ArrayList<>();
 
-    public void setBanner(String banner) {
-        this.banner = banner;
-    }
-
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public Long getOrderNo() {
-        return orderNo;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setShow(String show) {
-        this.show = show;
-    }
-
-    public String getShow() {
-        return show;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("banner", getBanner())
-                .append("name", getName())
-                .append("orderNo", getOrderNo())
-                .append("title", getTitle())
-                .append("content", getContent())
-                .append("createTime", getCreateTime())
-                .append("updateTime", getUpdateTime())
-                .append("status", getStatus())
-                .append("show", getShow())
-                .toString();
-    }
 }
