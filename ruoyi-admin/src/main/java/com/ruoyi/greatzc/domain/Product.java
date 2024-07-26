@@ -1,5 +1,6 @@
 package com.ruoyi.greatzc.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -63,6 +64,7 @@ public class Product extends BaseEntity {
      * 首页展示
      */
     @Excel(name = "首页展示")
+    @TableField(value = "`show`")
     private String show;
 
     public void setId(Long id) {
