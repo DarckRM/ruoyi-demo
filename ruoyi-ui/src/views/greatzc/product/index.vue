@@ -57,7 +57,13 @@
         </template>
       </el-table-column>
       <el-table-column label="名称" align="center" prop="name" />
-      <el-table-column label="分类" align="center" prop="category" />
+      <el-table-column label="分类" align="center" prop="category">
+        <template slot-scope="scope">
+          <el-tag v-for="category in scope.row.categories">
+            {{ category.name }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="标题" align="center" prop="title" />
       <el-table-column label="内容" align="center" prop="content" />
       <el-table-column label="语种" align="center" prop="lang">
@@ -102,8 +108,11 @@
         </el-form-item>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="排序" prop="orderNo">
-              <el-input type="number" v-model="form.orderNo" placeholder="请输入排序" />
+            <el-form-item label="分类" prop="categories">
+              <el-select multiple v-model="form.categoryIndex">
+                <el-option v-for="category in categories" :key="category.value" :label="category.label"
+                  :value="category.value">{{ category.label }}</el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -144,6 +153,7 @@
 
 <script>
 import { listProduct, getProduct, delProduct, addProduct, updateProduct } from "@/api/greatzc/product";
+import { listCategory } from "@/api/greatzc/category";
 
 export default {
   name: "Product",
@@ -164,6 +174,8 @@ export default {
       total: 0,
       // 产品信息表格数据
       productList: [],
+      // 分类列表
+      categories: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -197,6 +209,17 @@ export default {
       listProduct(this.queryParams).then(response => {
         this.productList = response.rows;
         this.total = response.total;
+
+        listCategory().then(response => {
+          this.categories = []
+          response.data.forEach(element => {
+              this.categories.push({
+                label: element.name,
+                value: element.id
+              })
+          });
+        })
+        console.log(this.categories)
         this.loading = false;
       });
     },
@@ -217,7 +240,8 @@ export default {
         createTime: null,
         updateTime: null,
         status: null,
-        show: null
+        show: null,
+        categoryIndex: null,
       };
       this.resetForm("form");
     },
