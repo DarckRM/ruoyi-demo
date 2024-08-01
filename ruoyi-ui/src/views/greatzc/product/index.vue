@@ -9,7 +9,6 @@
           <el-option v-for="dict in dict.type.sys_language" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      </el-form-item>
       <el-form-item label="标题" prop="title">
         <el-input v-model="queryParams.title" placeholder="请输入标题" clearable @keyup.enter.native="handleQuery" />
       </el-form-item>

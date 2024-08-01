@@ -1,0 +1,22 @@
+{
+  "name": "greatzc-official",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.24.2",
+    "vue": "^3.4.31",
+    "vue-router": "^4.4.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "unplugin-vue-components": "^0.27.3",
+    "vite": "^5.3.4"
+  }
+}
