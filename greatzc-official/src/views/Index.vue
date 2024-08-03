@@ -1,25 +1,6 @@
 <template>
-  <!-- Start Preloader Area -->
-  <div class="preloader">
-    <div class="lds-ripple">
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <!-- End Preloader Area -->
-
-  <!-- Start Header Area -->
-  <header class="header-area">
-    <!-- Start Top Header -->
-    <TopHeader />
-    <!-- Start Top Header -->
-    <NaviHeader />
-    <!-- Start Navbar Area -->
-  </header>
-  <!-- End Header Area -->
-
   <!-- Start Banner Area -->
-  <section class="banner-area bg-1 jarallax" data-jarallax='{"speed": 0.3}'>
+  <section style="background-attachment: scroll;" class="banner-area bg-1 jarallax" data-jarallax='{"speed": 0.3}'>
     <div class="d-table">
       <div class="d-table-cell">
         <div class="container">
@@ -27,17 +8,17 @@
             <div class="col-lg-9">
               <div class="banner-content">
                 <span class="top-title wow fadeInDown" data-wow-delay="1s">Welcome to GreatZc</span>
-                <h1 class="wow fadeInDown" data-wow-delay="1s">Get The Best Hardware And Industrail Device Support</h1>
-
-                <p class="wow fadeInLeft" data-wow-delay="1s">Join the millions getting bargain deals on shipping cars,
-                  furniture, freight, and more</p>
-
+                <h1 style="color: white;" class="wow fadeInDown" data-wow-delay="1s">Get The Best Hardware And
+                  Industrail Device Support</h1>
+                <p style="color: white;" class="wow fadeInLeft" data-wow-delay="1s">
+                  With hiht quality products, advanced technology, affordable price and best AFTER-SALES service
+                </p>
                 <div class="banner-btn wow fadeInUp" data-wow-delay="1s">
                   <a href="pricing-style-one.html" class="default-btn">
-                    <span>Get A Free Quote</span>
+                    <span>Read More</span>
                   </a>
                   <a href="contact-us.html" class="default-btn active">
-                    <span>Contact Us</span>
+                    <span style="color: white;">Contact Us</span>
                   </a>
                 </div>
               </div>
@@ -45,7 +26,7 @@
 
             <div class="col-lg-3">
               <div class="video-btn-2 wow zoomIn" data-wow-delay="1s">
-                <a href="https://www.youtube.com/watch?v=tEV5sXt6pV8" class="popup-youtube">
+                <a href="" class="popup-youtube">
                   <span></span>
                   <span></span>
                   <span></span>
@@ -63,54 +44,26 @@
 
   <!-- Start About Us Area -->
   <section class="about-us-area pt-100 pb-70">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="about-img">
-            <img src="/assets/img/about-img.jpg" alt="Image">
+    <BCarousel fade :interval="3000" controls indicators ride="carousel">
+      <BCarouselSlide>
+        <template #img>
+          <img src="/assets/img/banner/1.jpg" alt="image slot" />
+        </template>
+      </BCarouselSlide>
 
-            <div class="experience">
-              <div class="">
-                <h2>20 Years Of Experience</h2>
-              </div>
-            </div>
-          </div>
-        </div>
+      <BCarouselSlide>
+        <template #img>
+          <img src="/assets/img/banner/2.jpg" alt="image slot" />
+        </template>
+      </BCarouselSlide>
 
-        <div class="col-lg-6">
-          <div class="about-content">
-            <span class="top-title">About Us</span>
-            <h2>Modern And Trusted Logistics Company</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident possimus quae adipisci quisquam
-              distinctio nemo, tempora corrupti expedita nihil. Reiciendis impedit voluptates temporibus aut
-              consectetur, vitae culpa et consectetur adipisicing elit. Provident possimus quae.</p>
+      <BCarouselSlide>
+        <template #img>
+          <img src="/assets/img/banner/3.jpg" alt="image slot" />
+        </template>
+      </BCarouselSlide>
+    </BCarousel>
 
-            <ul>
-              <li>
-                <i class="bx bx-check"></i>
-                24/7 Business Support
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Secure Transportation
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                World Wide Most Effective Business
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Easy And Quick Problem Analysis
-              </li>
-            </ul>
-
-            <a href="about-us.html" class="default-btn">
-              <span>About Us</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
   <!-- End About Us Area -->
 
@@ -120,17 +73,28 @@
       <div class="section-title">
         <span>Our Services</span>
         <h2>We Are Trusted For Our Services</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit porro, aliquid reprehenderit iusto inventore
-          sint beatae ipsum impedit in sit numquam illum distinctio sequi quisquam et hic tempore</p>
+        <p> With hiht quality products, advanced technology, affordable price and best AFTER-SALES service </p>
+        <p> We Have Gained Trust </p>
       </div>
 
       <div class="row">
-        <div class="col-lg-4 col-sm-6">
+        <div class="col-lg-3 col-sm-6">
           <div class="single-services-box">
-            <i class="flaticon-fast-delivery-1"></i>
-            <h3>Road Transport</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore
-              asperiores.</p>
+            <i class="flaticon-user"></i>
+            <h3>Our Team</h3>
+            <p>We have an experienced R&D team, ensure technological and innovative products!</p>
+            <a href="" class="read-more">
+              Read More
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+          <div class="single-services-box">
+            <i class="flaticon-warehouse"></i>
+            <h3>Our Equipment</h3>
+            <p>With advanced development equipments and comprehensive test facilities, experienced and skilled workers,
+              product quality and safety are highly guaranteed!</p>
 
             <a href="services-details.html" class="read-more">
               Read More
@@ -138,12 +102,13 @@
           </div>
         </div>
 
-        <div class="col-lg-4 col-sm-6">
+        <div class="col-lg-3 col-sm-6 offset-sm-3 offset-lg-0">
           <div class="single-services-box">
-            <i class="flaticon-boat"></i>
-            <h3>Sea Transport</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore
-              asperiores.</p>
+            <i class="flaticon-done"></i>
+            <h3>Quality Inspection</h3>
+            <p>We have comprehensive test facilities and we will carefully test products to ensure the quality before
+              each
+              delivery!</p>
 
             <a href="services-details.html" class="read-more">
               Read More
@@ -151,66 +116,27 @@
           </div>
         </div>
 
-        <div class="col-lg-4 col-sm-6 offset-sm-3 offset-lg-0">
+        <div class="col-lg-3 col-sm-6 offset-sm-3 offset-lg-0">
           <div class="single-services-box">
-            <i class="flaticon-airplane"></i>
-            <h3>Air Transport</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nostrum minima eligendi neque labore
-              asperiores.</p>
+            <i class="flaticon-support"></i>
+            <h3>After Sales</h3>
+            <p>Our working team and sales team can guarantee a comprehensive and efficient after-sales service for our
+              products sold to everywhere of the world.</p>
 
             <a href="services-details.html" class="read-more">
               Read More
             </a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
   <!-- End Services Area -->
 
   <!-- Start Choose Us Area -->
-  <section class="choose-us-area pt-100 pb-70">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="choose-us-content">
-            <span class="top-title">Why Choose Us</span>
-            <h2>We Are The Best And That's Why You Can Choose Us Easily</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet ratione eveniet eum. Quam enim inventore,
-              exercitationem error ad temporibus sit facere quaerat architecto impedit ullam quasi vitae distinctio eos
-              labore?</p>
-
-            <div class="choose-us-slider owl-carousel owl-theme">
-              <div class="single-choose-us-box bg-color-1">
-                <i class="bx bx-calendar"></i>
-                <span>20+ Years Work Experiences</span>
-              </div>
-
-              <div class="single-choose-us-box bg-color-2">
-                <i class="bx bx-globe"></i>
-                <span>World's Areas Covered</span>
-              </div>
-
-              <div class="single-choose-us-box bg-color-3">
-                <i class="bx bx-user"></i>
-                <span>Corporate And Official Client</span>
-              </div>
-
-              <div class="single-choose-us-box bg-color-1">
-                <i class="bx bx-calendar"></i>
-                <span>20+ Years Work Experiences</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="choose-us-img">
-            <img src="/assets/img/choose-us-img.jpg" alt="Image">
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="counter-area bg-color">
+    <Company />
   </section>
   <!-- End Choose Us Area -->
 
@@ -876,6 +802,5 @@
 </template>
 
 <script setup>
-import TopHeader from '../components/header/TopHeader.vue'
-import NaviHeader from '../components/header/NaviHeader.vue'
+import Company from '../components/about/Company.vue'
 </script>

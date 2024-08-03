@@ -2,26 +2,27 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Index from './views/Index.vue'
 import Footer from './components/footer/Footer.vue'
+import TopHeader from './components/header/TopHeader.vue'
+import NaviHeader from './components/header/NaviHeader.vue'
+
+import { router } from "./router";
 </script>
 
 <template>
-  <router-view></router-view>
+  <div class="preloader">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <header class="header-area">
+    <TopHeader />
+    <NaviHeader />
+  </header>
+  <div style="margin-top: 80px;">
+    <router-view></router-view>
+  </div>
   <Footer />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>

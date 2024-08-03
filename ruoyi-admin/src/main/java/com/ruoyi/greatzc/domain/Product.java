@@ -2,6 +2,7 @@ package com.ruoyi.greatzc.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.ruoyi.greatzc.domain.relation.ProductCategory;
+import com.ruoyi.greatzc.vo.CategoryVO;
 import lombok.Data;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -76,6 +77,6 @@ public class Product extends BaseEntity {
     private List<Integer> categoryIndex = new ArrayList<>();
 
     @TableField(exist = false)
-    private List<ProductCategory> categories = new ArrayList<>();
+    private List<CategoryVO> categories = new ArrayList<>();
 
 }

@@ -5,15 +5,21 @@
         <div class="col-lg-8 col-md-10">
           <ul class="header-left-content">
             <li>
-              <i class="bx bx-home"></i>
-              基础信息
+              <i class="bx">
+                <BiHouse></BiHouse>
+              </i>
+              Home
             </li>
             <li>
-              <i class="bx bx-phone-call"></i>
+              <i class="bx">
+                <BiTelephone></BiTelephone>
+              </i>
               <a href="">+86 (133) 456 7890</a>
             </li>
             <li>
-              <i class="bx bx-envelope"></i>
+              <i class="bx">
+                <BiEnvelopeAt></BiEnvelopeAt>
+              </i>
               <a href="mailto:hello@greatzc.com">greatzc@mail.com</a>
             </li>
           </ul>
@@ -64,4 +70,7 @@
 </template>
 
 <script setup>
+import BiHouse from '~icons/bi/house';
+import BiTelephone from '~icons/bi/telephone';
+import BiEnvelopeAt from '~icons/bi/envelope-at';
 </script>

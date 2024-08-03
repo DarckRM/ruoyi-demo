@@ -1209,11 +1209,8 @@ About Area Style
           box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
   display: inline-block;
   padding: 10px;
-  position: absolute;
-  bottom: 108px;
+  bottom: 10px;
   right: -130px;
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
 }
 
 .about-img .experience h2 {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.greatzc.mapper.relation.ProductCategoryMapper">
+
+    <select id="selectEnhanceList" resultType="com.ruoyi.greatzc.vo.CategoryVO">
+        SELECT t1.*, t2.name FROM product_category t1
+        LEFT JOIN category t2 ON t1.category_id = t2.id
+        WHERE t1.product_id = #{productId}
+    </select>
+</mapper>
