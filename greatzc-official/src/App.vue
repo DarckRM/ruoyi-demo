@@ -4,11 +4,15 @@ import Index from './views/Index.vue'
 import Footer from './components/footer/Footer.vue'
 import TopHeader from './components/header/TopHeader.vue'
 import NaviHeader from './components/header/NaviHeader.vue'
+import BackToTop from './components/tools/BackToTop.vue'
 
 import { router } from "./router";
+
+
 </script>
 
 <template>
+  <BackToTop />
   <div class="preloader">
     <div class="lds-ripple">
       <div></div>

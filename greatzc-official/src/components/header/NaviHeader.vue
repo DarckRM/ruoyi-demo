@@ -25,15 +25,15 @@
               </li>
 
               <li class="nav-item">
-                <router-link to="/index" @click="menuClick(1)" :class="menuActicve[1]">Products</router-link>
+                <router-link to="/products" @click="menuClick(1)" :class="menuActicve[1]">Products</router-link>
               </li>
 
               <li class="nav-item">
-                <router-link to="/index" @click="menuClick(2)" :class="menuActicve[2]">News</router-link>
+                <router-link to="/news" @click="menuClick(2)" :class="menuActicve[2]">News</router-link>
               </li>
 
               <li class="nav-item">
-                <router-link to="/about" @click="menuClick(3)" :class="menuActicve[3]">Contact</router-link>
+                <router-link to="/contact" @click="menuClick(3)" :class="menuActicve[3]">Contact</router-link>
               </li>
 
               <li class="nav-item">
@@ -43,7 +43,7 @@
 
             <div class="others-option">
               <div class="get-quote">
-                <a href="pricing-style-two.html" class="default-btn">
+                <a href="" class="default-btn">
                   <span>Get A Quote</span>
                 </a>
               </div>
@@ -82,7 +82,8 @@
 
 <script>
 import BiCaretDown from '~icons/bi/caret-down';
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   components: {
@@ -90,6 +91,14 @@ export default defineComponent({
   },
   data() {
     return {
+      pathMapIndex: {
+        index: 0,
+        products: 1,
+        news: 2,
+        contact: 3,
+        about: 4
+      },
+      router: useRouter(),
       menuActicve: [
         "nav-link",
         "nav-link",
@@ -98,6 +107,14 @@ export default defineComponent({
         "nav-link"
       ]
     }
+  },
+  created() {
+    this.$watch(
+      () => this.$route.path,
+      (newId, oldId) => {
+       this.menuClick(this.pathMapIndex[newId.split('/')[1]])
+      }
+    )
   },
   methods: {
     menuClick(item) {

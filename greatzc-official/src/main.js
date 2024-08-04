@@ -18,14 +18,13 @@ import "./assets/css/odometer.min.css";
 import "./assets/css/owl.carousel.min.css";
 import "./assets/css/responsive.css";
 import "./assets/css/style.css";
-// import "./assets/css/timeline.css";
+import "vue3-carousel/dist/carousel.css";
 // 添加基础 JS 文件
 import "./assets/js/jquery.min.js";
 // import './assets/js/popper.min.js'
 import "./assets/js/meanmenu.min.js";
 // import './assets/js/wow.min.js'
 import "./assets/js/ajaxchimp.min.js";
-import "./assets/js/owl.carousel.min.js";
 import "./assets/js/nice-select.min.js";
 import "./assets/js/magnific-popup.min.js";
 import "./assets/js/parallax.min.js";

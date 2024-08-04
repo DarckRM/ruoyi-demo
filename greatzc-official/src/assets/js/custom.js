@@ -25,187 +25,17 @@
 	});
 
 	// Choose Us Slider JS
-	$('.choose-us-slider').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: true,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		navText: [
-			"<i class='bx bx-chevron-left'></i>",
-			"<i class='bx bx-chevron-right'></i>",
-		],
-		responsive:{
-			0: {
-				items: 1,
-			},
-			414: {
-				items: 2,
-			},
-			576: {
-				items: 3,
-			},
-			768: {
-				items: 3,
-			},
-			992: {
-				items: 2,
-			},
-			1200: {
-				items: 3,
-			}
-		}
-	});
 
 	// Testimonials Slider JS
-	$('.testimonials-slider').owlCarousel({
-		loop: true,
-		nav: false,
-		autoplay: true,
-		autoplayHoverPause: true,
-		mouseDrag: true,
-		margin: 30,
-		center: true,
-		dots: true,
-		smartSpeed: 1000,
-		responsive: {
-			0: {
-				items: 1,
-			},
-			576: {
-				items: 1,
-			},
-			768: {
-				items: 1,
-			},
-			992: {
-				items: 3,
-			},
-			1200: {
-				items: 3,
-			}
-		}
-	}); 
 
 	// Testimonials Slider Two JS
-	$('.testimonials-slider-two').owlCarousel({
-		loop: true,
-		nav: false,
-		autoplay: true,
-		autoplayHoverPause: true,
-		mouseDrag: true,
-		margin: 30,
-		center: true,
-		dots: false,
-		smartSpeed: 1000,
-		responsive: {
-			0: {
-				items: 1,
-			},
-			576: {
-				items: 1,
-			},
-			768: {
-				items: 1,
-			},
-			992: {
-				items: 3,
-			},
-			1200: {
-				items: 3,
-			}
-		}
-	}); 
 
 	// Partner Slider JS
-	$('.partner-slider').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: false,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		navText: [
-			"<i class='bx bx-chevron-left'></i>",
-			"<i class='bx bx-chevron-right'></i>",
-		],
-		responsive:{
-			0: {
-				items: 1,
-			},
-			414: {
-				items: 2,
-			},
-			576: {
-				items: 3,
-			},
-			768: {
-				items: 4,
-			},
-			1200: {
-				items: 5,
-			}
-		}
-	});
-
 	// Blog Slider JS
-	$('.blog-slider').owlCarousel({
-		loop: true,
-		nav: false,
-		autoplay: true,
-		autoplayHoverPause: true,
-		mouseDrag: true,
-		dots: true,
-		smartSpeed: 1500,
-		responsive: {
-			0: {
-				items: 1,
-			},
-			576: {
-				items: 1,
-			},
-			768: {
-				items: 2,
-			},
-			992: {
-				items: 2,
-			},
-			1200: {
-				items: 3,
-			}
-		}
-	});
+
 
 	// Related Product JS
-	$('.related-product').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: false,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		responsive:{
-			0: {
-				items: 1,
-			},
-			576: {
-				items: 2,
-			},
-			768: {
-				items: 2,
-			},
-			992: {
-				items: 3,
-			},
-			1200: {
-				items: 3,
-			},
-		},
-	});
+
 
 	// Click Event JS
 	$('.go-top').on('click', function() {
@@ -377,45 +207,7 @@
 	var thumbs = $("#thumbs");
 	// Var Totalslides = 10;
 	var syncedSecondary = true;
-	
-	bigimage
-		.owlCarousel({
-		items: 1,
-		slideSpeed: 2000,
-		nav: true,
-		autoplay: true,
-		dots: false,
-		loop: true,
-		responsiveRefreshRate: 200,
-		navText: [
-			"<i class='bx bx-left-arrow-alt'></i>",
-			"<i class='bx bx-right-arrow-alt'></i>",
-		]
-	})
-	.on("changed.owl.carousel", syncPosition);
-	
-	thumbs
-		.on("initialized.owl.carousel", function() {
-		thumbs
-		.find(".owl-item")
-		.eq(0)
-		.addClass("current");
-	})
-	.owlCarousel({
-		items: 5,
-		dots: false,
-		nav: false,
-		navText: [
-			"<i class='bx bx-left-arrow-alt'></i>",
-			"<i class='bx bx-right-arrow-alt'></i>",
-		],
-		smartSpeed: 200,
-		slideSpeed: 500,
-		slideBy: 4,
-		responsiveRefreshRate: 100
-	})
-	.on("changed.owl.carousel", syncPosition2);
-	
+
 	function syncPosition(el) {
 		//if loop is set to false, then you have to uncomment the next line
 		//var current = el.item.index;

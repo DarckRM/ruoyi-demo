@@ -81,4 +81,6 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import BiCheck2Circle from '~icons/bi/check2-circle';
+</script>

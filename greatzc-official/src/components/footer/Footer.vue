@@ -93,21 +93,24 @@
         <div class="col-lg-3 col-md-6">
           <div class="single-footer-widget">
             <h3>Address</h3>
-
             <ul class="address">
               <li class="location">
-                <i class="bx bxs-location-plus"></i>
-                9170 Millbrook Rd, Newark, IL 60541
+                <i class="bx">
+                  <BiBuilding style="width: 25px;" />
+                </i>
+                {{ info.address }}
               </li>
               <li>
-                <i class="bx bxs-envelope"></i>
-                <a href="mailto:hello@greatzc.com">hello@greatzc.com</a>
-                <a href="mailto:info@greatzc.com">info@greatzc.com</a>
+                <i class="bx">
+                  <BiEnvelope style="width: 25px;" />
+                </i>
+                <a :href="info.mailto">{{ info.email }}</a>
               </li>
               <li>
-                <i class="bx bxs-phone-call"></i>
-                <a href="">+1 (123) 456 7890</a>
-                <a href="">+1 (514) 312-6678</a>
+                <i class="bx">
+                  <BiTelephone style="width: 25px;" />
+                </i>
+                <a href="">{{ info.tel }}</a>
               </li>
             </ul>
           </div>
@@ -123,4 +126,14 @@
 </template>
 
 <script setup>
+import BiEnvelope from '~icons/bi/envelope';
+import BiBuilding from '~icons/bi/building';
+import BiTelephone from '~icons/bi/telephone';
+
+const info = {
+  address: '407-410,Building 3,Nanshan Yun Gu Innovation Industrial Park,\nNo.4093 Liuxian Avenue,Nanshan District,Shenzhen City,Zipcode 518051,China',
+  tel: '+ (86) 17898469007',
+  email: 'greatzc01@aliyun.com',
+  mailto: 'mailto:greatzc01@aliyun.com'
+}
 </script>

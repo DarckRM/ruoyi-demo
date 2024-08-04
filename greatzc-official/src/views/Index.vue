@@ -44,26 +44,21 @@
 
   <!-- Start About Us Area -->
   <section class="about-us-area pt-100 pb-70">
-    <BCarousel fade :interval="3000" controls indicators ride="carousel">
-      <BCarouselSlide>
-        <template #img>
-          <img src="/assets/img/banner/1.jpg" alt="image slot" />
-        </template>
-      </BCarouselSlide>
-
-      <BCarouselSlide>
-        <template #img>
-          <img src="/assets/img/banner/2.jpg" alt="image slot" />
-        </template>
-      </BCarouselSlide>
-
-      <BCarouselSlide>
-        <template #img>
-          <img src="/assets/img/banner/3.jpg" alt="image slot" />
-        </template>
-      </BCarouselSlide>
-    </BCarousel>
-
+    <carousel :autoplay="5000" :wrap-around="true" :transition="500">
+      <slide class="single-choose-us-box bg-color-1">
+        <img src="/assets/img/banner/1.jpg" />
+      </slide>
+      <slide class="single-choose-us-box bg-color-1">
+        <img src="/assets/img/banner/2.jpg" />
+      </slide>
+      <slide class="single-choose-us-box bg-color-1">
+        <img src="/assets/img/banner/3.jpg" />
+      </slide>
+      <template #addons>
+        <Navigation />
+        <Pagination />
+      </template>
+    </carousel>
   </section>
   <!-- End About Us Area -->
 
@@ -201,244 +196,9 @@
   <!-- End Counter Area -->
 
   <!-- Start Track Area -->
-  <section class="track-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="tab quote-list-tab">
-            <ul class="tabs">
-              <li>
-                <a href="#">
-                  <i class="flaticon-truck"></i>
-                  Track & Trace
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Request A Quote
-                  <i class="flaticon-location"></i>
-                </a>
-              </li>
-            </ul>
-
-            <div class="tab_content">
-              <div class="tabs_item">
-                <form>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Personal Data</h3>
-                    </div>
-
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Your Email">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Phone">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Shipment Data</h3>
-                    </div>
-
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Type of flight One</option>
-                          <option value="2">Type of flight Two</option>
-                          <option value="0">Type of flight Three</option>
-                          <option value="3">Type of flight Four</option>
-                          <option value="4">Type of flight Five</option>
-                          <option value="5">Type of flight Six</option>
-                          <option value="6">Type of flight Seven</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="City of Departure">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Which City">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Incomers One</option>
-                          <option value="2">Incomers Two</option>
-                          <option value="0">Incomers Three</option>
-                          <option value="3">Incomers Four</option>
-                          <option value="4">Travel Insurance Five</option>
-                          <option value="5">Incomers Six</option>
-                          <option value="6">Incomers Seven</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Width ">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Height">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-2 col-sm-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="weight">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Length">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Express Delivery
-                        <input type="radio" checked="checked" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Ocean Freight
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Road Freight
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Air Freight
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-12">
-                      <button type="submit" class="default-btn">
-                        Request A Quote
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-              <div class="tabs_item">
-                <form>
-                  <div class="row">
-                    <div class="col-12">
-                      <h3>Shipment Type</h3>
-                      <div class="form-group">
-                        <select>
-                          <option value="1">Property Used For</option>
-                          <option value="2">Home Insurance</option>
-                          <option value="0">Business Insurance</option>
-                          <option value="3">Health Insurance</option>
-                          <option value="4">Travel Insurance</option>
-                          <option value="5">Car Insurance</option>
-                          <option value="6">Life Insurance</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-12 mt-30">
-                      <h3>Tracking Number</h3>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-group">
-                        <textarea class="form-control"
-                          placeholder="You can enter up to a maximum of 10 airway bill numbers for tracking."></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Express Delivery
-                        <input type="radio" checked="checked" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Ocean Freight
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Road Freight
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6 col-md-3">
-                      <label class="single-check">
-                        Air Freight
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                    </div>
-
-                    <div class="col-12">
-                      <button type="submit" class="default-btn">
-                        Request A Quote
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="track-area jarallax">
+    <Feedback />
+  </div>
   <!-- End Track Area -->
 
   <!-- Start Pricing Area -->
@@ -793,14 +553,10 @@
       </div>
     </div>
   </section>
-
-  <div class="go-top">
-    <i class="bx bx-chevrons-up"></i>
-    <i class="bx bx-chevrons-up"></i>
-  </div>
-  <!-- End Go Top Area -->
 </template>
 
 <script setup>
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import Company from '../components/about/Company.vue'
+import Feedback from '../components/contact/Feedback.vue'
 </script>
