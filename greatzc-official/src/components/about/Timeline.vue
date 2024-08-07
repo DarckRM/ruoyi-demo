@@ -37,18 +37,8 @@ body {
 .timeline {
   margin: 4em auto;
   position: relative;
-  max-width: 46em;
+  max-width: 43em;
 
-  &:before {
-    background-color: 'black';
-    content: '';
-    margin-left: 0px;
-    position: absolute;
-    top: 0;
-    left: 2em;
-    width: 20px;
-    height: 100%;
-  }
 }
 
 .timeline-event {
@@ -86,7 +76,7 @@ body {
   position: relative;
   top: -0.875em;
   left: 2em;
-  width: 100%;
+  width: 90%;
 
   h3 {
     font-size: 1.75em;
@@ -148,7 +138,7 @@ const timeLineDataOne = [
     datetime: 'November 2006',
     title: 'Produce And Saleing',
     subTitle: 'Thinclients,cloud terminals,mini PCs',
-    content: 'The early organization of Shenzhen Zechuang Weiye Technology Co.,Ltd is established as the agent of selling a series of products such as computer sharing devices,thinclients,cloud terminals and mini PCs and so on.<'
+    content: 'The early organization of Shenzhen Zechuang Weiye Technology Co.,Ltd is established as the agent of selling a series of products such as computer sharing devices,thinclients,cloud terminals and mini PCs and so on.'
   },
   {
     datetime: 'July 2008',

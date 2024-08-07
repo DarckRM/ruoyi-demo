@@ -342,7 +342,7 @@
   <!-- End Shipment Area -->
 
   <!-- Start Team Area -->
-  <section class="team-area pt-100 pb-70">
+  <!-- <section class="team-area pt-100 pb-70">
     <div class="container">
       <div class="section-title">
         <span>Our Team</span>
@@ -471,7 +471,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End Team Area -->
 
   <!-- Start Partner Area -->

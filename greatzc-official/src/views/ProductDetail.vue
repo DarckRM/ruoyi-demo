@@ -91,7 +91,7 @@
                   <div class="tabs_item">
                     <div class="products-details-tab-content">
                       <h3 class="mb-2">Description</h3>
-                      <iframe style="width: 100%; min-height: 2000px" src="/products/1001.html"></iframe>
+                      <iframe style="width: 100%; min-height: 2000px" :src="'/products/' + $route.params.id + '.html'"></iframe>
                     </div>
                   </div>
 
@@ -217,6 +217,4 @@ import BiStarFill from '~icons/bi/star-fill';
 import BiTwitter from '~icons/bi/twitter';
 import BiInstagram from '~icons/bi/instagram';
 import BiFacebook from '~icons/bi/facebook';
-import BiDash from '~icons/bi/dash';
-import BiPlusLg from '~icons/bi/plus-lg';
 </script>

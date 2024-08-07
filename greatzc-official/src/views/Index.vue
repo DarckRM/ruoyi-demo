@@ -202,7 +202,7 @@
   <!-- End Track Area -->
 
   <!-- Start Pricing Area -->
-  <section class="pricing-area pt-100 pb-70">
+  <!-- <section class="pricing-area pt-100 pb-70">
     <div class="container">
       <div class="section-title">
         <span>Our Pricing</span>
@@ -321,11 +321,11 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End Pricing Area -->
 
   <!-- Start Shipment Area -->
-  <section class="shipment-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
+  <!-- <section class="shipment-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
     <div class="container">
       <div class="shipment-content">
         <span class="top-title">Shipment</span>
@@ -344,11 +344,11 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End Shipment Area -->
 
   <!-- Start Testimonials Area -->
-  <section class="testimonials-area ptb-100">
+  <!-- <section class="testimonials-area ptb-100">
     <div class="container-fluid p-0">
       <div class="section-title">
         <span>Our Testimonials</span>
@@ -395,7 +395,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End Testimonials Area -->
 
   <!-- Start Partner Area -->
@@ -433,126 +433,6 @@
     </div>
   </div>
   <!-- End Partner Area -->
-
-  <!-- Start Blog Area -->
-  <section class="blog-area ptb-100">
-    <div class="container">
-      <div class="section-title">
-        <span>Our Blog</span>
-        <h2>Make A Relation With Our Blog Article And Meet With Our Blogs</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit porro, aliquid reprehenderit iusto inventore
-          sint beatae ipsum impedit in sit numquam illum distinctio sequi quisquam et hic tempore</p>
-      </div>
-
-      <div class="row">
-        <div class="blog-slider owl-carousel owl-theme">
-          <div class="single-blog-post">
-            <div class="post-image">
-              <a href="#">
-                <img src="/assets/img/blog/blog-1.jpg" alt="image">
-              </a>
-            </div>
-
-            <div class="blog-content">
-              <div class="date">
-                <i class="bx bx-calendar"></i>
-                <span>06 October 2019</span>
-              </div>
-
-              <h3>
-                <a href="#">New Cargo Shipment Is Open On The Global Market</a>
-              </h3>
-
-              <p>Luis ipsum suspendisse ultrices. Risus commodo viverra maecenas accumsan lacus vel facilisis ultrices
-                Risus ipsum.</p>
-
-              <a href="blog-details.html" class="default-btn">
-                <span>Read More</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="single-blog-post">
-            <div class="post-image">
-              <a href="#">
-                <img src="/assets/img/blog/blog-2.jpg" alt="image">
-              </a>
-            </div>
-
-            <div class="blog-content">
-              <div class="date">
-                <i class="bx bx-calendar"></i>
-                <span>07 October 2019</span>
-              </div>
-
-              <h3>
-                <a href="#">Transportation Charged Has Removed Form This Months</a>
-              </h3>
-
-              <p>Luis ipsum suspendisse ultrices. Risus commodo viverra maecenas accumsan lacus vel facilisis ultrices
-                Risus ipsum.</p>
-
-              <a href="blog-details.html" class="default-btn">
-                <span>Read More</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="single-blog-post">
-            <div class="post-image">
-              <a href="#">
-                <img src="/assets/img/blog/blog-3.jpg" alt="image">
-              </a>
-            </div>
-
-            <div class="blog-content">
-              <div class="date">
-                <i class="bx bx-calendar"></i>
-                <span>08 October 2019</span>
-              </div>
-
-              <h3>
-                <a href="#">Marketing Policy Added Into The Logistic Service</a>
-              </h3>
-
-              <p>Luis ipsum suspendisse ultrices. Risus commodo viverra maecenas accumsan lacus vel facilisis ultrices
-                Risus ipsum.</p>
-
-              <a href="blog-details.html" class="default-btn">
-                <span>Read More</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="single-blog-post">
-            <div class="post-image">
-              <a href="#">
-                <img src="/assets/img/blog/blog-4.jpg" alt="image">
-              </a>
-            </div>
-
-            <div class="blog-content">
-              <div class="date">
-                <i class="bx bx-calendar"></i>
-                <span>09 October 2019</span>
-              </div>
-
-              <h3>
-                <a href="#">Transportation Charged Has Removed Form This Months</a>
-              </h3>
-
-              <p>Luis ipsum suspendisse ultrices. risus commodo viverra maecenas accumsan lacus vel facilisis ultrices
-                risus ipsum.</p>
-
-              <a href="blog-details.html" class="default-btn">
-                <span>Read More</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </template>
 
 <script setup>

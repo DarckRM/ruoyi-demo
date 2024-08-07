@@ -8,8 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BackToTop: typeof import('./src/components/tools/BackToTop.vue')['default']
-    BCarousel: typeof import('bootstrap-vue-next')['BCarousel']
-    BCarouselSlide: typeof import('bootstrap-vue-next')['BCarouselSlide']
     BFormSelect: typeof import('bootstrap-vue-next')['BFormSelect']
     Company: typeof import('./src/components/about/Company.vue')['default']
     Copyright: typeof import('./src/components/footer/Copyright.vue')['default']
@@ -25,7 +23,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Timeline: typeof import('./src/components/about/Timeline.vue')['default']
-    TimeLine: typeof import('./src/components/about/TimeLine.vue')['default']
     TopHeader: typeof import('./src/components/header/TopHeader.vue')['default']
   }
 }
