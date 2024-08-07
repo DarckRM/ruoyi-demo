@@ -64,7 +64,7 @@
         </template>
       </el-table-column>
       <el-table-column label="标题" align="center" prop="title" />
-      <el-table-column label="内容" align="center" prop="content" />
+      <!-- <el-table-column label="内容" align="center" prop="content" /> -->
       <el-table-column label="语种" align="center" prop="lang">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_language" :value="scope.row.lang"></dict-tag>
@@ -94,7 +94,7 @@
       @pagination="getList" />
 
     <!-- 添加或修改产品信息对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item prop="productId">
 

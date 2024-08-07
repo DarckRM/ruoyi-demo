@@ -5,7 +5,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 col-sm-6">
             <div class="showing-result-count">
-              <p>Showing 1-8 of 14 results</p>
+              <p>Showing 1 - {{ products.length }} of {{ total }} results</p>
             </div>
           </div>
 
@@ -20,9 +20,9 @@
 
       <div class="row">
         <div v-for="product in products" class="col-lg-4 col-sm-6">
-          <div  class="single-product">
+          <div class="single-product">
             <div class="product-img">
-              <img :src="product.post" alt="Image">
+              <img :src="getImgUrl(product.banner)" alt="Image">
               <ul>
                 <li>
                   <a href="#product-view-one" data-toggle="modal">
@@ -41,10 +41,10 @@
               </ul>
             </div>
 
-            <router-link :to="'product/' + product.category + '/' + product.title + '/' + product.id">
+            <router-link :to="'product/' + product.title + '/' + product.id">
               <h3>{{ product.title }}</h3>
             </router-link>
-            <span>{{ product.category }}</span>
+            <span v-for="cate in product.categories">{{ cate.name }}</span>
             <!-- <a href="cart.html" class="default-btn">
               <span>Add To Cart</span>
             </a> -->
@@ -243,48 +243,14 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import BiEye from '~icons/bi/eye';
 import BiSuitHeart from '~icons/bi/suit-heart';
+import { listProduct } from "@/api/product";
+import { getImgUrl } from '@/utils/getImgUrl';
 
 const categories = [
-  {
-    key: "1",
-    text: "Industrial PC",
-    value: "1"
-  }, {
-    key: "2",
-    text: "Mini PC",
-    value: ""
-  }, {
-    key: "3",
-    text: "OPS PC",
-    value: ""
-  }, {
-    key: "4",
-    text: "NUC PC",
-    value: ""
-  }, {
-    key: "5",
-    text: "Mini Itx Motherboard",
-    value: ""
-  }, {
-    key: "6",
-    text: "3.5'' Motherboard",
-    value: ""
-  }, {
-    key: "7",
-    text: "NUC Motherboard",
-    value: ""
-  }, {
-    key: "8",
-    text: "Android Products",
-    value: ""
-  }, {
-    key: "9",
-    text: "Multy LAN Products",
-    value: ""
-  }
+
 ]
 
 const products = [
@@ -343,4 +309,64 @@ const products = [
     id: "8001"
   },
 ]
+
+
+export default {
+  data() {
+    return {
+      getImgUrl,
+      total: 0,
+      products: [],
+      categories: [{
+        key: "1",
+        text: "Industrial PC",
+        value: "1"
+      }, {
+        key: "2",
+        text: "Mini PC",
+        value: ""
+      }, {
+        key: "3",
+        text: "OPS PC",
+        value: ""
+      }, {
+        key: "4",
+        text: "NUC PC",
+        value: ""
+      }, {
+        key: "5",
+        text: "Mini Itx Motherboard",
+        value: ""
+      }, {
+        key: "6",
+        text: "3.5'' Motherboard",
+        value: ""
+      }, {
+        key: "7",
+        text: "NUC Motherboard",
+        value: ""
+      }, {
+        key: "8",
+        text: "Android Products",
+        value: ""
+      }, {
+        key: "9",
+        text: "Multy LAN Products",
+        value: ""
+      }]
+    }
+  },
+  components: {
+    BiEye,
+    BiSuitHeart
+  },
+  methods: {
+  },
+  mounted() {
+    listProduct().then(res => {
+      this.products = res.rows
+      this.total = res.total
+    })
+  }
+}
 </script>

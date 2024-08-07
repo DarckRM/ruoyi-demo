@@ -104,7 +104,7 @@
                 <i class="bx">
                   <BiEnvelope style="width: 25px;" />
                 </i>
-                <a :href="info.mailto">{{ info.email }}</a>
+                <a :href="'mailto:' + info.majorEmail ">{{ info.majorEmail }}</a>
               </li>
               <li>
                 <i class="bx">
@@ -125,15 +125,28 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import BiEnvelope from '~icons/bi/envelope';
 import BiBuilding from '~icons/bi/building';
 import BiTelephone from '~icons/bi/telephone';
+import { getAbout } from '@/api/baseInfo';
 
-const info = {
-  address: '407-410,Building 3,Nanshan Yun Gu Innovation Industrial Park,\nNo.4093 Liuxian Avenue,Nanshan District,Shenzhen City,Zipcode 518051,China',
-  tel: '+ (86) 17898469007',
-  email: 'greatzc01@aliyun.com',
-  mailto: 'mailto:greatzc01@aliyun.com'
+export default {
+  data() {
+    return {
+      info: {}
+    }
+  },
+  components: {
+    BiEnvelope,
+    BiBuilding,
+    BiTelephone
+  },
+  mounted() {
+    getAbout(1).then(res => {
+      this.info = res.data
+    })
+  }
 }
+
 </script>

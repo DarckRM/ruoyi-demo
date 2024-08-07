@@ -19,4 +19,5 @@
 
 <script setup>
 import List from "../components/products/List.vue"
+
 </script>

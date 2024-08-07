@@ -1,11 +1,43 @@
 <template>
   <div class="app-container home">
     <el-row :gutter="20">
-      <el-col :span="4">
+      <el-col :span="12">
         <el-card>
+          <div slot="header">
+            <span>企业介绍</span>
+            <el-button style="margin-left: 20px;" type="text" @click="submitForm">修改</el-button>
+          </div>
           <el-form>
-            <el-form-item label="Hello" label-width="40px">
-              <el-input></el-input>
+            <el-form-item label="主标题">
+              <el-input v-model="form.title"></el-input>
+            </el-form-item>
+            <el-form-item label="副标题">
+              <el-input v-model="form.subTitle"></el-input>
+            </el-form-item>
+            <el-form-item label="正文">
+            </el-form-item>
+            <editor v-model="form.content" style="max-height: 400px; overflow: auto;" />
+          </el-form>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <div slot="header">
+            <span>关于信息</span>
+            <el-button style="margin-left: 20px;" type="text" @click="submitForm">修改</el-button>
+          </div>
+          <el-form>
+            <el-form-item label="地址">
+              <el-input v-model="form.address"></el-input>
+            </el-form-item>
+            <el-form-item label="主邮箱">
+              <el-input v-model="form.majorEmail"></el-input>
+            </el-form-item>
+            <el-form-item label="副邮箱">
+              <el-input v-model="form.subEmail"></el-input>
+            </el-form-item>
+            <el-form-item label="电话">
+              <el-input v-model="form.tel"></el-input>
             </el-form-item>
           </el-form>
         </el-card>
@@ -15,17 +47,46 @@
 </template>
 
 <script>
+import { getAbout } from "@/api/greatzc/baseInfo";
+import { updateAbout } from "../api/greatzc/baseInfo";
+
 export default {
   name: "Index",
   data() {
     return {
       // 版本号
-      version: "3.8.7"
+      version: "3.8.7",
+      form: {
+        id: 1,
+        title: '',
+        subTitle: '',
+        content: '',
+        address: '',
+        majorEmail: '',
+        subEmail: '',
+        tel: ''
+      }
     };
+  },
+  mounted() {
+    this.getAboutInfo()
   },
   methods: {
     goTarget(href) {
       window.open(href, "_blank");
+    },
+    getAboutInfo() {
+      this.loading = true
+      getAbout(1).then(res => {
+        this.form = res.data
+        this.loading = false
+      })
+    },
+    submitForm() {
+      updateAbout(this.form).then(res => {
+        this.$modal.msgSuccess("修改成功")
+        this.getAboutInfo()
+      })
     }
   }
 };

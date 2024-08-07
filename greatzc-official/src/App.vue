@@ -7,7 +7,7 @@ import NaviHeader from './components/header/NaviHeader.vue'
 import BackToTop from './components/tools/BackToTop.vue'
 
 import { router } from "./router";
-
+import { onMounted } from 'vue'
 
 </script>
 

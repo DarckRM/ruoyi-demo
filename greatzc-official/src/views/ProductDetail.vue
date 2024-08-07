@@ -4,14 +4,14 @@
       <div class="row align-items-center">
         <div class="col-lg-6 col-md-12">
           <div class="product-details-image">
-            <img :src="'/assets/img/product/' + $route.params.category + '/1.jpg'" alt="Image">
+            <img :src="getImgUrl(product.banner)" alt="Image">
           </div>
         </div>
 
         <div class="col-lg-6 col-md-12">
           <div class="product-details-desc">
             <h3>{{ $route.params.name }}</h3>
-
+            <p class="category">{{ product.name }}</p>
             <div class="product-review">
               <div class="rating">
                 <i v-for="i in 5" class='bx'>
@@ -75,7 +75,9 @@
               </li>
             </ul>
 
-            <p class="category">Category: <span>{{ $route.params.category }}</span></p>
+            <p class="category">Category: <span v-for="cate in product.categories">
+                {{ cate.name }}&ensp;
+              </span></p>
           </div>
         </div>
 
@@ -91,7 +93,9 @@
                   <div class="tabs_item">
                     <div class="products-details-tab-content">
                       <h3 class="mb-2">Description</h3>
-                      <iframe style="width: 100%; min-height: 2000px" :src="'/products/' + $route.params.id + '.html'"></iframe>
+                      <!-- <iframe style="width: 100%; min-height: 2000px"
+                        :src="'/products/' + $route.params.id + '.html'"></iframe> -->
+                      <div v-html="product.content"></div>
                     </div>
                   </div>
 
@@ -212,9 +216,40 @@
   </section>
 </template>
 
-<script setup>
+<script>
 import BiStarFill from '~icons/bi/star-fill';
 import BiTwitter from '~icons/bi/twitter';
 import BiInstagram from '~icons/bi/instagram';
 import BiFacebook from '~icons/bi/facebook';
+
+import { getImgUrl } from '@/utils/getImgUrl';
+import { getProduct } from '@/api/product';
+import { useRoute } from 'vue-router';
+
+export default {
+  setup() {
+    const route = useRoute()
+    return {
+      route
+    }
+  },
+  components: {
+    BiStarFill,
+    BiTwitter,
+    BiFacebook,
+    BiInstagram
+  },
+  data() {
+    return {
+      getImgUrl,
+      product: {}
+    }
+  },
+  mounted() {
+    const id = this.route.params.id
+    getProduct(id).then(res => {
+      this.product = res.data
+    })
+  }
+}
 </script>
