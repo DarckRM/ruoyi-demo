@@ -80,10 +80,14 @@ public class ProductServiceImpl implements IProductService {
         HashMap<String, List<CategoryVO>> categoryMap = new HashMap<>();
         productIds.forEach(e -> {
             List<CategoryVO> categoryVOS = productCategoryMapper.selectEnhanceList(e);
-            categoryMap.put(e,categoryVOS);
+            categoryMap.put(e, categoryVOS);
         });
 
-        products.forEach(e -> e.setCategories(categoryMap.getOrDefault(e.getProductId(), new ArrayList<>())));
+        products.forEach(e -> {
+            List<CategoryVO> vos = categoryMap.getOrDefault(e.getProductId(), new ArrayList<>());
+            e.setCategories(vos);
+            e.setCategoryIndex(vos.stream().map(CategoryVO::getCategoryId).collect(Collectors.toList()));
+        });
         return products;
     }
 
@@ -121,12 +125,6 @@ public class ProductServiceImpl implements IProductService {
             return updateCategory(product);
         }
 
-        List<ProductCategory> categories = product.getCategoryIndex().stream()
-                .map(item -> new ProductCategory(null, product.getProductId(), item))
-                .collect(Collectors.toList());
-
-        productCategoryMapper.insert(categories);
-
         product.setCreateTime(product.getUpdateTime());
         product.setId(null);
         product.setCreateTime(DateUtils.getNowDate());
@@ -135,11 +133,12 @@ public class ProductServiceImpl implements IProductService {
     }
 
     private int updateCategory(Product product) {
-        productCategoryMapper.deleteByIds(product.getCategoryIndex());
+        productCategoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", product.getProductId()));
         List<ProductCategory> categories = product.getCategoryIndex().stream()
                 .map(item -> new ProductCategory(null, product.getProductId(), item))
                 .collect(Collectors.toList());
-
+        if (categories.isEmpty())
+            return 1;
         return productCategoryMapper.insert(categories).size();
     }
 

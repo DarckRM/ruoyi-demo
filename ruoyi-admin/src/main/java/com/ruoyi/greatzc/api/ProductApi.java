@@ -3,6 +3,7 @@ package com.ruoyi.greatzc.api;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.utils.EnvUtil;
 import com.ruoyi.greatzc.domain.Product;
 import com.ruoyi.greatzc.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class ProductApi extends BaseController {
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         Product product = productService.selectProductById(id);
         // 替换正文中的图片 URL
-        product.setContent(product.getContent().replace("/dev-api/", "http://localhost:8080/"));
+        product.setContent(product.getContent().replace("/dev-api/", EnvUtil.BASE_URL));
         return success(product);
     }
 

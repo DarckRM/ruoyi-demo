@@ -127,7 +127,7 @@
           <el-input v-model="form.title" placeholder="请输入标题" />
         </el-form-item>
         <el-form-item label="内容">
-          <editor v-model="form.content" :min-height="192" />
+          <editor v-model="form.content" :min-height="192" type="url" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-radio-group v-model="form.status">

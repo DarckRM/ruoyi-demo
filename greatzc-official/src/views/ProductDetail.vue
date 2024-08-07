@@ -95,7 +95,7 @@
                       <h3 class="mb-2">Description</h3>
                       <!-- <iframe style="width: 100%; min-height: 2000px"
                         :src="'/products/' + $route.params.id + '.html'"></iframe> -->
-                      <div v-html="product.content"></div>
+                      <div class="preview" v-html="product.content"></div>
                     </div>
                   </div>
 
@@ -253,3 +253,33 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.preview>>>table {
+  padding: 10px;
+}
+
+.preview>>>td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* 奇偶行样式 */
+.preview>>>tr:nth-child(even) {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  /* 偶数行背景色 */
+}
+
+.preview>>>tr:nth-child(odd) {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  /* 奇数行背景色 */
+}
+
+/* 鼠标悬停样式 */
+tr:hover {
+  background-color: #29ec8b;
+  /* 鼠标悬停时背景色 */
+}
+</style>
