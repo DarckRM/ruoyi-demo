@@ -127,6 +127,7 @@
           <el-input v-model="form.title" placeholder="请输入标题" />
         </el-form-item>
         <el-form-item label="内容">
+          <file-upload @input="uploadDoc" type="primary" style="margin-bottom: 5px;">上传文件</file-upload>
           <editor v-model="form.content" :min-height="192" type="url" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
@@ -202,6 +203,12 @@ export default {
     this.getList();
   },
   methods: {
+    uploadDoc(value) {
+      if (value.result) {
+        this.form.content = value.result
+        this.form.shadowContent = value.result
+      }
+    },
     /** 查询产品信息列表 */
     getList() {
       this.loading = true;
@@ -218,7 +225,6 @@ export default {
               })
           });
         })
-        console.log(this.categories)
         this.loading = false;
       });
     },
@@ -241,6 +247,7 @@ export default {
         status: null,
         show: null,
         categoryIndex: null,
+        shadowContent: undefined
       };
       this.resetForm("form");
     },
@@ -280,6 +287,9 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          if (this.form.shadowContent != undefined) {
+            this.form.content = this.form.shadowContent
+          }
           if (this.form.id != null) {
             updateProduct(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");

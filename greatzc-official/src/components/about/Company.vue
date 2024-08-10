@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <div class="about-img">
+        <div >
           <img src="/assets/img/about-img.jpg" alt="Image">
           <img src="/assets/img/about-img-2.jpg" alt="Image">
           <div class="experience">

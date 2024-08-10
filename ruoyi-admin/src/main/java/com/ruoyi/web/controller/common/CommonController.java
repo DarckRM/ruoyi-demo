@@ -1,13 +1,14 @@
 package com.ruoyi.web.controller.common;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.file.FileUtils;
 import com.ruoyi.framework.config.ServerConfig;
+import org.zwobble.mammoth.DocumentConverter;
+import org.zwobble.mammoth.Result;
 
 /**
  * 通用请求处理
@@ -80,6 +83,35 @@ public class CommonController
             // 上传文件路径
             String filePath = RuoYiConfig.getUploadPath();
             // 上传并返回新文件名称
+            // TODO)) 对于 docx, doc 文件做另外的处理, 这部分逻辑以后需要单独写
+            if (ObjectUtils.isEmpty(file))
+                return AjaxResult.error("文件为空");
+            if (Objects.requireNonNull(file.getOriginalFilename()).contains("doc") || Objects.requireNonNull(file.getContentType()).contains("document")) {
+                String[] split = file.getOriginalFilename().split("\\.");
+                File doc = File.createTempFile(split[0], split[1]);
+                file.transferTo(doc);
+
+                DocumentConverter converter = new DocumentConverter()
+                        .imageConverter(image -> {
+                            String imageName = FileUploadUtils.upload(filePath, image);
+                            String src = "/dev-api" + imageName;
+                            Map<String, String> attr = new HashMap<>();
+                            attr.put("src", src);
+                            if (!ObjectUtils.isEmpty(image.getAltText()))
+                                attr.put("alt", image.getAltText().get().replace("\n", ""));
+                            return attr;
+                        });
+                Result<String> result = converter.convertToHtml(doc);
+
+                AjaxResult ajax = AjaxResult.success();
+                ajax.put("url", file.getOriginalFilename());
+                ajax.put("result", result.getValue());
+                ajax.put("warning", result.getWarnings());
+                ajax.put("fileName", file.getOriginalFilename());
+                ajax.put("newFileName", FileUtils.getName(file.getOriginalFilename()));
+                ajax.put("originalFilename", file.getOriginalFilename());
+                return ajax;
+            }
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + fileName;
             AjaxResult ajax = AjaxResult.success();

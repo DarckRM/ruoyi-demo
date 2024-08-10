@@ -89,7 +89,12 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
+<!--    docx to html-->
+        <dependency>
+            <groupId>org.zwobble.mammoth</groupId>
+            <artifactId>mammoth</artifactId>
+            <version>1.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>

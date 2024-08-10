@@ -1,10 +1,14 @@
 package com.ruoyi.common.utils.file;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
+
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.Constants;
@@ -78,6 +82,20 @@ public class FileUploadUtils
     {
         try
         {
+            return upload(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        }
+        catch (Exception e)
+        {
+            throw new IOException(e.getMessage(), e);
+        }
+    }
+
+    public static final String upload(String baseDir, org.zwobble.mammoth.images.Image image) throws IOException {
+        try
+        {
+            String prefix = image.getContentType().split("/")[1];
+            String imageName = IdUtils.fastSimpleUUID() + "." + prefix;
+            MultipartFile file = new MockMultipartFile(imageName, imageName, image.getContentType(), image.getInputStream());
             return upload(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         }
         catch (Exception e)

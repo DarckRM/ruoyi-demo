@@ -256,7 +256,6 @@ export default {
     });
     this.quill.on('text-change', () => {
       this.$emit('contentData', this.quill.root.innerHTML)
-      console.log(this.quill.root.innerHTML)
     })
     this.quill.on("selection-change", (range, oldRange, source) => {
       this.$emit("on-selection-change", range, oldRange, source);
