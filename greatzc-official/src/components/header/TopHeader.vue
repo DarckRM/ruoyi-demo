@@ -5,20 +5,17 @@
         <div class="col-lg-8 col-md-10">
           <ul class="header-left-content">
             <li>
-              <i class="bx">
-                <BiHouse></BiHouse>
+              <i class="bx bx-home">
               </i>
-              Home
+              {{ info.address }}
             </li>
             <li>
-              <i class="bx">
-                <BiTelephone></BiTelephone>
+              <i class="bx bx-phone-call">
               </i>
               <a href="">{{ info.tel }}</a>
             </li>
             <li>
-              <i class="bx">
-                <BiEnvelopeAt></BiEnvelopeAt>
+              <i class="bx bx-envelope">
               </i>
               <a href="mailto:hello@greatzc.com">{{ info.majorEmail }}</a>
             </li>

@@ -8,8 +8,8 @@
               <img src="/assets/img/logo.png" alt="Image">
             </a>
 
-            <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua consec.</p>
+            <p> Professional Supplier of Embedded Motherboards,Embedded Computers,Mini PCs,OPS PCs,Mini Itx
+              Motherboards,Fanless Motherboardss,Firewall Products</p>
 
             <ul class="social-icon">
               <li>
@@ -95,21 +95,16 @@
             <h3>Address</h3>
             <ul class="address">
               <li class="location">
-                <i class="bx">
-                  <BiBuilding style="width: 25px;" />
-                </i>
+                <i class="bx bxs-location-plus"></i>
                 {{ info.address }}
               </li>
               <li>
-                <i class="bx">
-                  <BiEnvelope style="width: 25px;" />
-                </i>
-                <a :href="'mailto:' + info.majorEmail ">{{ info.majorEmail }}</a>
+                <i class="bx bxs-envelope"></i>
+                <a :href="'mailto:' + info.majorEmail">{{ info.majorEmail }}</a>
+                <a :href="'mailto:' + info.majorEmail">{{ info.subEmail }}</a>
               </li>
               <li>
-                <i class="bx">
-                  <BiTelephone style="width: 25px;" />
-                </i>
+                <i class="bx bxs-phone-call"></i>
                 <a href="">{{ info.tel }}</a>
               </li>
             </ul>
@@ -129,10 +124,10 @@
 import BiEnvelope from '~icons/bi/envelope';
 import BiBuilding from '~icons/bi/building';
 import BiTelephone from '~icons/bi/telephone';
-
+import BiFaceBook from '~icons/bi/facebook'
 
 export default {
-  props: { 
+  props: {
     info: Object
   },
   mounted() {
@@ -140,7 +135,8 @@ export default {
   components: {
     BiEnvelope,
     BiBuilding,
-    BiTelephone
+    BiTelephone,
+    BiFaceBook,
   }
 }
 

@@ -5,7 +5,9 @@
         <div class="row align-items-center">
           <div class="col-lg-6 col-sm-6">
             <div class="showing-result-count">
-              <p>Showing 1 - {{ products.length }} of {{ total }} results</p>
+              <p>Showing {{ (params.pageNum - 1) * params.pageSize <= 0 ? 1 : params.pageNum * params.pageSize }} - {{
+                  params.pageNum * (params.pageSize + 1) < total ? params.pageNum * (params.pageSize + 1) : total}} of
+                  {{ total }} results</p>
             </div>
           </div>
 
@@ -50,13 +52,8 @@
 
         <div class="col-lg-12 col-md-12">
           <div class="pagination-area">
-            <span class="page-numbers current" aria-current="page">1</span>
-            <a href="#" class="page-numbers">2</a>
-            <a href="#" class="page-numbers">3</a>
-
-            <a href="#" class="next page-numbers">
-              <i class="bx bx-chevron-right"></i>
-            </a>
+            <BPagination @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
+              :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
           </div>
         </div>
       </div>
@@ -259,11 +256,13 @@ export default {
     return {
       getImgUrl,
       total: 0,
-      category: 0,
+      category: -1,
       products: [],
       categories: [],
       params: {
-        categoryIndex: []
+        categoryIndex: [],
+        pageNum: 1,
+        pageSize: 10
       }
     }
   },
@@ -275,12 +274,13 @@ export default {
     listProduct(this.params).then(res => {
       this.products = res.rows
       this.total = res.total
+      this.ex1Rows = res.total
     })
     listCategory().then(res => {
       this.categories = [{
-        key: null,
+        key: -1,
         text: 'All',
-        value: null 
+        value: -1
       }]
       res.rows.forEach(e => {
         this.categories.push({
@@ -292,19 +292,33 @@ export default {
     })
   },
   methods: {
-    changeCategory() {
-      this.params = {
-        categoryIndex: []
-      }
+    changePagination(ev, page) {
+      this.params.pageNum = page
+      this.params.categoryIndex = []
       this.params.categoryIndex.push(this.category)
       listProduct(this.params).then(res => {
         this.products = [{
           key: -1,
           text: 'All',
-          value: -1 
+          value: -1
         }]
         this.products = res.rows
         this.total = res.total
+        this.ex1Rows = res.total
+      })
+    },
+    changeCategory() {
+      this.params.categoryIndex = []
+      this.params.categoryIndex.push(this.category)
+      listProduct(this.params).then(res => {
+        this.products = [{
+          key: -1,
+          text: 'All',
+          value: -1
+        }]
+        this.products = res.rows
+        this.total = res.total
+        this.ex1Rows = res.total
       })
     }
   }

@@ -54,22 +54,19 @@
               </li>
               <li>
                 <a href="#" target="_blank">
-                  <i class="bx">
-                    <BiTwitter />
+                  <i class="bx bxl-twitter">
                   </i>
                 </a>
               </li>
               <li>
                 <a href="#" target="_blank">
-                  <i class="bx">
-                    <BiInstagram />
+                  <i class="bx bxl-instagram">
                   </i>
                 </a>
               </li>
               <li>
                 <a href="#" target="_blank">
-                  <i class="bx">
-                    <BiFacebook />
+                  <i class="bx bxl-facebook">
                   </i>
                 </a>
               </li>
