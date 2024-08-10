@@ -13,12 +13,4 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 @SpringBootTest(classes = RuoYiApplication.class)
 public class TestRun {
-
-    @Autowired
-    ProductMapper productMapper;
-
-//    @Test
-    public void runOne() {
-        log.info(productMapper.selectList(null).toString());
-    }
 }

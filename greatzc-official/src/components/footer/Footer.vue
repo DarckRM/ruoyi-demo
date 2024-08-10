@@ -129,23 +129,18 @@
 import BiEnvelope from '~icons/bi/envelope';
 import BiBuilding from '~icons/bi/building';
 import BiTelephone from '~icons/bi/telephone';
-import { getAbout } from '@/api/baseInfo';
+
 
 export default {
-  data() {
-    return {
-      info: {}
-    }
+  props: { 
+    info: Object
+  },
+  mounted() {
   },
   components: {
     BiEnvelope,
     BiBuilding,
     BiTelephone
-  },
-  mounted() {
-    getAbout(1).then(res => {
-      this.info = res.data
-    })
   }
 }
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import errorCode from '@/utils/errorCode'
+import { tansParams, blobValidate } from "@/utils/tools";
 
 // 是否显示重新登录
 export let isRelogin = { show: false };

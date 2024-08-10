@@ -37,6 +37,7 @@ public class ProductApi extends BaseController {
 
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
+        logger.info(EnvUtil.BASE_URL);
         Product product = productService.selectProductById(id);
         // 替换正文中的图片 URL
         product.setContent(product.getContent().replace("/dev-api/", EnvUtil.BASE_URL));

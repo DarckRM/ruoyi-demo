@@ -16,3 +16,11 @@ export function getProduct(id) {
     method: 'get'
   })
 }
+
+export function listCategory(query) {
+  return request({
+    url: '/category/list',
+    method: 'get',
+    params: query
+  })
+}

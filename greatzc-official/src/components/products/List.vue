@@ -11,7 +11,7 @@
 
           <div class="col-lg-6 col-sm-6">
             <div class="showing-top-bar-ordering">
-              <BFormSelect :options="categories">
+              <BFormSelect :onchange="changeCategory" v-model="category" :options="categories">
               </BFormSelect>
             </div>
           </div>
@@ -45,9 +45,6 @@
               <h3>{{ product.title }}</h3>
             </router-link>
             <span v-for="cate in product.categories">{{ cate.name }}</span>
-            <!-- <a href="cart.html" class="default-btn">
-              <span>Add To Cart</span>
-            </a> -->
           </div>
         </div>
 
@@ -246,69 +243,15 @@
 <script>
 import BiEye from '~icons/bi/eye';
 import BiSuitHeart from '~icons/bi/suit-heart';
-import { listProduct } from "@/api/product";
+import { listProduct, listCategory } from "@/api/product";
 import { getImgUrl } from '@/utils/getImgUrl';
+import { onUpdated } from 'vue';
 
 const categories = [
 
 ]
 
-const products = [
-  {
-    post: "/assets/img/product/Industrial PC/1.jpg",
-    title: "ZC-G52-ITX6412 Fanless Industial PC Onboard J6412",
-    category: "Industrial PC",
-    id: "1001"
-  },
-  {
-    post: "/assets/img/product/Mini PC/1.jpg",
-    title: "ZC-H45-R3050 Mini PC With NVDIA RTX3050",
-    category: "Mini PC",
-    id: "2001"
-  },
-  {
-    post: "/assets/img/product/OPS PC/1.jpg",
-    title: "ZC-OPSH510 OPS PC Support 10th 11th Gen I3 I5 I7 CPU",
-    category: "OPS PC",
-    id: "3001"
-  },
-  {
-    post: "/assets/img/product/NUC PC/1.jpg",
-    title: "ZC-NUC10 NUC PC Onboard Intel 10th Gen Comet Lake U series CPU I3 I5 I7",
-    category: "NUC PC",
-    id: "4001"
-  },
-  {
-    post: "/assets/img/product/Mini ITX Motherboard/1.jpg",
-    title: "ZC-ITX6412 Fanless Thin Mini Itx Motherboard J6412 CPU",
-    category: "Mini ITX Motherboard",
-    id: "5001"
-  },
-  {
-    post: "/assets/img/product/3.5'' Motherboard/1.jpg",
-    title: "ZC35-P4125DL 3.5'' Motherboard Onboard J4125 CPU",
-    category: "3.5'' Motherboard",
-    id: "6001"
-  },
-  {
-    post: "/assets/img/product/NUC Motherboard/1.jpg",
-    title: "ZC-N32D Nano Itx Motherboard 2 LAN Ports",
-    category: "NUC Motherboard",
-    id: "7001"
-  },
-  {
-    post: "/assets/img/product/Android Products/1.jpg",
-    title: "ZC-A20N Android Motherboard",
-    category: "Android Products",
-    id: "8001"
-  },
-  {
-    post: "/assets/img/product/Multy LAN Products/1.jpg",
-    title: "ZC-H78-3104L Mini PC with 4 LAN Supports 8th 9th Gen Celeron Pentium I3 I5 I7 CPU",
-    category: "Multy LAN Products",
-    id: "8001"
-  },
-]
+const products = []
 
 
 export default {
@@ -316,57 +259,54 @@ export default {
     return {
       getImgUrl,
       total: 0,
+      category: 0,
       products: [],
-      categories: [{
-        key: "1",
-        text: "Industrial PC",
-        value: "1"
-      }, {
-        key: "2",
-        text: "Mini PC",
-        value: ""
-      }, {
-        key: "3",
-        text: "OPS PC",
-        value: ""
-      }, {
-        key: "4",
-        text: "NUC PC",
-        value: ""
-      }, {
-        key: "5",
-        text: "Mini Itx Motherboard",
-        value: ""
-      }, {
-        key: "6",
-        text: "3.5'' Motherboard",
-        value: ""
-      }, {
-        key: "7",
-        text: "NUC Motherboard",
-        value: ""
-      }, {
-        key: "8",
-        text: "Android Products",
-        value: ""
-      }, {
-        key: "9",
-        text: "Multy LAN Products",
-        value: ""
-      }]
+      categories: [],
+      params: {
+        categoryIndex: []
+      }
     }
   },
   components: {
     BiEye,
     BiSuitHeart
   },
-  methods: {
-  },
   mounted() {
-    listProduct().then(res => {
+    listProduct(this.params).then(res => {
       this.products = res.rows
       this.total = res.total
     })
+    listCategory().then(res => {
+      this.categories = [{
+        key: null,
+        text: 'All',
+        value: null 
+      }]
+      res.rows.forEach(e => {
+        this.categories.push({
+          key: e.id,
+          text: e.name,
+          value: e.id
+        })
+      });
+    })
+  },
+  methods: {
+    changeCategory() {
+      this.params = {
+        categoryIndex: []
+      }
+      this.params.categoryIndex.push(this.category)
+      listProduct(this.params).then(res => {
+        this.products = [{
+          key: -1,
+          text: 'All',
+          value: -1 
+        }]
+        this.products = res.rows
+        this.total = res.total
+      })
+    }
   }
 }
 </script>

@@ -14,13 +14,13 @@
               <i class="bx">
                 <BiTelephone></BiTelephone>
               </i>
-              <a href="">+ (86) 17898469007</a>
+              <a href="">{{ info.tel }}</a>
             </li>
             <li>
               <i class="bx">
                 <BiEnvelopeAt></BiEnvelopeAt>
               </i>
-              <a href="mailto:hello@greatzc.com">greatzc@mail.com</a>
+              <a href="mailto:hello@greatzc.com">{{ info.majorEmail }}</a>
             </li>
           </ul>
         </div>
@@ -69,8 +69,24 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import BiHouse from '~icons/bi/house';
 import BiTelephone from '~icons/bi/telephone';
 import BiEnvelopeAt from '~icons/bi/envelope-at';
+
+export default {
+  components: {
+    BiHouse,
+    BiEnvelopeAt,
+    BiTelephone
+  },
+  props: {
+    info: {}
+  },
+  data() {
+    return {
+      languages: []
+    }
+  }
+}
 </script>
