@@ -1,24 +1,18 @@
 <template>
-  <section class="choose-us-area pt-100 pb-70 bg-color">
-    <div class="container">
-      <div class="row">
-        <div class="timeline col-lg-6 col-md-12 col-sm-12">
-          <ol v-for="item in timeLineData">
-            <li>
-              <div class="timeline-event">
-                <label class="timeline-event-icon"></label>
-                <div class="timeline-event-copy">
-                  <p class="timeline-event-thumbnail">{{ item.datetime }}</p>
-                  <h3>{{ item.title }}</h3>
-                  <h4>{{ item.subTitle }}</h4>
-                  <p>{{ item.content }}</p>
-                </div>
+  <section class="choose-us-area pt-100 pb-70" style="background-color: #eeeeee;">
+        <div class="timeline col-lg-12 col-md-12 col-sm-12">
+          <ol>
+            <li v-for="item in timeLineData">
+              <div class="timeline-event-copy">
+                <h2 class="timeline-event-thumbnail">{{ item.datetime }}</h2>
+                <h3>{{ item.title }}</h3>
+                <h5>{{ item.subTitle }}</h5>
+                <p>{{ item.content }}</p>
               </div>
             </li>
           </ol>
         </div>
-      </div>
-    </div>
+
   </section>
 
 </template>
@@ -38,15 +32,21 @@ body {
   box-sizing: border-box;
 }
 
+.timeline::-webkit-scrollbar {
+  display: none;
+}
+
 /* Styling */
 .timeline {
   white-space: nowrap;
-  overflow-x: hidden;
+  overflow-x: scroll;
+  height: 800px;
 }
 
 .timeline ol {
   width: 100vw;
-  padding: 250px 0;
+  padding-top: 350px;
+  padding-bottom: 150px;
   transition: all 1s;
 }
 
@@ -54,12 +54,75 @@ body {
   position: relative;
   display: inline-block;
   list-style-type: none;
-  width: 160px;
+  width: 260px;
   height: 3px;
   background-color: #fff;
 }
 
-.timeline-event {
+.timeline ol li:last-child {
+  width: 280px;
+}
+
+.timeline ol li:not(:first-child) {
+  margin-left: 14px;
+}
+
+.timeline ol li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 1px);
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #0383ff;
+}
+
+.timeline ol li div {
+  position: absolute;
+  left: calc(100% + 7px);
+  width: 480px;
+  padding: 15px;
+  font-size: 1rem;
+  white-space: normal;
+  color: black;
+  background: white;
+}
+
+.timeline ol li div::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.timeline ol li:nth-child(odd) div {
+  top: -16px;
+  transform: translateY(-100%);
+}
+
+.timeline ol li:nth-child(odd) div::before {
+  top: 100%;
+  border-width: 8px 8px 0 0;
+  border-color: white transparent transparent transparent;
+}
+
+.timeline ol li:nth-child(even) div {
+  top: calc(100% + 16px);
+}
+
+.timeline ol li:nth-child(even) div::before {
+  top: -8px;
+  border-width: 8px 0 0 8px;
+  border-color: transparent transparent transparent white;
+}
+
+.timeline-event-a {
   position: relative;
 
   &::before {
@@ -87,7 +150,7 @@ body {
   }
 }
 
-.timeline-event-copy {
+.timeline-event-copy-a {
   padding-left: 1.5em;
   padding-top: 1em;
   padding-bottom: 0em;
@@ -114,7 +177,7 @@ body {
   }
 }
 
-.timeline-event-icon {
+.timeline-event-icon-a {
   transition: transform 0.2s ease-in;
   transition: rotate 0.2s ease-in;
   rotate: 45deg;
@@ -130,7 +193,7 @@ body {
   height: 1em;
 }
 
-.timeline-event-thumbnail {
+.timeline-event-thumbnail-a {
   transition: box-shadow 0.5s ease-in 0.1s;
   color: white;
   font-size: 0.75em;
