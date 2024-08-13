@@ -20,16 +20,16 @@
   <!-- End About Us Area -->
 
   <!-- Start Counter Area -->
-  <div class="bg-color ">
+  <div>
     <Timeline />
   </div>
   <!-- End Counter Area -->
 
   <!-- Start Choose Us Area -->
-   <div>
+  <div>
     <Culture />
-   </div>
-  
+  </div>
+
   <!-- End Choose Us Area -->
 
   <!-- Start Track Area -->

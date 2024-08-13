@@ -1,21 +1,26 @@
 <template>
-  <div>
-    <div class="row">
-      <div v-for="column in timeLineData" class="col-lg-4 col-md-6 col-sm-6">
-        <ul v-for="item in column" class="timeline">
-          <div class="timeline-event">
-            <label class="timeline-event-icon"></label>
-            <div class="timeline-event-copy">
-              <p class="timeline-event-thumbnail">{{ item.datetime }}</p>
-              <h3>{{ item.title }}</h3>
-              <h4>{{ item.subTitle }}</h4>
-              <p>{{ item.content }}</p>
-            </div>
-          </div>
-        </ul>
+  <section class="choose-us-area pt-100 pb-70 bg-color">
+    <div class="container">
+      <div class="row">
+        <div class="timeline col-lg-6 col-md-12 col-sm-12">
+          <ol v-for="item in timeLineData">
+            <li>
+              <div class="timeline-event">
+                <label class="timeline-event-icon"></label>
+                <div class="timeline-event-copy">
+                  <p class="timeline-event-thumbnail">{{ item.datetime }}</p>
+                  <h3>{{ item.title }}</h3>
+                  <h4>{{ item.subTitle }}</h4>
+                  <p>{{ item.content }}</p>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
 </template>
 <style scoped>
 /* Fonts */
@@ -35,10 +40,23 @@ body {
 
 /* Styling */
 .timeline {
-  margin: 4em auto;
-  position: relative;
-  max-width: 43em;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
 
+.timeline ol {
+  width: 100vw;
+  padding: 250px 0;
+  transition: all 1s;
+}
+
+.timeline ol li {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  width: 160px;
+  height: 3px;
+  background-color: #fff;
 }
 
 .timeline-event {
@@ -127,7 +145,7 @@ body {
 
 <script setup>
 
-const timeLineDataOne = [
+const timeLineData = [
   {
     datetime: 'April 2004',
     title: 'Organization Establishe',
@@ -152,9 +170,6 @@ const timeLineDataOne = [
     subTitle: 'Shenzhen Zechuang Weiye Technology Co.,Lt',
     content: 'Shenzhen Zechuang Weiye Technology Co.,Ltd,as a registered company,shared the market of industrial computers in public by producing and selling industrial computers and set up the department of foreign trading.Therefore, it placed high weight in enlarging the production line of industrial computers with high quality such as ZC-1037-6C and ZC-T4200DL.'
   },
-]
-
-const timeLineDataTwo = [
   {
     datetime: 'April 2013',
     title: 'Custom Designed Device',
@@ -185,9 +200,6 @@ const timeLineDataTwo = [
     subTitle: '8th Gen And 10th Gen',
     content: 'Shenzhen Zechuang Weiye Technology Co.,Ltd developed series of OPS Computer onboard 8th gen and 10th gen OPS PC.'
   },
-]
-
-const timeLineDataThree = [
   {
     datetime: 'September 2021',
     title: 'New Mini ITX Motherboard',
@@ -206,12 +218,6 @@ const timeLineDataThree = [
     subTitle: '11th Gen Core',
     content: 'Shenzhen Zechuang Weiye Technology Co.,Ltd developed series of mini itx motherboard onboard 12th gen Core i3 i5 i7;OPS PC which support 10th/11th Gen Core i3 i5 i7 CPU.'
   },
-]
-
-const timeLineData = [
-  timeLineDataOne,
-  timeLineDataTwo,
-  timeLineDataThree
 ]
 
 </script>

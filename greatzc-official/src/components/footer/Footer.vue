@@ -36,34 +36,7 @@
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-6">
-          <div class="single-footer-widget">
-            <h3>Services</h3>
-
-            <ul class="import-link">
-              <li>
-                <a href="#">Sea Freight</a>
-              </li>
-              <li>
-                <a href="#">Air Freight</a>
-              </li>
-              <li>
-                <a href="#">Road Freight</a>
-              </li>
-              <li>
-                <a href="#">Local Delivery</a>
-              </li>
-              <li>
-                <a href="#">Bus Freight</a>
-              </li>
-              <li>
-                <a href="#">Car Freight</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <div class="single-footer-widget">
             <h3>Company</h3>
 
@@ -90,7 +63,7 @@
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <div class="single-footer-widget">
             <h3>Address</h3>
             <ul class="address">
