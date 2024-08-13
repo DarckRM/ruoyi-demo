@@ -70,6 +70,9 @@ public class Product extends BaseEntity {
     @TableField(value = "`show`")
     private String show;
 
+    @Excel(name = "关键词")
+    private String keywords;
+
     /**
      * 产品分类参数
      */

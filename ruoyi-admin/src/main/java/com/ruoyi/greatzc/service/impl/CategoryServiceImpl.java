@@ -1,9 +1,11 @@
 package com.ruoyi.greatzc.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.greatzc.domain.Category;
 import com.ruoyi.greatzc.mapper.CategoryMapper;
+import com.ruoyi.greatzc.vo.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.greatzc.service.ICategoryService;
@@ -92,5 +94,10 @@ public class CategoryServiceImpl implements ICategoryService
     public int deleteCategoryById(Long id)
     {
         return categoryMapper.deleteCategoryById(id);
+    }
+
+    @Override
+    public List<CategoryVO> getCategoryOptions() {
+        return categoryMapper.getCategoryOptions();
     }
 }

@@ -73,4 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="getCategoryOptions" resultType="com.ruoyi.greatzc.vo.CategoryVO">
+        SELECT t1.`name` AS `text`, t1.id AS `value`, COUNT(t2.category_id) AS `count` FROM
+        category t1
+        LEFT JOIN product_category t2 ON t1.id = t2.category_id
+        GROUP BY t1.id
+    </select>
 </mapper>

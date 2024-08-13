@@ -6,23 +6,28 @@
           <div class="col-lg-6 col-sm-6">
             <div class="showing-result-count">
               <p>Showing {{ (params.pageNum - 1) * params.pageSize <= 0 ? 1 : params.pageNum * params.pageSize }} - {{
-                  params.pageNum * (params.pageSize + 1) < total ? params.pageNum * (params.pageSize + 1) : total}} of
+                params.pageNum * (params.pageSize + 1) < total ? params.pageNum * (params.pageSize + 1) : total }} of
                   {{ total }} results</p>
             </div>
           </div>
-
           <div class="col-lg-6 col-sm-6">
             <div class="showing-top-bar-ordering">
-              <BFormSelect :onchange="changeCategory" v-model="category" :options="categories">
-              </BFormSelect>
+              <BFormSelect :onchange="changeCategory" v-model="category" :options="categories"></BFormSelect>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="row">
+      <div class="categories col-lg-3">
+        <BListGroup>
+          <BListGroupItem @click="clickCategory(cate)" button :active="cate.value == category" v-for="cate in categories">
+            {{ cate.text }}
+            <BBadge style="float: right;" variant="primary" >{{ cate.count }}</BBadge>
+          </BListGroupItem>
+        </BListGroup>
+      </div>
+      <div style="min-height: 800px;" class="row">
         <div v-for="product in products" class="col-lg-4 col-sm-6">
-          <div class="single-product">
+          <div class="single-product" style="margin-bottom: 0px; height: 330px;">
             <div class="product-img">
               <img :src="getImgUrl(product.banner)" alt="Image">
               <ul>
@@ -51,7 +56,7 @@
         </div>
 
         <div class="col-lg-12 col-md-12">
-          <div class="pagination-area">
+          <div class="pagination-area" style="width: 30%; margin: 0 auto;">
             <BPagination @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
               :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
           </div>
@@ -60,181 +65,6 @@
     </div>
   </div>
   <!-- End Product Area -->
-
-  <!-- Start Product View One Area -->
-  <div class="modal fade product-view-one" id="product-view-one">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">
-            <i class="bx bx-x"></i>
-          </span>
-        </button>
-
-        <div class="row align-items-center">
-          <div class="col-lg-6 col-md-6">
-            <div class="product-view-one-image">
-              <div id="big" class="owl-carousel owl-theme">
-                <div class="item">
-                  <img src="/assets/img/product/product-1.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-2.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-3.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-4.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-5.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-6.jpg" alt="Image">
-                </div>
-              </div>
-
-              <div id="thumbs" class="owl-carousel owl-theme">
-                <div class="item">
-                  <img src="/assets/img/product/product-1.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-2.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-3.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-4.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-5.jpg" alt="Image">
-                </div>
-
-                <div class="item">
-                  <img src="/assets/img/product/product-6.jpg" alt="Image">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6">
-            <div class="product-content">
-              <h3>
-                <a href="#">Delivery Box</a>
-              </h3>
-
-              <div class="price">
-                <span class="new-price">$190.00</span>
-              </div>
-
-              <div class="product-review">
-                <div class="rating">
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                  <i class="bx bxs-star"></i>
-                </div>
-                <a href="#" class="rating-count">3 reviews</a>
-              </div>
-
-              <ul class="product-info">
-                <li>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At magnam ad reprehenderit fuga nam, non
-                    odit necessitatibus facilis beatae temporibus</p>
-                </li>
-                <li>
-                  <span>Availability:</span> <a href="#">In stock (7 items)</a>
-                </li>
-                <li>
-                  <span>Product Type:</span> <a href="#">Box</a>
-                </li>
-              </ul>
-
-              <div class="product-color-switch">
-                <h4>Color:</h4>
-
-                <ul>
-                  <li>
-                    <a href="#" title="Black" class="color-black"></a>
-                  </li>
-                  <li>
-                    <a href="#" title="White" class="color-white"></a>
-                  </li>
-                  <li class="active">
-                    <a href="#" title="Green" class="color-green"></a>
-                  </li>
-                  <li>
-                    <a href="#" title="Yellow Green" class="color-yellowgreen"></a>
-                  </li>
-                  <li>
-                    <a href="#" title="Teal" class="color-teal"></a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="product-add-to-cart">
-                <div class="input-counter">
-                  <span class="minus-btn">
-                    <i class="bx bx-minus"></i>
-                  </span>
-
-                  <input type="text" min="1" value="1">
-
-                  <span class="plus-btn">
-                    <i class="bx bx-plus"></i>
-                  </span>
-                </div>
-
-                <button type="submit" class="default-btn">
-                  Add to Cart
-                  <i class="flaticon-right"></i>
-                </button>
-              </div>
-
-              <div class="share-this-product">
-                <h3>Share This Product</h3>
-
-                <ul>
-                  <li>
-                    <a href="#">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bx bxl-instagram"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -242,7 +72,7 @@ import BiEye from '~icons/bi/eye';
 import BiSuitHeart from '~icons/bi/suit-heart';
 import { listProduct, listCategory } from "@/api/product";
 import { getImgUrl } from '@/utils/getImgUrl';
-import { onUpdated } from 'vue';
+import { BListGroup, BListGroupItem, BBadge, BCard } from 'bootstrap-vue-next';
 
 const categories = [
 
@@ -268,7 +98,10 @@ export default {
   },
   components: {
     BiEye,
-    BiSuitHeart
+    BiSuitHeart,
+    BListGroup,
+    BListGroupItem,
+    BBadge
   },
   mounted() {
     listProduct(this.params).then(res => {
@@ -283,11 +116,7 @@ export default {
         value: -1
       }]
       res.rows.forEach(e => {
-        this.categories.push({
-          key: e.id,
-          text: e.name,
-          value: e.id
-        })
+        this.categories.push(e)
       });
     })
   },
@@ -320,7 +149,23 @@ export default {
         this.total = res.total
         this.ex1Rows = res.total
       })
+    },
+    clickCategory(v) {
+      this.category = v.value
+      this.changeCategory()
     }
   }
 }
 </script>
+
+<style scoped>
+.categories {
+  height: 100%;
+  float: left;
+}
+@media screen and (max-width: 990px) {
+  .categories {
+    display: none;
+  }
+}
+</style>

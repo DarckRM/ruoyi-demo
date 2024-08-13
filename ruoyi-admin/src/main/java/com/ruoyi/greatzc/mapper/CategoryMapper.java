@@ -3,6 +3,7 @@ package com.ruoyi.greatzc.mapper;
 import java.util.List;
 
 import com.ruoyi.greatzc.domain.Category;
+import com.ruoyi.greatzc.vo.CategoryVO;
 
 /**
  * 产品分类Mapper接口
@@ -59,4 +60,12 @@ public interface CategoryMapper
      * @return 结果
      */
     public int deleteCategoryByIds(Long[] ids);
+
+    /**
+     * @author akarin
+     * @description 获取用于前端筛选器的产品列表
+     * @date 2024/8/14 0:35
+     * @return java.util.List<com.ruoyi.greatzc.domain.CategoryVO>
+     **/
+    public List<CategoryVO> getCategoryOptions();
 }

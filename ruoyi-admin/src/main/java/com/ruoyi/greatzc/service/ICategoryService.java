@@ -3,6 +3,7 @@ package com.ruoyi.greatzc.service;
 import java.util.List;
 
 import com.ruoyi.greatzc.domain.Category;
+import com.ruoyi.greatzc.vo.CategoryVO;
 
 /**
  * 产品分类Service接口
@@ -59,4 +60,12 @@ public interface ICategoryService
      * @return 结果
      */
     public int deleteCategoryById(Long id);
+
+    /**
+     * @author akarin
+     * @description 获取筛选用产品类别列表
+     * @date 2024/8/14 0:45
+     * @return java.util.List<com.ruoyi.greatzc.vo.CategoryVO>
+     **/
+    public List<CategoryVO> getCategoryOptions();
 }

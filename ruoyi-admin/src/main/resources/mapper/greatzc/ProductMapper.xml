@@ -16,11 +16,12 @@
         <result property="status" column="status"/>
         <result property="show" column="show"/>
         <result property="lang" column="lang"/>
+        <result property="keywords" column="keywords"/>
     </resultMap>
 
     <sql id="selectProductVo">
         select DISTINCT t1.id, t1.product_id, banner, name, order_no, title, content, create_time, update_time,
-        status, `show`, lang
+        status, `show`, lang, keywords
         FROM product t1
     </sql>
 

@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createBootstrap } from "bootstrap-vue-next";
+import { createHead } from "@unhead/vue";
 import router from "./router/index.js";
 
 // Add the necessary CSS
@@ -35,4 +36,8 @@ import "./assets/js/form-validator.min.js";
 import "./assets/js/contact-form-script.js";
 import "./assets/js/custom.js";
 
-createApp(App).use(router).use(createBootstrap()).mount("#app");
+createApp(App)
+  .use(router)
+  .use(createHead())
+  .use(createBootstrap())
+  .mount("#app");

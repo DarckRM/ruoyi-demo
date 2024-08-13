@@ -4,7 +4,15 @@
       <div class="row align-items-center">
         <div class="col-lg-6 col-md-12">
           <div class="product-details-image">
-            <img :src="getImgUrl(product.banner)" alt="Image">
+            <carousel :autoplay="5000" :wrap-around="true" :transition="500">
+              <slide v-for="banner in product.banner.split(',')" class="single-choose-us-box bg-color-1">
+                <img style="max-height: 400px;" :src="getImgUrl(banner)" alt="Image">
+              </slide>
+              <template #addons>
+                <Navigation />
+                <Pagination />
+              </template>
+            </carousel>
           </div>
         </div>
 
@@ -219,9 +227,11 @@ import BiTwitter from '~icons/bi/twitter';
 import BiInstagram from '~icons/bi/instagram';
 import BiFacebook from '~icons/bi/facebook';
 
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { getImgUrl } from '@/utils/getImgUrl';
 import { getProduct } from '@/api/product';
 import { useRoute } from 'vue-router';
+import { useHead } from '@unhead/vue';
 
 export default {
   setup() {
@@ -230,23 +240,38 @@ export default {
       route
     }
   },
+
   components: {
     BiStarFill,
     BiTwitter,
     BiFacebook,
-    BiInstagram
+    BiInstagram,
+    Carousel,
+    Slide,
+    Pagination,
+    Navigation
   },
   data() {
     return {
       getImgUrl,
-      product: {}
+      product: {
+        banner: ''
+      }
     }
   },
   mounted() {
     const id = this.route.params.id
     getProduct(id).then(res => {
       this.product = res.data
+      useHead({
+        title: this.product.title,
+        meta: [
+          { name: 'keywords', content: this.product.keywords },
+          { name: 'description', content: this.product.title }
+        ]
+      })
     })
+
   }
 }
 </script>
@@ -259,19 +284,6 @@ export default {
 .preview>>>td {
   border: 1px solid #ccc;
   padding: 10px;
-}
-
-/* 奇偶行样式 */
-.preview>>>tr:nth-child(even) {
-  border: 1px solid #ccc;
-  background-color: #eee;
-  /* 偶数行背景色 */
-}
-
-.preview>>>tr:nth-child(odd) {
-  border: 1px solid #ccc;
-  background-color: #fff;
-  /* 奇数行背景色 */
 }
 
 /* 鼠标悬停样式 */

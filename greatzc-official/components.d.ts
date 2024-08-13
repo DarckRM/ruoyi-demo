@@ -8,7 +8,11 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BackToTop: typeof import('./src/components/tools/BackToTop.vue')['default']
+    BBadge: typeof import('bootstrap-vue-next')['BBadge']
+    BCard: typeof import('bootstrap-vue-next')['BCard']
     BFormSelect: typeof import('bootstrap-vue-next')['BFormSelect']
+    BListGroup: typeof import('bootstrap-vue-next')['BListGroup']
+    BListGroupItem: typeof import('bootstrap-vue-next')['BListGroupItem']
     BPagination: typeof import('bootstrap-vue-next')['BPagination']
     Company: typeof import('./src/components/about/Company.vue')['default']
     Copyright: typeof import('./src/components/footer/Copyright.vue')['default']

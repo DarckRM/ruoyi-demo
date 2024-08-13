@@ -5,6 +5,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.greatzc.domain.Category;
 import com.ruoyi.greatzc.domain.Product;
 import com.ruoyi.greatzc.service.ICategoryService;
+import com.ruoyi.greatzc.vo.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class CategoryApi extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(Category category) {
         startPage();
-        List<Category> list = categoryService.selectCategoryList(category);
+        List<CategoryVO> list = categoryService.getCategoryOptions();
         return getDataTable(list);
     }
 }
