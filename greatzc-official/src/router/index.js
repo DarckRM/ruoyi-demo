@@ -4,6 +4,7 @@ import Index from "../views/Index.vue";
 import Products from "../views/Products.vue";
 import About from "../views/About.vue";
 import Contact from "../views/Contact.vue";
+import News from "../views/News.vue";
 
 const routes = [
   { path: "/", redirect: "/index" },
@@ -18,6 +19,13 @@ const routes = [
   {
     path: "/product/:name/:id",
     component: () => import("../views/ProductDetail.vue"),
+  },
+  {
+    path: "/news", component: News
+  },
+  {
+    path: "/news/:tilte/:id",
+    component: () => import("../views/NewsDetail.vue"),
   },
 ];
 

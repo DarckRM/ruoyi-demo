@@ -110,23 +110,21 @@ export default {
     BBadge
   },
   mounted() {
-    this.getCategories()
-    this.getProducts()
+    this.init()
   },
   methods: {
+    init() {
+      this.getProducts().then((a) => {
+        this.getCategories()
+      })
+    },
     getProducts() {
       this.loading = true
-      sleep(500).then(() => {
-        listProduct(this.params).then(res => {
-          this.products = [{
-            key: -1,
-            text: 'All',
-            value: -1
-          }]
+      return sleep(500).then(() => {
+        return listProduct(this.params).then(res => {
           this.products = res.rows
-          this.total = res.total
+          this.setTotal(res.total)
           this.ex1Rows = res.total
-
           this.loading = false
         })
       })
@@ -137,7 +135,8 @@ export default {
         this.categories = [{
           key: -1,
           text: 'All',
-          value: -1
+          value: -1,
+          count: this.total
         }]
         res.rows.forEach(e => {
           this.categories.push(e)
@@ -156,6 +155,9 @@ export default {
     clickCategory(v) {
       this.category = v.value
       this.changeCategory()
+    },
+    setTotal(v) {
+      this.total = v
     }
   }
 }

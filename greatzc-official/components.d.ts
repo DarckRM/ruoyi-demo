@@ -25,7 +25,6 @@ declare module 'vue' {
     Feedback: typeof import('./src/components/contact/Feedback.vue')['default']
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    List: typeof import('./src/components/products/List.vue')['default']
     Message: typeof import('./src/components/contact/Message.vue')['default']
     Method: typeof import('./src/components/contact/Method.vue')['default']
     NaviHeader: typeof import('./src/components/header/NaviHeader.vue')['default']

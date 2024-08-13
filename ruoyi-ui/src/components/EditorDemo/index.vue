@@ -145,7 +145,10 @@ export default {
   },
   computed: {
     styles() {
-      let style = {};
+      let style = {
+        maxHeight: '500px',
+        overflowY: 'scroll'
+      };
       if (this.minHeight) {
         style.minHeight = `${this.minHeight}px`;
       }

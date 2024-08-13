@@ -475,7 +475,7 @@
   <!-- End Team Area -->
 
   <!-- Start Partner Area -->
-  <div class="partner-area bg-color ptb-70">
+  <div class="partner-area bg-color">
     <div class="container">
       <div class="row">
         <div class="partner-slider owl-carousel owl-theme">
