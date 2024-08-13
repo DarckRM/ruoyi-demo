@@ -30,9 +30,13 @@
         </div>
         <div style="min-height: 800px;" class="row">
           <div v-for="product in products" class="col-lg-4 col-sm-6">
-            <div class="single-product" style="margin-bottom: 0px; height: 330px;">
+            <div class="single-product" style="margin-bottom: 20px; height: 380px;">
               <div class="product-img">
-                <img :src="getImgUrl(product.banner)" alt="Image">
+                <carousel :autoplay="randomSlideTime(product.banner.split(',').length)" :wrap-around="true" :transition="500">
+                  <slide v-for="banner in product.banner.split(',')" class="single-choose-us-box bg-color-1">
+                    <img style="max-height: 200px;" :src="getImgUrl(banner)" alt="Image">
+                  </slide>
+                </carousel>
                 <ul>
                   <li>
                     <a href="#product-view-one" data-toggle="modal">
@@ -75,9 +79,10 @@
 import BiEye from '~icons/bi/eye';
 import BiSuitHeart from '~icons/bi/suit-heart';
 import { listProduct, listCategory } from "@/api/product";
-import { getImgUrl } from '@/utils/getImgUrl';
-import { BListGroup, BListGroupItem, BBadge, BCard, BOverlay } from 'bootstrap-vue-next';
+import { getImgUrl, randomSlideTime } from '@/utils/getImgUrl';
+import { BListGroup, BListGroupItem, BBadge, BOverlay } from 'bootstrap-vue-next';
 import { sleep } from '@/utils/tools';
+import { Carousel, Slide } from 'vue3-carousel'
 
 const categories = [
 
@@ -89,6 +94,7 @@ const products = []
 export default {
   data() {
     return {
+      randomSlideTime,
       getImgUrl,
       total: 0,
       category: -1,
@@ -107,7 +113,9 @@ export default {
     BiSuitHeart,
     BListGroup,
     BListGroupItem,
-    BBadge
+    BBadge,
+    Carousel,
+    Slide
   },
   mounted() {
     this.init()
@@ -119,6 +127,7 @@ export default {
       })
     },
     getProducts() {
+      this.products = []
       this.loading = true
       return sleep(500).then(() => {
         return listProduct(this.params).then(res => {

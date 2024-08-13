@@ -4,14 +4,14 @@
   <div class="page-title-area bg-19">
     <div class="container">
       <div class="page-title-content">
-        <h2>Blog Column One</h2>
+        <h2>News</h2>
         <ul>
           <li>
             <a href="index.html">
               Home
             </a>
           </li>
-          <li class="active">Blog Column One</li>
+          <li class="active">News</li>
         </ul>
       </div>
     </div>
@@ -29,6 +29,8 @@
 import List from '@/components/news/List.vue';
 
 export default {
-
+  components: {
+    List
+  }
 }
 </script>

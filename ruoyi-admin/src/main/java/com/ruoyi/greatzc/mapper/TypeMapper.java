@@ -2,6 +2,7 @@ package com.ruoyi.greatzc.mapper;
 
 import java.util.List;
 import com.ruoyi.greatzc.domain.Type;
+import com.ruoyi.greatzc.vo.TypeVO;
 
 /**
  * 新闻分类Mapper接口
@@ -58,4 +59,6 @@ public interface TypeMapper
      * @return 结果
      */
     public int deleteTypeByIds(Long[] ids);
+
+    public List<TypeVO> getTypeOptions();
 }

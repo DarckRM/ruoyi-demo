@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.greatzc.mapper.TypeMapper">
-    
+
     <resultMap type="Type" id="TypeResult">
-        <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="status"    column="status"    />
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
     </resultMap>
 
     <sql id="selectTypeVo">
@@ -18,17 +18,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectTypeList" parameterType="Type" resultMap="TypeResult">
         <include refid="selectTypeVo"/>
-        <where>  
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="status != null "> and status = #{status}</if>
+        <where>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="status != null ">and status = #{status}</if>
         </where>
     </select>
-    
+
     <select id="selectTypeById" parameterType="Long" resultMap="TypeResult">
         <include refid="selectTypeVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertType" parameterType="Type" useGeneratedKeys="true" keyProperty="id">
         insert into type
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -36,13 +36,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="status != null">status,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="status != null">#{status},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateType" parameterType="Type">
@@ -61,9 +61,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteTypeByIds" parameterType="String">
-        delete from type where id in 
+        delete from type where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+
+    <select id="getTypeOptions" resultType="com.ruoyi.greatzc.vo.TypeVO">
+        SELECT t1.`name` AS `text`, t1.id AS `value`, COUNT(t2.type_id) AS `count` FROM
+        `type` t1
+        LEFT JOIN news_type t2 ON t1.id = t2.type_id
+        GROUP BY t1.id
+    </select>
 </mapper>
