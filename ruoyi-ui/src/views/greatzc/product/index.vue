@@ -97,7 +97,6 @@
     <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item prop="productId">
-
         </el-form-item>
         <el-form-item label="封面" prop="banner">
           <image-upload v-model="form.banner" />
@@ -125,6 +124,9 @@
         </el-row>
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入标题" />
+        </el-form-item>
+        <el-form-item label="关键词" prop="keywords">
+          <el-input v-model="form.keywords" placeholder="请输入关键词，使用英文逗号分割" />
         </el-form-item>
         <el-form-item label="内容">
           <file-upload @input="uploadDoc" type="primary" style="margin-bottom: 5px;">上传文件</file-upload>
@@ -241,6 +243,7 @@ export default {
         name: null,
         orderNo: null,
         title: null,
+        keywords: null,
         content: null,
         createTime: null,
         updateTime: null,
