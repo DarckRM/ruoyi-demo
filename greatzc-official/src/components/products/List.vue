@@ -17,51 +17,55 @@
           </div>
         </div>
       </div>
-      <div class="categories col-lg-3">
-        <BListGroup>
-          <BListGroupItem @click="clickCategory(cate)" button :active="cate.value == category" v-for="cate in categories">
-            {{ cate.text }}
-            <BBadge style="float: right;" variant="primary" >{{ cate.count }}</BBadge>
-          </BListGroupItem>
-        </BListGroup>
-      </div>
-      <div style="min-height: 800px;" class="row">
-        <div v-for="product in products" class="col-lg-4 col-sm-6">
-          <div class="single-product" style="margin-bottom: 0px; height: 330px;">
-            <div class="product-img">
-              <img :src="getImgUrl(product.banner)" alt="Image">
-              <ul>
-                <li>
-                  <a href="#product-view-one" data-toggle="modal">
-                    <i class="bx">
-                      <BiEye />
-                    </i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="bx">
-                      <BiSuitHeart />
-                    </i>
-                  </a>
-                </li>
-              </ul>
+
+      <BOverlay :show="loading">
+        <div class="categories col-lg-3">
+          <BListGroup>
+            <BListGroupItem @click="clickCategory(cate)" button :active="cate.value == category"
+              v-for="cate in categories">
+              {{ cate.text }}
+              <BBadge style="float: right;" variant="primary">{{ cate.count }}</BBadge>
+            </BListGroupItem>
+          </BListGroup>
+        </div>
+        <div style="min-height: 800px;" class="row">
+          <div v-for="product in products" class="col-lg-4 col-sm-6">
+            <div class="single-product" style="margin-bottom: 0px; height: 330px;">
+              <div class="product-img">
+                <img :src="getImgUrl(product.banner)" alt="Image">
+                <ul>
+                  <li>
+                    <a href="#product-view-one" data-toggle="modal">
+                      <i class="bx">
+                        <BiEye />
+                      </i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="bx">
+                        <BiSuitHeart />
+                      </i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <router-link :to="'product/' + product.title + '/' + product.id">
+                <h3>{{ product.title }}</h3>
+              </router-link>
+              <span v-for="cate in product.categories">{{ cate.name }}</span>
             </div>
+          </div>
 
-            <router-link :to="'product/' + product.title + '/' + product.id">
-              <h3>{{ product.title }}</h3>
-            </router-link>
-            <span v-for="cate in product.categories">{{ cate.name }}</span>
+          <div class="col-lg-12 col-md-12">
+            <div class="pagination-area" style="width: 30%; margin: 0 auto;">
+              <BPagination @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
+                :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
+            </div>
           </div>
         </div>
-
-        <div class="col-lg-12 col-md-12">
-          <div class="pagination-area" style="width: 30%; margin: 0 auto;">
-            <BPagination @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
-              :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
-          </div>
-        </div>
-      </div>
+      </BOverlay>
     </div>
   </div>
   <!-- End Product Area -->
@@ -72,7 +76,8 @@ import BiEye from '~icons/bi/eye';
 import BiSuitHeart from '~icons/bi/suit-heart';
 import { listProduct, listCategory } from "@/api/product";
 import { getImgUrl } from '@/utils/getImgUrl';
-import { BListGroup, BListGroupItem, BBadge, BCard } from 'bootstrap-vue-next';
+import { BListGroup, BListGroupItem, BBadge, BCard, BOverlay } from 'bootstrap-vue-next';
+import { sleep } from '@/utils/tools';
 
 const categories = [
 
@@ -93,7 +98,8 @@ export default {
         categoryIndex: [],
         pageNum: 1,
         pageSize: 10
-      }
+      },
+      loading: false
     }
   },
   components: {
@@ -104,51 +110,48 @@ export default {
     BBadge
   },
   mounted() {
-    listProduct(this.params).then(res => {
-      this.products = res.rows
-      this.total = res.total
-      this.ex1Rows = res.total
-    })
-    listCategory().then(res => {
-      this.categories = [{
-        key: -1,
-        text: 'All',
-        value: -1
-      }]
-      res.rows.forEach(e => {
-        this.categories.push(e)
-      });
-    })
+    this.getCategories()
+    this.getProducts()
   },
   methods: {
-    changePagination(ev, page) {
-      this.params.pageNum = page
-      this.params.categoryIndex = []
-      this.params.categoryIndex.push(this.category)
-      listProduct(this.params).then(res => {
-        this.products = [{
+    getProducts() {
+      this.loading = true
+      sleep(500).then(() => {
+        listProduct(this.params).then(res => {
+          this.products = [{
+            key: -1,
+            text: 'All',
+            value: -1
+          }]
+          this.products = res.rows
+          this.total = res.total
+          this.ex1Rows = res.total
+
+          this.loading = false
+        })
+      })
+
+    },
+    getCategories() {
+      listCategory().then(res => {
+        this.categories = [{
           key: -1,
           text: 'All',
           value: -1
         }]
-        this.products = res.rows
-        this.total = res.total
-        this.ex1Rows = res.total
+        res.rows.forEach(e => {
+          this.categories.push(e)
+        });
       })
+    },
+    changePagination(ev, page) {
+      this.params.pageNum = page
+      this.changeCategory()
     },
     changeCategory() {
       this.params.categoryIndex = []
       this.params.categoryIndex.push(this.category)
-      listProduct(this.params).then(res => {
-        this.products = [{
-          key: -1,
-          text: 'All',
-          value: -1
-        }]
-        this.products = res.rows
-        this.total = res.total
-        this.ex1Rows = res.total
-      })
+      this.getProducts()
     },
     clickCategory(v) {
       this.category = v.value
@@ -163,6 +166,7 @@ export default {
   height: 100%;
   float: left;
 }
+
 @media screen and (max-width: 990px) {
   .categories {
     display: none;

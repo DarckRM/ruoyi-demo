@@ -19,5 +19,5 @@
 </template>
 
 <script setup>
-import Feedback from '../components/contact/Feedback.vue'
+import Feedback from '../components/contact/Message.vue'
 </script>

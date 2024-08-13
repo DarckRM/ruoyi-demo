@@ -231,3 +231,8 @@ export function tansParams(params) {
 export function blobValidate(data) {
   return data.type !== 'application/json'
 }
+
+// 暂停一段时间
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}

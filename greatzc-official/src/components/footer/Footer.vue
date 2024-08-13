@@ -5,7 +5,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="single-footer-widget">
             <a href="index.html" class="logo">
-              <img src="/assets/img/logo.png" alt="Image">
+              <img style="width: 160px; filter: brightness(100);" src="/assets/img/logo.png" alt="Image">
             </a>
 
             <p> Professional Supplier of Embedded Motherboards,Embedded Computers,Mini PCs,OPS PCs,Mini Itx
@@ -39,19 +39,18 @@
         <div class="col-lg-4 col-md-6">
           <div class="single-footer-widget">
             <h3>Company</h3>
-
             <ul class="import-link">
               <li>
-                <a href="about-us.html">About Us</a>
+                <a href="about-us.html">Home</a>
               </li>
               <li>
-                <a href="team.html">Team</a>
+                <a href="team.html">Products</a>
               </li>
               <li>
-                <a href="faq.html">FAQ</a>
+                <a href="faq.html">News</a>
               </li>
               <li>
-                <a href="blog-column-one.html">Blog</a>
+                <a href="blog-column-one.html">Contact Us</a>
               </li>
               <li>
                 <a href="privacy-policy.html">Privacy Policy</a>

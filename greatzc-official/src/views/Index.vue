@@ -148,7 +148,7 @@
               <span class="target">+</span>
             </h2>
 
-            <p>Delivered Packages</p>
+            <p>Delivered Devices</p>
           </div>
         </div>
 
@@ -235,5 +235,5 @@
 <script setup>
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import Company from '../components/about/Company.vue'
-import Feedback from '../components/contact/Feedback.vue'
+import Feedback from '../components/contact/Message.vue'
 </script>
