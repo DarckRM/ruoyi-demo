@@ -14,6 +14,7 @@ declare module 'vue' {
     BListGroup: typeof import('bootstrap-vue-next')['BListGroup']
     BListGroupItem: typeof import('bootstrap-vue-next')['BListGroupItem']
     BModal: typeof import('bootstrap-vue-next')['BModal']
+    BOffcanvas: typeof import('bootstrap-vue-next')['BOffcanvas']
     BOverlay: typeof import('bootstrap-vue-next')['BOverlay']
     BPagination: typeof import('bootstrap-vue-next')['BPagination']
     Company: typeof import('./src/components/about/Company.vue')['default']

@@ -2,15 +2,30 @@
   <div class="navbar-area">
     <div class="mobile-nav">
       <div class="container">
-        <div class="mobile-menu">
-          <div class="logo">
+        <div class="mobile-menu navbar">
+          <div style="width: 150px; float: left;" class="logo">
             <a href="index.html">
               <img src="/assets/img/logo.png" alt="logo">
             </a>
           </div>
+          <div class="nav-item ">
+            <BButton @click="mobileMenu" variant="outline-primary" class="bx bx-menu nav-link"
+              style="font-weight: 600; font-size: 15px; ">
+            </BButton>
+          </div>
         </div>
       </div>
     </div>
+
+    <BOffcanvas style="min-height: 340px; width: 75%; margin: 0 auto; border-radius: 2px;" no-header v-model="showMenu" placement="top">
+      <BListGroup style="width: 100%; margin: 0 auto;">
+        <router-link v-for="menu in menuItems" :to="menu.to" @click="menuClick(menu.id)">
+          <BListGroupItem button :active="menu.id == current">
+            {{ menu.name }}
+          </BListGroupItem>
+        </router-link>
+      </BListGroup>
+    </BOffcanvas>
 
     <div class="desktop-nav">
       <div class="container">
@@ -20,60 +35,20 @@
           </a>
           <div class="collapse navbar-collapse mean-menu">
             <ul class="navbar-nav m-auto">
-              <li class="nav-item">
-                <router-link to="/index" @click="menuClick(0)" :class="menuActicve[0]">Home</router-link>
+              <li class="nav-item" v-for="menu in menuItems">
+                <router-link :to="menu.to" @click="menuClick(menu.id)" :class="menuActicve[menu.id]">{{ menu.name
+                  }}</router-link>
               </li>
-
               <li class="nav-item">
-                <router-link to="/products" @click="menuClick(1)" :class="menuActicve[1]">Products</router-link>
-              </li>
-
-              <li class="nav-item">
-                <router-link to="/news" @click="menuClick(2)" :class="menuActicve[2]">News</router-link>
-              </li>
-
-              <li class="nav-item">
-                <router-link to="/contact" @click="menuClick(3)" :class="menuActicve[3]">Contact</router-link>
-              </li>
-
-              <li class="nav-item">
-                <router-link to="/about" @click="menuClick(4)" :class="menuActicve[4]">About Us</router-link>
+                <a class="nav-link">
+                  Languages
+                  <i class="bx bx-chevron-down">
+                  </i>
+                </a>
               </li>
             </ul>
-
-            <div class="others-option">
-              <div class="get-quote">
-                <a href="contact" class="default-btn">
-                  <span>Get A Quote</span>
-                </a>
-              </div>
-            </div>
           </div>
         </nav>
-      </div>
-    </div>
-
-    <div class="others-option-for-responsive">
-      <div class="container">
-        <div class="dot-menu">
-          <div class="inner">
-            <div class="circle circle-one"></div>
-            <div class="circle circle-two"></div>
-            <div class="circle circle-three"></div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="option-inner">
-            <div class="others-option justify-content-center d-flex align-items-center">
-              <div class="get-quote">
-                <a href="pricing-style-two.html" class="default-btn">
-                  <span>Get A Quote</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -84,6 +59,7 @@
 import BiCaretDown from '~icons/bi/caret-down';
 import { defineComponent, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { BButton, BListGroupItem } from 'bootstrap-vue-next';
 
 export default defineComponent({
   components: {
@@ -91,6 +67,7 @@ export default defineComponent({
   },
   data() {
     return {
+      showMenu: false,
       pathMapIndex: {
         index: 0,
         products: 1,
@@ -98,6 +75,34 @@ export default defineComponent({
         contact: 3,
         about: 4
       },
+      current: 0,
+      menuItems: [
+        {
+          id: 0,
+          name: 'Home',
+          to: '/index'
+        },
+        {
+          id: 1,
+          name: 'Products',
+          to: '/products'
+        },
+        {
+          id: 2,
+          name: 'News',
+          to: '/news'
+        },
+        {
+          id: 3,
+          name: 'Contact',
+          to: '/contact'
+        },
+        {
+          id: 4,
+          name: 'About',
+          to: '/about'
+        },
+      ],
       router: useRouter(),
       menuActicve: [
         "nav-link",
@@ -125,7 +130,12 @@ export default defineComponent({
         "nav-link",
         "nav-link"
       ]
+      this.current = item
       this.menuActicve[item] = "nav-link active"
+      this.showMenu = false
+    },
+    mobileMenu() {
+      this.showMenu = true
     }
   }
 })

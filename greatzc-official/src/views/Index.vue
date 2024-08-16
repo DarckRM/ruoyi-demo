@@ -1,9 +1,7 @@
 <template>
   <div>
-
-
     <!-- Start Banner Area -->
-    <section style="background-attachment: scroll;" class="banner-area bg-1 jarallax" data-jarallax='{"speed": 0.3}'>
+    <section class="banner-area bg-1 jarallax" data-jarallax='{"speed": 0.3}'>
       <div class="d-table">
         <div class="d-table-cell">
           <div class="container">
@@ -11,17 +9,17 @@
               <div class="col-lg-9">
                 <div class="banner-content">
                   <span class="top-title wow fadeInDown" data-wow-delay="1s">Welcome to GreatZc</span>
-                  <h1 style="color: white;" class="wow fadeInDown" data-wow-delay="1s">Get The Best Hardware And
+                  <h1 class="wow fadeInDown" data-wow-delay="1s">Get The Best Hardware And
                     Industrail Device Support</h1>
-                  <p style="color: white;" class="wow fadeInLeft" data-wow-delay="1s">
-                    With hiht quality products, advanced technology, affordable price and best AFTER-SALES service
+                  <p class="wow fadeInLeft" data-wow-delay="1s">
+                    With high quality products, advanced technology, affordable price and best after-sales service
                   </p>
                   <div class="banner-btn wow fadeInUp" data-wow-delay="1s">
                     <a href="pricing-style-one.html" class="default-btn">
                       <span>Read More</span>
                     </a>
                     <a href="contact-us.html" class="default-btn active">
-                      <span style="color: white;">Contact Us</span>
+                      <span>Contact Us</span>
                     </a>
                   </div>
                 </div>

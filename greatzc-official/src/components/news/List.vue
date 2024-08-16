@@ -37,17 +37,17 @@
                 </div>
               </div>
             </BOverlay>
-
-            <div class="col-lg-12 col-md-12">
-              <div class="pagination-area" style="width: 37%; margin: 0 auto">
-                <BPagination @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
-                  :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
+            <div class="col-lg-12 col-md-6">
+              <div class="pagination-area">
+                <BPagination align="center"  @page-click="changePagination" v-model="params.pageNum"
+                  :total-rows="total" :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next"
+                  last-text="Last" />
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-2">
           <div class="widget-sidebar">
             <div class="sidebar-widget search">
               <form class="search-form">

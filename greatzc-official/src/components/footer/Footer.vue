@@ -2,7 +2,7 @@
   <footer class="footer-area pt-100 pb-70">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <div class="single-footer-widget">
             <a href="index.html" class="logo">
               <img style="width: 160px; filter: brightness(100);" src="/assets/img/logo.png" alt="Image">

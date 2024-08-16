@@ -17,8 +17,8 @@ import "./assets/css/meanmenu.min.css";
 import "./assets/css/nice-select.min.css";
 import "./assets/css/odometer.min.css";
 import "./assets/css/owl.carousel.min.css";
-import "./assets/css/responsive.css";
 import "./assets/css/style.css";
+import "./assets/css/responsive.css";
 import "vue3-carousel/dist/carousel.css";
 // 添加基础 JS 文件
 import "./assets/js/jquery.min.js";

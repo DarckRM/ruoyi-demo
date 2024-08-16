@@ -63,8 +63,8 @@
           </div>
 
           <div class="col-lg-12 col-md-12">
-            <div class="pagination-area" style="width: 30%; margin: 0 auto;">
-              <BPagination @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
+            <div class="pagination-area">
+              <BPagination align="center" @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
                 :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
             </div>
           </div>

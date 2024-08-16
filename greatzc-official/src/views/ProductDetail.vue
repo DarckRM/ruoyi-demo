@@ -10,7 +10,7 @@
               </slide>
               <template #addons>
                 <Navigation />
-                <Pagination />
+                <Pagination style="margin-top: 0;" />
               </template>
             </carousel>
           </div>
@@ -237,10 +237,9 @@ export default {
   setup() {
     const route = useRoute()
     return {
-      route
+      route,
     }
   },
-
   components: {
     BiStarFill,
     BiTwitter,
@@ -249,7 +248,8 @@ export default {
     Carousel,
     Slide,
     Pagination,
-    Navigation
+    Navigation,
+    useHead
   },
   data() {
     return {
