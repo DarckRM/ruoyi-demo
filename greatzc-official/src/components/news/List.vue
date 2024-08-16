@@ -62,26 +62,12 @@
               <h3 class="widget-title">Recent Post</h3>
 
               <ul>
-                <li>
-                  <a href="blog-details.html">
-                    New Cargo Shipment Is Open On The Global Market
-                    <img src="/assets/img/blog-details/recent-post-1.jpg" alt="Image">
+                <li style="height: 90px; overflow: hidden;" v-for="newsInfo in news">
+                  <a href="">
+                    {{ newsInfo.title }}
+                    <img style="max-height: 70px;" :src="getImgUrl(newsInfo.banner.split(',')[0])" alt="Image">
                   </a>
-                  <span>October 19,2021</span>
-                </li>
-                <li>
-                  <a href="blog-details.html">
-                    Marketing Policy Added To The Logistic Service
-                    <img src="/assets/img/blog-details/recent-post-2.jpg" alt="Image">
-                  </a>
-                  <span>October 18,2021</span>
-                </li>
-                <li>
-                  <a href="blog-details.html">
-                    Don’t forget caybersecurity on your computer
-                    <img src="/assets/img/blog-details/recent-post-3.jpg" alt="Image">
-                  </a>
-                  <span>October 09,2021</span>
+                  <span>{{ newsInfo.createTime }}</span>
                 </li>
               </ul>
             </div>

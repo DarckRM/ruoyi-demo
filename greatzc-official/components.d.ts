@@ -20,7 +20,6 @@ declare module 'vue' {
     Copyright: typeof import('./src/components/footer/Copyright.vue')['default']
     Counter: typeof import('./src/components/home/Counter.vue')['default']
     Culture: typeof import('./src/components/about/Culture.vue')['default']
-    Detail: typeof import('./src/components/products/Detail.vue')['default']
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     List: typeof import('./src/components/news/List.vue')['default']
