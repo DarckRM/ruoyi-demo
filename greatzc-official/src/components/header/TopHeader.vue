@@ -5,11 +5,6 @@
         <div class="col-lg-8 col-md-10">
           <ul class="header-left-content">
             <li>
-              <i class="bx bx-home">
-              </i>
-              {{ info.address }}
-            </li>
-            <li>
               <i class="bx bx-phone-call">
               </i>
               <a href="">{{ info.tel }}</a>

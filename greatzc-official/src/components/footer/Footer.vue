@@ -41,22 +41,16 @@
             <h3>Company</h3>
             <ul class="import-link">
               <li>
-                <a href="about-us.html">Home</a>
+                <a href="index">Home</a>
               </li>
               <li>
-                <a href="team.html">Products</a>
+                <a href="products">Products</a>
               </li>
               <li>
-                <a href="faq.html">News</a>
+                <a href="news">News</a>
               </li>
               <li>
-                <a href="blog-column-one.html">Contact Us</a>
-              </li>
-              <li>
-                <a href="privacy-policy.html">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="terms-conditions.html">Terms And Conditions</a>
+                <a href="contact">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -87,7 +81,7 @@
   </footer>
   <div class="copy-right-area">
     <div class="container">
-      <p>Copyright &copy; 2021.Company name All rights reserved.<a target="_blank" href=""></a></p>
+      <p>Copyright &copy; 2024.GreatZc All rights reserved.<a target="_blank" href=""></a></p>
     </div>
   </div>
 </template>

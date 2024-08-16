@@ -41,13 +41,34 @@ export default {
     </div>
   </div>
   <header class="header-area">
-    <TopHeader :info="info" />
+    <TopHeader :info="info" mode="out-in" />
     <NaviHeader />
   </header>
   <div style="margin-top: 80px;">
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+      <transition name="fade">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
   </div>
   <Footer :info="info" />
 </template>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-active {
+  transition: opacity 2s ease;
+}
+
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from {
+
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

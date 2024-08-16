@@ -1,28 +1,29 @@
 <template>
-
-  <!-- Start Page Title Area -->
-  <div class="page-title-area bg-19">
-    <div class="container">
-      <div class="page-title-content">
-        <h2>News</h2>
-        <ul>
-          <li>
-            <a href="index.html">
-              Home
-            </a>
-          </li>
-          <li class="active">News</li>
-        </ul>
+  <div>
+    <!-- Start Page Title Area -->
+    <div class="page-title-area bg-19">
+      <div class="container">
+        <div class="page-title-content">
+          <h2>News</h2>
+          <ul>
+            <li>
+              <a href="index.html">
+                Home
+              </a>
+            </li>
+            <li class="active">News</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- End Page Title Area -->
+    <!-- End Page Title Area -->
 
-  <!-- Start Blog Column One Area -->
-  <div>
-    <List></List>
+    <!-- Start Blog Column One Area -->
+    <div>
+      <List></List>
+    </div>
+    <!-- End Blog Column One Area -->
   </div>
-  <!-- End Blog Column One Area -->
 </template>
 
 <script>

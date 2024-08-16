@@ -43,7 +43,7 @@
 
             <div class="others-option">
               <div class="get-quote">
-                <a href="" class="default-btn">
+                <a href="contact" class="default-btn">
                   <span>Get A Quote</span>
                 </a>
               </div>
@@ -112,7 +112,7 @@ export default defineComponent({
     this.$watch(
       () => this.$route.path,
       (newId, oldId) => {
-       this.menuClick(this.pathMapIndex[newId.split('/')[1]])
+        this.menuClick(this.pathMapIndex[newId.split('/')[1]])
       }
     )
   },

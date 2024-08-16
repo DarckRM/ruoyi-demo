@@ -31,7 +31,12 @@ const routes = [
 
 export const router = createRouter({
   history: createWebHistory(),
-  routes: routes,
+  routes: routes
 });
+
+router.beforeEach((to, from, next) => {
+  document.documentElement.scrollTop = 0;
+  next();
+})
 
 export default router;
