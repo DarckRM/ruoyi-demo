@@ -125,8 +125,15 @@
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入标题" />
         </el-form-item>
-        <el-form-item label="关键词" prop="keywords">
-          <el-input v-model="form.keywords" placeholder="请输入关键词，使用英文逗号分割" />
+        <el-form-item label="关键词">
+          <el-tag :key="tag" v-for="tag in keywords" closable :disable-transitions="false" @close="handleClose(tag)"
+            style="margin: 5px">
+            {{ tag }}
+          </el-tag>
+          <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small"
+            @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
+          </el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加</el-button>
         </el-form-item>
         <el-form-item label="内容">
           <file-upload @input="uploadDoc" type="primary" style="margin-bottom: 5px;">上传文件</file-upload>
@@ -198,7 +205,10 @@ export default {
       form: {},
       // 表单校验
       rules: {
-      }
+      },
+      keywords: [],
+      inputVisible: false,
+      inputValue: ''
     };
   },
   created() {
@@ -221,10 +231,10 @@ export default {
         listCategory().then(response => {
           this.categories = []
           response.data.forEach(element => {
-              this.categories.push({
-                label: element.name,
-                value: element.id
-              })
+            this.categories.push({
+              label: element.name,
+              value: element.id
+            })
           });
         })
         this.loading = false;
@@ -280,8 +290,9 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
-      getProduct(id).then(response => {
-        this.form = response.data;
+      getProduct(id).then(res => {
+        this.form = res.data;
+        this.keywords = res.data.keywords.split(',')
         this.open = true;
         this.title = "修改产品信息";
       });
@@ -290,6 +301,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.form.keywords = this.keywords.toString()
           if (this.form.shadowContent != undefined) {
             this.form.content = this.form.shadowContent
           }
@@ -324,6 +336,23 @@ export default {
       this.download('greatzc/product/export', {
         ...this.queryParams
       }, `product_${new Date().getTime()}.xlsx`)
+    },
+    handleClose(tag) {
+      this.keywords.splice(this.keywords.indexOf(tag), 1);
+    },
+    showInput() {
+      this.inputVisible = true;
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+    handleInputConfirm() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.keywords.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = '';
     }
   }
 };

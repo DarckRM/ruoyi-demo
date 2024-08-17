@@ -103,7 +103,7 @@ export default {
       params: {
         categoryIndex: [],
         pageNum: 1,
-        pageSize: 10
+        pageSize: 9
       },
       loading: false
     }

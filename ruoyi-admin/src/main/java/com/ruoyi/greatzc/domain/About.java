@@ -23,5 +23,6 @@ public class About implements Serializable {
     private String majorEmail;
     private String subEmail;
     private String tel;
+    private String keywords;
 
 }

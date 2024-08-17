@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.greatzc.mapper.NewsMapper">
-    
+
     <resultMap type="News" id="NewsResult">
-        <result property="id"    column="id"    />
-        <result property="banner"    column="banner"    />
-        <result property="title"    column="title"    />
-        <result property="tags"    column="tags"    />
-        <result property="content"    column="content"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="status"    column="status"    />
-        <result property="author"    column="author"    />
-        <result property="show"    column="show"    />
+        <result property="id" column="id"/>
+        <result property="banner" column="banner"/>
+        <result property="title" column="title"/>
+        <result property="tags" column="tags"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
+        <result property="author" column="author"/>
+        <result property="show" column="show"/>
+        <result property="keywords" column="keywords"/>
     </resultMap>
 
     <sql id="selectNewsVo">
-        select id, banner, title, tags, content, create_time, update_time, `status`, author, `show` from news
+        select id, banner, title, tags, content, create_time, update_time, `status`, author, `show`, keywords from news
     </sql>
 
     <select id="selectNewsList" parameterType="News" resultMap="NewsResult">
         <include refid="selectNewsVo"/>
-        <where>  
-            <if test="banner != null  and banner != ''"> and banner = #{banner}</if>
-            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
-            <if test="tags != null  and tags != ''"> and tags like concat('%', #{tags}, '%')</if>
-            <if test="content != null  and content != ''"> and content = #{content}</if>
-            <if test="status != null  and status != ''"> and `status` = #{status}</if>
-            <if test="author != null  and author != ''"> and author like concat('%', #{author}, '%')</if>
-            <if test="show != null  and show != ''"> and `show` = #{show}</if>
+        <where>
+            <if test="banner != null  and banner != ''">and banner = #{banner}</if>
+            <if test="title != null  and title != ''">and title like concat('%', #{title}, '%')</if>
+            <if test="tags != null  and tags != ''">and tags like concat('%', #{tags}, '%')</if>
+            <if test="content != null  and content != ''">and content = #{content}</if>
+            <if test="status != null  and status != ''">and `status` = #{status}</if>
+            <if test="author != null  and author != ''">and author like concat('%', #{author}, '%')</if>
+            <if test="show != null  and show != ''">and `show` = #{show}</if>
         </where>
+        ORDER BY create_time DESC
     </select>
-    
+
     <select id="selectNewsById" parameterType="Long" resultMap="NewsResult">
         <include refid="selectNewsVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertNews" parameterType="News">
         insert into news
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -52,7 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">`status`,</if>
             <if test="author != null">author,</if>
             <if test="show != null">`show`,</if>
-         </trim>
+            <if test="keywords != null">`keywords`,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="banner != null">#{banner},</if>
@@ -64,7 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="author != null">#{author},</if>
             <if test="show != null">#{show},</if>
-         </trim>
+            <if test="keywords != null">#{keywords},</if>
+        </trim>
     </insert>
 
     <update id="updateNews" parameterType="News">
@@ -79,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">`status` = #{status},</if>
             <if test="author != null">author = #{author},</if>
             <if test="show != null">`show` = #{show},</if>
+            <if test="keywords != null">`keywords` = #{keywords},</if>
         </trim>
         where id = #{id}
     </update>
@@ -88,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteNewsByIds" parameterType="String">
-        delete from news where id in 
+        delete from news where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

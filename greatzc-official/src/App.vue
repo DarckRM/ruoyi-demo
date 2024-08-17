@@ -8,6 +8,7 @@ import BackToTop from './components/tools/BackToTop.vue'
 
 import { router } from "./router";
 import { getAbout } from '@/api/baseInfo';
+import { useHead } from '@unhead/vue';
 
 export default {
   components: {
@@ -26,6 +27,12 @@ export default {
   mounted() {
     getAbout(1).then(res => {
       this.info = res.data
+      useHead({
+        meta: [
+          { name: 'keywords', content: this.info.keywords },
+          { name: 'description', content: this.info.title }
+        ]
+      })
     })
   }
 }

@@ -2,110 +2,47 @@
   <section class="blog-column-one-area ptb-100">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8">
-          <div class="row">
-            <BOverlay :show="loading">
-              <div class="col-lg-12 col-md-6" style="min-height: 500px;">
-                <div class="single-blog-post" v-for="newsInfo in news">
-                  <div class="post-image">
-                    <carousel :autoplay="randomSlideTime(newsInfo.banner.split(',').length)" :wrap-around="true"
-                      :transition="500">
-                      <slide v-for="banner in newsInfo.banner.split(',')" class="single-choose-us-box">
-                        <a>
-                          <img style="height: 500px;" :src="getImgUrl(banner)" alt="Image">
-                        </a>
-                      </slide>
-                    </carousel>
-                  </div>
-
-                  <div class="blog-content">
-                    <div class="date">
-                      <i class="bx bx-calendar"></i>
-                      <span>{{ newsInfo.createTime }}</span>
-                    </div>
-
-                    <h3>
-                      <a href="#">{{ newsInfo.title }}</a>
-                    </h3>
-
-                    <p style="height: 140px; overflow: hidden;" v-html="newsInfo.content"></p>
-
-                    <a href="blog-details.html" class="default-btn">
-                      <span>Read More</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </BOverlay>
-            <div class="col-lg-12 col-md-6">
-              <div class="pagination-area">
-                <BPagination align="center"  @page-click="changePagination" v-model="params.pageNum"
-                  :total-rows="total" :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next"
-                  last-text="Last" />
-              </div>
-            </div>
+        <div class="col-lg-8 col-md-8" style="min-height: 400px;">
+          <BOverlay :show="loading">
+            <router-view v-slot="{ Component }">
+              <transition name="fade">
+                <component :is="Component" :news="news">
+                </component>
+              </transition>
+            </router-view>
+          </BOverlay>
+          <div :style="$route.path != '/news/all' ? {display: 'none'} : {display: 'block'}" class="pagination-area">
+            <BPagination align="center" @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
+              :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-2">
-          <div class="widget-sidebar">
-            <div class="sidebar-widget search">
-              <form class="search-form">
-                <input class="form-control" name="search" placeholder="Search here" type="text">
-                <button class="search-button" type="submit">
-                  <i class="bx bx-search"></i>
-                </button>
-              </form>
-            </div>
-
-            <div class="sidebar-widget recent-post">
-              <h3 class="widget-title">Recent Post</h3>
-
-              <ul>
-                <li style="height: 90px; overflow: hidden;" v-for="newsInfo in news">
-                  <a href="">
-                    {{ newsInfo.title }}
-                    <img style="max-height: 70px;" :src="getImgUrl(newsInfo.banner.split(',')[0])" alt="Image">
-                  </a>
-                  <span>{{ newsInfo.createTime }}</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sidebar-widget categories">
-              <h3>Categories</h3>
-              <ul>
-                <li v-for="type in types">
-                  <a href="#">{{ type.text }}<span>
-                      <BBadge variant="primary">{{ type.count }}</BBadge>
-                    </span></a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sidebar-widget categories">
-              <h3>Archives</h3>
-              <ul>
-                <li v-for="archive in Object.keys(archives)">
-                  <a href="#">{{ archive.split(' ')[1] }}<span>{{ archive.split(' ')[0] }}</span></a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sidebar-widget tags mb-0">
-              <h3>Tags</h3>
-              <ul>
-                <li v-for="tag in tags">
-                  <a href="#">{{ tag }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-lg-4 col-md-4">
+          <Side :news="news" :archives="archives" :tags="tags" :types="types"></Side>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.fade-enter-active {
+  transition: opacity 2s ease;
+}
+
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from {
+
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
 
 <script>
 import BiEye from '~icons/bi/eye';
@@ -114,7 +51,9 @@ import { listNews, listType } from "@/api/news";
 import { getImgUrl, randomSlideTime } from '@/utils/getImgUrl';
 import { BListGroup, BListGroupItem, BBadge, BCard, BOverlay } from 'bootstrap-vue-next';
 import { sleep } from '@/utils/tools';
-import { Carousel, Slide } from 'vue3-carousel'
+
+import Main from '@/components/news/Main.vue'
+import Side from '@/components/news/Side.vue'
 
 export default {
   data() {
@@ -123,17 +62,16 @@ export default {
       getImgUrl,
       total: 0,
       type: -1,
-      news: [],
-      types: [],
-      tags: [],
-      archives: {
-      },
       params: {
         typeIndex: [],
         pageNum: 1,
-        pageSize: 5
+        pageSize: 2
       },
-      loading: false
+      loading: false,
+      news: [],
+      archives: {},
+      types: [],
+      tags: []
     }
   },
   components: {
@@ -142,9 +80,9 @@ export default {
     BListGroup,
     BListGroupItem,
     BBadge,
-    Carousel,
-    Slide,
-    BOverlay
+    BOverlay,
+    Side,
+    Main
   },
   mounted() {
     this.init()
@@ -166,17 +104,24 @@ export default {
 
           this.tags = []
           this.news.forEach((v) => {
+            // 内容过滤
+            var content = v.content
+            const regex = /<img[^>]*>/gi;
+            content.replace(regex, '')
+            if (content.length > 460) {
+              content = content.slice(0, 460) + "..."
+            }
+            v.content = content
+
             var dateString = v.createTime.split('-')
             this.archives[dateString[0] + ' ' + this.numberToStringMonth(dateString[1])] = 0
             v.tags.split(',').forEach((tag) => {
               this.tags.push(tag)
             })
           })
-          console.log(this.archives)
           this.loading = false
         })
       })
-
     },
     getTypes() {
       listType().then(res => {
@@ -199,6 +144,7 @@ export default {
       this.params.typeIndex = []
       this.params.typeIndex.push(this.type)
       this.getNews()
+      document.documentElement.scrollTop = 0;
     },
     clickType(v) {
       this.type = v.value

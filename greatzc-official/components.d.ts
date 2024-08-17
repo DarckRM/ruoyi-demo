@@ -24,11 +24,13 @@ declare module 'vue' {
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     List: typeof import('./src/components/news/List.vue')['default']
+    Main: typeof import('./src/components/news/Main.vue')['default']
     Message: typeof import('./src/components/contact/Message.vue')['default']
     Method: typeof import('./src/components/contact/Method.vue')['default']
     NaviHeader: typeof import('./src/components/header/NaviHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Side: typeof import('./src/components/news/Side.vue')['default']
     Timeline: typeof import('./src/components/about/Timeline.vue')['default']
     TopHeader: typeof import('./src/components/header/TopHeader.vue')['default']
   }

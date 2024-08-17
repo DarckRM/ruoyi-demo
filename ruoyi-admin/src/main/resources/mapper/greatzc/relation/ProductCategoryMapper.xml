@@ -7,6 +7,6 @@
     <select id="selectEnhanceList" resultType="com.ruoyi.greatzc.vo.CategoryVO">
         SELECT t1.*, t2.name FROM product_category t1
         LEFT JOIN category t2 ON t1.category_id = t2.id
-        WHERE t1.product_id = #{productId}
+        WHERE t1.product_id = #{id}
     </select>
 </mapper>

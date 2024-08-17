@@ -7,7 +7,7 @@
           <h2>News</h2>
           <ul>
             <li>
-              <a href="index.html">
+              <a href="/index">
                 Home
               </a>
             </li>
@@ -28,10 +28,12 @@
 
 <script>
 import List from '@/components/news/List.vue';
+import Side from '@/components/news/Side.vue';
 
 export default {
   components: {
-    List
+    List,
+    Side
   }
 }
 </script>

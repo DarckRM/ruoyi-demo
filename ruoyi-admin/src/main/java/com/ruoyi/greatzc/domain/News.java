@@ -1,5 +1,7 @@
 package com.ruoyi.greatzc.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -45,6 +47,11 @@ public class News extends BaseEntity
     /** 是否首页展示 */
     @Excel(name = "是否首页展示")
     private String show;
+
+    @Getter
+    @Setter
+    @Excel(name = "关键词")
+    private String keywords;
 
     public void setId(Long id) 
     {

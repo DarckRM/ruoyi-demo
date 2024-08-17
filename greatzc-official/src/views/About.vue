@@ -34,7 +34,7 @@
     <!-- End Choose Us Area -->
 
     <!-- Start Track Area -->
-    <section class="track-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
+    <section style="display: none;" class="track-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">

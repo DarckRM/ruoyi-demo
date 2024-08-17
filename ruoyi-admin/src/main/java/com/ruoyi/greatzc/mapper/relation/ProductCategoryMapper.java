@@ -11,5 +11,5 @@ import java.util.List;
 
 @Mapper
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
-    List<CategoryVO> selectEnhanceList(@Param("productId") String productId);
+    List<CategoryVO> selectEnhanceList(@Param("id") Long id);
 }

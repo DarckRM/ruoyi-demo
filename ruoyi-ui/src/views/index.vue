@@ -39,6 +39,16 @@
             <el-form-item label="电话">
               <el-input v-model="form.tel"></el-input>
             </el-form-item>
+            <el-form-item label="关键词">
+              <el-tag :key="tag" v-for="tag in keywords" closable :disable-transitions="false"
+                @close="handleClose(tag)" style="margin: 5px">
+                {{ tag }}
+              </el-tag>
+              <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput"
+                size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
+              </el-input>
+              <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加</el-button>
+            </el-form-item>
           </el-form>
         </el-card>
       </el-col>
@@ -64,8 +74,12 @@ export default {
         address: '',
         majorEmail: '',
         subEmail: '',
-        tel: ''
-      }
+        tel: '',
+        keywords: ''
+      },
+      keywords: [],
+      inputVisible: false,
+      inputValue: ''
     };
   },
   mounted() {
@@ -79,14 +93,33 @@ export default {
       this.loading = true
       getAbout(1).then(res => {
         this.form = res.data
+        this.keywords = res.data.keywords.split(',')
         this.loading = false
       })
     },
     submitForm() {
+      this.form.keywords = this.keywords.toString()
       updateAbout(this.form).then(res => {
         this.$modal.msgSuccess("修改成功")
         this.getAboutInfo()
       })
+    },
+    handleClose(tag) {
+      this.keywords.splice(this.keywords.indexOf(tag), 1);
+    },
+    showInput() {
+      this.inputVisible = true;
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+    handleInputConfirm() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.keywords.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = '';
     }
   }
 };

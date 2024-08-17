@@ -9,6 +9,7 @@ import News from "../views/News.vue";
 const routes = [
   { path: "/", redirect: "/index" },
   { path: "/index.html", redirect: "/index" },
+  { path: "/news", redirect: "/news/all" },
   { path: "/index", component: Index },
   {
     path: "/products",
@@ -21,22 +22,29 @@ const routes = [
     component: () => import("../views/ProductDetail.vue"),
   },
   {
-    path: "/news", component: News
-  },
-  {
-    path: "/news/:tilte/:id",
-    component: () => import("../views/NewsDetail.vue"),
+    path: "/news",
+    component: News,
+    children: [
+      {
+        path: "all",
+        component: () => import("../components/news/Main.vue"),
+      },
+      {
+        path: ":tilte/:id",
+        component: () => import("../views/NewsDetail.vue"),
+      },
+    ],
   },
 ];
 
 export const router = createRouter({
   history: createWebHistory(),
-  routes: routes
+  routes: routes,
 });
 
 router.beforeEach((to, from, next) => {
   document.documentElement.scrollTop = 0;
   next();
-})
+});
 
 export default router;

@@ -27,7 +27,7 @@
 
     <select id="selectProductList" parameterType="Product" resultMap="ProductResult">
         <include refid="selectProductVo"/>
-        LEFT JOIN product_category t2 ON t1.product_id = t2.product_id
+        LEFT JOIN product_category t2 ON t1.id = t2.product_id
         <where>
             <if test="categoryIndex != null and categoryIndex.size() > 0 and categoryIndex[0] > 0">
                 t2.category_id = #{categoryIndex[0]}
@@ -41,6 +41,7 @@
             <if test="status != null ">and status = #{status}</if>
             <if test="show != null ">and show = #{show}</if>
         </where>
+        ORDER BY create_time DESC
     </select>
 
     <select id="selectProductById" parameterType="Long" resultMap="ProductResult">
@@ -66,6 +67,7 @@
             <if test="updateTime != null">update_time,</if>
             <if test="status != null">`status`,</if>
             <if test="show != null">`show`,</if>
+            <if test="keywords != null">`keywords`,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -80,6 +82,7 @@
             <if test="updateTime != null">#{updateTime},</if>
             <if test="status != null">#{status},</if>
             <if test="show != null">#{show},</if>
+            <if test="keywords != null">#{keywords},</if>
         </trim>
     </insert>
 
@@ -96,6 +99,7 @@
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="status != null">`status` = #{status},</if>
             <if test="show != null">`show` = #{show},</if>
+            <if test="keywords != null">`keywords` = #{keywords},</if>
         </trim>
         where id = #{id}
     </update>

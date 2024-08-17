@@ -72,19 +72,19 @@ public class ProductServiceImpl implements IProductService {
     }
 
     private List<Product> injectCategories(List<Product> products) {
-        List<String> productIds = products.stream()
-                .map(Product::getProductId)
+        List<Long> productIds = products.stream()
+                .map(Product::getId)
                 .distinct().collect(Collectors.toList());
 
         //
-        HashMap<String, List<CategoryVO>> categoryMap = new HashMap<>();
+        HashMap<Long, List<CategoryVO>> categoryMap = new HashMap<>();
         productIds.forEach(e -> {
             List<CategoryVO> categoryVOS = productCategoryMapper.selectEnhanceList(e);
             categoryMap.put(e, categoryVOS);
         });
 
         products.forEach(e -> {
-            List<CategoryVO> vos = categoryMap.getOrDefault(e.getProductId(), new ArrayList<>());
+            List<CategoryVO> vos = categoryMap.getOrDefault(e.getId(), new ArrayList<>());
             e.setCategories(vos);
             e.setCategoryIndex(vos.stream().map(CategoryVO::getCategoryId).collect(Collectors.toList()));
         });
@@ -133,9 +133,9 @@ public class ProductServiceImpl implements IProductService {
     }
 
     private int updateCategory(Product product) {
-        productCategoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", product.getProductId()));
+        productCategoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", product.getId()));
         List<ProductCategory> categories = product.getCategoryIndex().stream()
-                .map(item -> new ProductCategory(null, product.getProductId(), item))
+                .map(item -> new ProductCategory(null, product.getId(), item))
                 .collect(Collectors.toList());
         if (categories.isEmpty())
             return 1;
