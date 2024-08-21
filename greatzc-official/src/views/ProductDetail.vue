@@ -272,6 +272,7 @@ export default {
 <style scoped>
 .preview>>>table {
   padding: 10px;
+  width: 800px;
 }
 
 .preview>>>td {

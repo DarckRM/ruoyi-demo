@@ -11,10 +11,21 @@
 
 <script>
 import Quill from 'quill'
+import QuillBetterTable from "quill-better-table";
+
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.bubble.css'
+import "quill-better-table/dist/quill-better-table.css";
+
 import { getToken } from "@/utils/auth";
+
+Quill.register(
+  {
+    "modules/better-table": QuillBetterTable
+  },
+  true
+);
 
 const titleConfig = {
   'ql-bold': '加粗',
@@ -90,7 +101,7 @@ export default {
       currentValue: "",
       options: {
         theme: 'snow',
-        bounds: document.body,
+        // bounds: document.body,
         modules: {
           toolbar: {
             container: [
@@ -112,31 +123,41 @@ export default {
               ["link", "image", "video"],                      // 链接、图片、视频
               [
                 { table: 'TD' },
-                { 'table-insert-row': 'TIR' },
-                { 'table-insert-column': 'TIC' },
-                { 'table-delete-row': 'TDR' },
-                { 'table-delete-column': 'TDC' }
+                // { 'table-insert-row': 'TIR' },
+                // { 'table-insert-column': 'TIC' },
+                // { 'table-delete-row': 'TDR' },
+                // { 'table-delete-column': 'TDC' }
               ]
             ],
             handlers: {
               table: function (val) {
-                this.quill.getModule('table').insertTable(3, 3)
-              },
-              'table-insert-row': function () {
-                this.quill.getModule('table').insertRowBelow()
-              },
-              'table-insert-column': function () {
-                this.quill.getModule('table').insertColumnRight()
-              },
-              'table-delete-row': function () {
-                this.quill.getModule('table').deleteRow()
-              },
-              'table-delete-column': function () {
-                this.quill.getModule('table').deleteColumn()
+                this.quill.getModule('better-table').insertTable(3, 3)
               }
             }
           },
-          table: true
+          table: false,
+          'better-table': {
+            operationMenu: {
+              items: {
+                insertColumnRight: { text: '右边插入一列' },
+                insertColumnLeft: { text: '左边插入一列' },
+                insertRowUp: { text: '上边插入一行' },
+                insertRowDown: { text: '下边插入一行' },
+                mergeCells: { text: '合并单元格' },
+                unmergeCells: { text: '拆分单元格' },
+                deleteColumn: { text: '删除列' },
+                deleteRow: { text: '删除行' },
+                deleteTable: { text: '删除表格' }
+              },
+              color: {
+                colors: ['green', 'red', 'yellow', 'blue', 'white'],
+                text: '背景色:'
+              }
+            }
+          },
+          keyboard: {
+            bindings: QuillBetterTable.keyboardBindings
+          }
         },
         placeholder: "请输入内容",
         readOnly: this.readOnly,
@@ -164,7 +185,10 @@ export default {
         if (val !== this.currentValue) {
           this.currentValue = val === null ? "" : val;
           if (this.quill) {
-            this.quill.clipboard.dangerouslyPasteHTML(this.currentValue);
+            let delta = this.quill.clipboard.convert({
+              html: val
+            })
+            this.quill.setContents(delta)
           }
         }
       },
@@ -270,18 +294,6 @@ export default {
     // this.quill.on('text-change', () => {
     //   this.$emit('contentData', this.quill.root.innerHTML)
     // })
-    this.$el.querySelector(
-      '.ql-table-insert-row'
-    ).innerHTML = `<svg t="1591862376726" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6306" width="18" height="200"><path d="M500.8 604.779L267.307 371.392l-45.227 45.27 278.741 278.613L779.307 416.66l-45.248-45.248z" p-id="6307"></path></svg>`
-    this.$el.querySelector(
-      '.ql-table-insert-column'
-    ).innerHTML = `<svg t="1591862238963" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6509" width="18" height="200"><path d="M593.450667 512.128L360.064 278.613333l45.290667-45.226666 278.613333 278.762666L405.333333 790.613333l-45.226666-45.269333z" p-id="6510"></path></svg>`
-    this.$el.querySelector(
-      '.ql-table-delete-row'
-    ).innerHTML = `<svg t="1591862253524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6632" width="18" height="200"><path d="M500.8 461.909333L267.306667 695.296l-45.226667-45.269333 278.741333-278.613334L779.306667 650.026667l-45.248 45.226666z" p-id="6633"></path></svg>`
-    this.$el.querySelector(
-      '.ql-table-delete-column'
-    ).innerHTML = `<svg t="1591862261059" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6755" width="18" height="200"><path d="M641.28 278.613333l-45.226667-45.226666-278.634666 278.762666 278.613333 278.485334 45.248-45.269334-233.365333-233.237333z" p-id="6756"></path></svg>`
     this.addQuillTitle()
   },
   activated() {
@@ -386,5 +398,15 @@ export default {
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
   content: "等宽字体";
+}
+
+.ql-editor {
+  min-height: 400px;
+  height: auto !important;
+  height: 400px;
+}
+
+.qlbt-operation-menu {
+  z-index: 9999 !important;
 }
 </style>

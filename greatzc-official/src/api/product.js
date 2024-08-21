@@ -2,6 +2,7 @@ import request from '@/utils/request'
 
 // 查询产品信息列表
 export function listProduct(query) {
+  query.lang = 'en-US'
   return request({
     url: '/product/list',
     method: 'get',

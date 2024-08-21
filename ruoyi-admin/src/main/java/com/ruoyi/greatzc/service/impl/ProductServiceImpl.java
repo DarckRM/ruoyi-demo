@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
@@ -99,10 +100,12 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public int insertProduct(Product product) {
+        product.setId(IdUtil.getSnowflakeNextId());
         product.setProductId(IdUtils.fastSimpleUUID());
         product.setCreateTime(DateUtils.getNowDate());
 
         productMapper.insertProduct(product);
+        productMapper.selectOne(new QueryWrapper<Product>().eq("product_id", product.getProductId()));
         return updateCategory(product);
     }
 
@@ -135,7 +138,7 @@ public class ProductServiceImpl implements IProductService {
     private int updateCategory(Product product) {
         productCategoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", product.getId()));
         List<ProductCategory> categories = product.getCategoryIndex().stream()
-                .map(item -> new ProductCategory(null, product.getId(), item))
+                .map(item -> new ProductCategory(0, product.getId(), item))
                 .collect(Collectors.toList());
         if (categories.isEmpty())
             return 1;
@@ -150,8 +153,9 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public int deleteProductByIds(Long[] ids) {
-        productMapper.deleteProductByIds(ids);
-        return productCategoryMapper.delete(new QueryWrapper<ProductCategory>().in("product_id", ids));
+        int rowProduct = productMapper.deleteProductByIds(ids);
+        productCategoryMapper.delete(new QueryWrapper<ProductCategory>().in("product_id", ids));
+        return rowProduct;
     }
 
     /**
@@ -162,7 +166,8 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public int deleteProductById(Long id) {
-        productMapper.deleteProductById(id);
-        return productCategoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", id));
+        int row = productMapper.deleteProductById(id);
+        productCategoryMapper.delete(new QueryWrapper<ProductCategory>().eq("product_id", id));
+        return row;
     }
 }

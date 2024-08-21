@@ -24,7 +24,13 @@ export default {
   props: { 
     urls: {
       type: String,
-      default: ""
+      default: (val) => {
+        console.log(val)
+        if (val == "" || val == null || val == undefined)
+          return ""
+        else
+          return val
+      }
     },
     navigate: {
       type: Boolean,

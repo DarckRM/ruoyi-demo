@@ -205,6 +205,16 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        name: [
+          { required: true, message: "产品名称不能为空", trigger: "blur"},
+        ],
+        title: [
+          { required: true, message: "产品展示标题不能为空", trigger: "blur"},
+        ],
+        lang: [
+          { required: true, message: "语种不能为空，请选择英语", trigger: "blur"},
+        ],
+
       },
       keywords: [],
       inputVisible: false,
@@ -218,7 +228,6 @@ export default {
     uploadDoc(value) {
       if (value.result) {
         this.form.content = value.result
-        this.form.shadowContent = value.result
       }
     },
     /** 查询产品信息列表 */
@@ -254,13 +263,13 @@ export default {
         orderNo: null,
         title: null,
         keywords: null,
+        lang: null,
         content: null,
         createTime: null,
         updateTime: null,
         status: null,
         show: null,
-        categoryIndex: null,
-        shadowContent: undefined
+        categoryIndex: null
       };
       this.resetForm("form");
     },
@@ -302,9 +311,6 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.form.keywords = this.keywords.toString()
-          if (this.form.shadowContent != undefined) {
-            this.form.content = this.form.shadowContent
-          }
           if (this.form.id != null) {
             updateProduct(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");

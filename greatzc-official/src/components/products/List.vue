@@ -30,7 +30,7 @@
         <BOverlay :show="loading">
           <div style="min-height: 800px;" class="row">
             <div v-for="product in products" class="col-lg-4 col-sm-6">
-              <div class="single-product" style="margin-bottom: 20px; height: 380px;">
+              <div class="single-product" style="margin-bottom: 20px; height: 360px;">
                 <div class="product-img">
                   <ImagePreview :imageStyle="'max-height: 180px; min-height: 120px'" :autoplay="randomSlideTime(product.banner)" :urls="product.banner" wrapAround>
                   </ImagePreview>
