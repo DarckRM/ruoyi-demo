@@ -97,7 +97,7 @@ export default {
       this.loading = true
       this.news = []
       return sleep(500).then(() => {
-        return listNews(this.params).then(res => {
+        listNews(this.params).then(res => {
           this.news = res.rows
           this.setTotal(res.total)
           this.ex1Rows = res.total

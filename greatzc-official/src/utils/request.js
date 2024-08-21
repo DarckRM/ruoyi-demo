@@ -2,7 +2,7 @@ import axios from "axios";
 import errorCode from "@/utils/errorCode";
 import { tansParams, blobValidate } from "@/utils/tools";
 import cache from "@/plugins/cache";
-import JSONbig from "json-bigint";
+import JSONBig from "json-bigint";
 
 // 是否显示重新登录
 export let isRelogin = { show: false };
@@ -13,15 +13,7 @@ const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   baseURL: import.meta.env.VITE_BASE_API,
   // 超时
-  timeout: 10000,
-  transformResponse: (data) => {
-    try {
-      return JSONbig.parse(data);
-    } catch (err) {
-      console.log(err);
-      return JSON.parse(data);
-    }
-  },
+  timeout: 10000
 });
 
 // request拦截器

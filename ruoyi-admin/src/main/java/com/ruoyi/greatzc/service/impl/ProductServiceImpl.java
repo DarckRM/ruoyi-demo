@@ -100,7 +100,7 @@ public class ProductServiceImpl implements IProductService {
      */
     @Override
     public int insertProduct(Product product) {
-        product.setId(IdUtil.getSnowflakeNextId());
+        product.setId(IdUtil.getSnowflakeNextId() / 1000);
         product.setProductId(IdUtils.fastSimpleUUID());
         product.setCreateTime(DateUtils.getNowDate());
 
