@@ -23,6 +23,7 @@ declare module 'vue' {
     Culture: typeof import('./src/components/about/Culture.vue')['default']
     Footer: typeof import('./src/components/footer/Footer.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    ImagePreview: typeof import('./src/components/tools/ImagePreview.vue')['default']
     List: typeof import('./src/components/news/List.vue')['default']
     Main: typeof import('./src/components/news/Main.vue')['default']
     Message: typeof import('./src/components/contact/Message.vue')['default']

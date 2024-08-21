@@ -2,7 +2,7 @@
   <div class="row">
     <div class="single-blog-post" v-for="newsInfo in news">
       <div class="post-image">
-        <carousel :autoplay="randomSlideTime(newsInfo.banner.split(',').length)" :wrap-around="true" :transition="500">
+        <carousel :autoplay="randomSlideTime(newsInfo.banner)" :wrap-around="true" :transition="500">
           <slide style="height: 400px;" v-for="banner in newsInfo.banner.split(',')" class="single-choose-us-box">
             <a>
               <img style="object-fit: cover" :src="getImgUrl(banner)" alt="Image">
@@ -36,6 +36,7 @@
 <script>
 import { Carousel, Slide } from 'vue3-carousel'
 import { getImgUrl, randomSlideTime } from '@/utils/getImgUrl';
+import ImagePreview from '@/components/tools/ImagePreview.vue';
 
 export default {
   components: {

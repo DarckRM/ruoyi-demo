@@ -1,11 +1,18 @@
 const imgPrefix = import.meta.env.VITE_FILE_API;
 
 export function getImgUrl(url) {
+  if (url == "")
+    return "/Louise.jpg"
   return imgPrefix + url;
 }
 
 // 获取一个随机的轮播图播放时间
-export function randomSlideTime(value) {
+export function randomSlideTime(param) {
+  if (param == undefined)
+    return 0
+
+  let value = param.split(',').length
+
   if (value == 1) {
     return 0
   }

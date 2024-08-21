@@ -17,59 +17,60 @@
           </div>
         </div>
       </div>
+      <div class="categories col-lg-3">
+        <BListGroup>
+          <BListGroupItem @click="clickCategory(cate)" button :active="cate.value == category"
+            v-for="cate in categories">
+            {{ cate.text }}
+            <BBadge style="float: right;" variant="primary">{{ cate.count }}</BBadge>
+          </BListGroupItem>
+        </BListGroup>
+      </div>
+      <div class="row">
+        <BOverlay :show="loading">
+          <div style="min-height: 800px;" class="row">
+            <div v-for="product in products" class="col-lg-4 col-sm-6">
+              <div class="single-product" style="margin-bottom: 20px; height: 380px;">
+                <div class="product-img">
+                  <ImagePreview :imageStyle="'max-height: 180px; min-height: 120px'" :autoplay="randomSlideTime(product.banner)" :urls="product.banner" wrapAround>
+                  </ImagePreview>
+                  <ul>
+                    <li>
+                      <a href="#product-view-one" data-toggle="modal">
+                        <i class="bx">
+                          <BiEye />
+                        </i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="bx">
+                          <BiSuitHeart />
+                        </i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
-      <BOverlay :show="loading">
-        <div class="categories col-lg-3">
-          <BListGroup>
-            <BListGroupItem @click="clickCategory(cate)" button :active="cate.value == category"
-              v-for="cate in categories">
-              {{ cate.text }}
-              <BBadge style="float: right;" variant="primary">{{ cate.count }}</BBadge>
-            </BListGroupItem>
-          </BListGroup>
-        </div>
-        <div style="min-height: 800px;" class="row">
-          <div v-for="product in products" class="col-lg-4 col-sm-6">
-            <div class="single-product" style="margin-bottom: 20px; height: 380px;">
-              <div class="product-img">
-                <carousel :autoplay="randomSlideTime(product.banner.split(',').length)" :wrap-around="true" :transition="500">
-                  <slide v-for="banner in product.banner.split(',')" class="single-choose-us-box bg-color-1">
-                    <img style="max-height: 200px;" :src="getImgUrl(banner)" alt="Image">
-                  </slide>
-                </carousel>
-                <ul>
-                  <li>
-                    <a href="#product-view-one" data-toggle="modal">
-                      <i class="bx">
-                        <BiEye />
-                      </i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="bx">
-                        <BiSuitHeart />
-                      </i>
-                    </a>
-                  </li>
-                </ul>
+                <router-link :to="'product/' + product.title + '/' + product.id">
+                  <h3>{{ product.title }}</h3>
+                </router-link>
+                <div style="overflow-y: auto;">
+                  <span v-for="cate in product.categories">{{ cate.name }}</span>
+                </div>
               </div>
+            </div>
 
-              <router-link :to="'product/' + product.title + '/' + product.id">
-                <h3>{{ product.title }}</h3>
-              </router-link>
-              <span v-for="cate in product.categories">{{ cate.name }}</span>
+            <div class="col-lg-12 col-md-12">
+              <div class="pagination-area">
+                <BPagination align="center" @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
+                  :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
+              </div>
             </div>
           </div>
+        </BOverlay>
+      </div>
 
-          <div class="col-lg-12 col-md-12">
-            <div class="pagination-area">
-              <BPagination align="center" @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
-                :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
-            </div>
-          </div>
-        </div>
-      </BOverlay>
     </div>
   </div>
   <!-- End Product Area -->
@@ -83,6 +84,7 @@ import { getImgUrl, randomSlideTime } from '@/utils/getImgUrl';
 import { BListGroup, BListGroupItem, BBadge, BOverlay } from 'bootstrap-vue-next';
 import { sleep } from '@/utils/tools';
 import { Carousel, Slide } from 'vue3-carousel'
+import ImagePreview from '../tools/ImagePreview.vue';
 
 const categories = [
 

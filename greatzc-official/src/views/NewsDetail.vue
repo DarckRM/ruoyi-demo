@@ -2,16 +2,20 @@
   <div class="blog-details-area">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="sidebar-widget">
+          <button class="search-button" type="submit">
+            <i class="bx bx-arrow-back"></i>
+            <router-link to="/news">
+              Back To News
+            </router-link>
+          </button>
+
+        </div>
+        <div class="col-lg-12 sidebar-widget">
           <div class="blog-details-content">
             <div class="blog-details-img">
-              <carousel :autoplay="5000" :wrap-around="true" :transition="500">
-                <slide v-for="banner in newsInfo.banner.split(',')" class="single-choose-us-box bg-color-1">
-                  <img style="max-height: 400px;" :src="getImgUrl(banner)" alt="Image">
-                </slide>
-              </carousel>
+              <ImagePreview :autoplay="5000" :urls="newsInfo.banner" :imageStyle="'height: 400px'"></ImagePreview>
             </div>
-
             <div class="blog-top-content">
               <div class="news-content">
                 <ul class="admin">

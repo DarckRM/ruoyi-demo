@@ -4,18 +4,9 @@
       <div class="row align-items-center">
         <div class="col-lg-6 col-md-12">
           <div class="product-details-image">
-            <carousel :autoplay="5000" :wrap-around="true" :transition="500">
-              <slide v-for="banner in product.banner.split(',')" class="single-choose-us-box bg-color-1">
-                <img style="max-height: 400px;" :src="getImgUrl(banner)" alt="Image">
-              </slide>
-              <template #addons>
-                <Navigation />
-                <Pagination style="margin-top: 0;" />
-              </template>
-            </carousel>
+            <ImagePreview :imageStyle="'height: 400px'" page :autoplay="5000" :urls="product.banner"></ImagePreview>
           </div>
         </div>
-
         <div class="col-lg-6 col-md-12">
           <div class="product-details-desc">
             <h3>{{ $route.params.name }}</h3>
@@ -26,10 +17,10 @@
                   <BiStarFill />
                 </i>
               </div>
-              <a href="#" class="rating-count">(3 Customer reviews)</a>
+              <!-- <a href="#" class="rating-count">(3 Customer reviews)</a> -->
             </div>
 
-            <div class="price">
+            <div class="price" style="display: none;">
               <!-- <span class="new-price"> <del>$00.00</del> $190.00</span> -->
             </div>
 
@@ -52,8 +43,8 @@
               </div>
             </div>
 
-            <button type="submit" class="default-btn">
-              <span>Add To Cart</span>
+            <button class="default-btn">
+              <router-link style="color: white;" to="/contact">Get Quote</router-link>
             </button>
 
             <ul class="social-wrap">
@@ -96,7 +87,7 @@
               <div class="col-lg-12 col-md-12">
                 <div class="tab_content">
                   <div class="tabs_item">
-                    <div class="products-details-tab-content">
+                    <div class="products-details-tab-content" style="max-width: 1200px; overflow-x: auto;">
                       <h3 class="mb-2">Description</h3>
                       <!-- <iframe style="width: 100%; min-height: 2000px"
                         :src="'/products/' + $route.params.id + '.html'"></iframe> -->
@@ -232,6 +223,7 @@ import { getImgUrl } from '@/utils/getImgUrl';
 import { getProduct } from '@/api/product';
 import { useRoute } from 'vue-router';
 import { useHead } from '@unhead/vue';
+import ImagePreview from '@/components/tools/ImagePreview.vue';
 
 export default {
   setup() {
@@ -249,7 +241,8 @@ export default {
     Slide,
     Pagination,
     Navigation,
-    useHead
+    useHead,
+    ImagePreview
   },
   data() {
     return {
