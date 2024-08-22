@@ -11,20 +11,20 @@ import path from "path";
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
-  const port = env.VITE_PORT
-  console.log(env)
+  const port = env.VITE_PORT;
+  console.log(env);
   return defineConfig({
     devServer: {
       host: "0.0.0.0",
       port: port,
       open: true,
       proxy: {
-        ['http://locahost:5173/dev-api']: {
+        ["http://locahost:" + port + "/dev-api"]: {
           name: "GreatZC Official Website",
           target: `http://localhost:8080`,
           changeOrigin: true,
           pathRewrite: {
-            ['http://locahost:5173/dev-api']: "",
+            ["http://locahost:" + port + "/dev-api"]: "",
           },
         },
       },

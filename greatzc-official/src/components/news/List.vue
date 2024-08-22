@@ -11,7 +11,7 @@
               </transition>
             </router-view>
           </BOverlay>
-          <div :style="$route.path != '/news/all' ? {display: 'none'} : {display: 'block'}" class="pagination-area">
+          <div :style="!showPage ? { display: 'none' } : { display: 'block' }" class="pagination-area">
             <BPagination align="center" @page-click="changePagination" v-model="params.pageNum" :total-rows="total"
               :per-page="params.pageSize" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" />
           </div>
@@ -67,6 +67,7 @@ export default {
         pageNum: 1,
         pageSize: 2
       },
+      showPage: true,
       loading: false,
       news: [],
       archives: {},
@@ -85,12 +86,31 @@ export default {
     Main
   },
   mounted() {
+    this.$watch(
+      () => this.$route,
+      (newId, oldId) => {
+        console.log(newId)
+        if (newId.name == 'all' || newId.name == 'type') {
+          this.showPage = true
+        } else {
+          this.showPage = false
+        }
+        if (newId.params.type) {
+          this.params.typeIndex = [newId.params.type]
+          this.getNews()
+        }
+        if (newId.name == 'all') {
+          this.params.typeIndex = [-1]
+          this.getNews()
+        }
+      }
+    )
     this.init()
   },
   methods: {
     init() {
       this.getNews().then(() => {
-        this.getTypes()
+        this.getTypes(this.total)
       })
     },
     getNews() {
@@ -123,14 +143,8 @@ export default {
         })
       })
     },
-    getTypes() {
+    getTypes(total) {
       listType().then(res => {
-        this.types = [{
-          key: -1,
-          text: 'All',
-          value: -1,
-          count: this.total
-        }]
         res.rows.forEach(e => {
           this.types.push(e)
         });

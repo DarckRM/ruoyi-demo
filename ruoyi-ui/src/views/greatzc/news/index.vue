@@ -53,6 +53,13 @@
       </el-table-column>
       <el-table-column label="标题" align="center" prop="title" />
       <el-table-column label="标签" align="center" prop="tags" />
+      <el-table-column label="分类" align="center" prop="category">
+        <template slot-scope="scope">
+          <el-tag v-for="type in scope.row.types">
+            {{ type.name }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="作者" align="center" prop="author" />
       <el-table-column label="是否启用" align="center" prop="status">
         <template slot-scope="scope">
@@ -86,9 +93,23 @@
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" type="textarea" placeholder="请输入内容" />
         </el-form-item>
-        <el-form-item label="标签" prop="tags">
-          <el-input v-model="form.tags" placeholder="请输入标签" />
-        </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="标签" prop="tags">
+              <el-input v-model="form.tags" placeholder="请输入标签" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="分类" prop="types">
+              <el-select multiple v-model="form.typeIndex">
+                <el-option v-for="type in types" :key="type.value" :label="type.label" :value="type.value">{{
+                  type.label
+                  }}</el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
         <el-form-item label="关键词">
           <el-tag :key="tag" v-for="tag in keywords" closable :disable-transitions="false" @close="handleClose(tag)"
             style="margin: 5px">
@@ -128,6 +149,7 @@
 
 <script>
 import { listNews, getNews, delNews, addNews, updateNews } from "@/api/greatzc/news";
+import { listType } from "@/api/greatzc/type";
 
 export default {
   name: "News",
@@ -171,7 +193,9 @@ export default {
       },
       keywords: [],
       inputVisible: false,
-      inputValue: ''
+      inputValue: '',
+      // 分类
+      types: []
     };
   },
   created() {
@@ -184,6 +208,16 @@ export default {
       listNews(this.queryParams).then(response => {
         this.newsList = response.rows;
         this.total = response.total;
+
+        listType().then(resp => {
+          resp.rows.forEach(e => {
+            this.types.push({
+              label: e.name,
+              value: e.id
+            })
+          });
+        })
+
         this.loading = false;
       });
     },

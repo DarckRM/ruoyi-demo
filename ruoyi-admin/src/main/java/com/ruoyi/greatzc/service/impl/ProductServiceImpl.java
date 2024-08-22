@@ -105,7 +105,6 @@ public class ProductServiceImpl implements IProductService {
         product.setCreateTime(DateUtils.getNowDate());
 
         productMapper.insertProduct(product);
-        productMapper.selectOne(new QueryWrapper<Product>().eq("product_id", product.getProductId()));
         return updateCategory(product);
     }
 

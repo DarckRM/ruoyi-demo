@@ -26,10 +26,15 @@
     <div class="sidebar-widget categories">
       <h3>Categories</h3>
       <ul>
+        <li>
+          <router-link :to="'/news/all'">All<span>
+              <BBadge variant="primary">{{ news.length }}</BBadge>
+            </span></router-link>
+        </li>
         <li v-for="type in types">
-          <a href="#">{{ type.text }}<span>
+          <router-link :to="'/news/type/' + type.value">{{ type.text }}<span>
               <BBadge variant="primary">{{ type.count }}</BBadge>
-            </span></a>
+            </span></router-link>
         </li>
       </ul>
     </div>

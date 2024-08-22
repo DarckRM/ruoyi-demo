@@ -291,9 +291,6 @@ export default {
       this.$emit("on-editor-change", eventName, ...args);
     });
 
-    // this.quill.on('text-change', () => {
-    //   this.$emit('contentData', this.quill.root.innerHTML)
-    // })
     this.addQuillTitle()
   },
   activated() {

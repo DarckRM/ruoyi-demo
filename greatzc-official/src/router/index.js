@@ -27,10 +27,16 @@ const routes = [
     children: [
       {
         path: "all",
+        name: "all",
         component: () => import("../components/news/Main.vue"),
       },
       {
-        path: ":tilte/:id",
+        path: "type/:type",
+        name: "type",
+        component: () => import("../components/news/Main.vue"),
+      },
+      {
+        path: ":title/:id",
         component: () => import("../views/NewsDetail.vue"),
       },
     ],
