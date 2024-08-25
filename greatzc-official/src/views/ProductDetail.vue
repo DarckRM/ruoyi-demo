@@ -277,7 +277,8 @@ export default {
 
 .preview>>>td {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 5px;
+  padding-left: 10px;
 }
 
 /* 鼠标悬停样式 */

@@ -53,7 +53,7 @@
                 </div>
 
                 <router-link :to="'product/' + product.title + '/' + product.id">
-                  <h3>{{ product.title }}</h3>
+                  <h3>{{ product.name }}</h3>
                 </router-link>
                 <div style="overflow-y: auto;">
                   <span v-for="cate in product.categories">{{ cate.name }}</span>
