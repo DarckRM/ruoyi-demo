@@ -40,6 +40,9 @@ public class News extends BaseEntity {
     @Excel(name = "标题")
     private String title;
 
+    @Excel(name = "排序")
+    private Integer orderNo;
+
     /**
      * 标签
      */
@@ -81,70 +84,6 @@ public class News extends BaseEntity {
     @TableField(exist = false)
     private List<TypeVO> types = new ArrayList<>();
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setBanner(String banner) {
-        this.banner = banner;
-    }
-
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public String getTags() {
-        return tags;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setShow(String show) {
-        this.show = show;
-    }
-
-    public String getShow() {
-        return show;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -153,6 +92,7 @@ public class News extends BaseEntity {
                 .append("title", getTitle())
                 .append("tags", getTags())
                 .append("content", getContent())
+                .append("orderNo", getOrderNo())
                 .append("createTime", getCreateTime())
                 .append("updateTime", getUpdateTime())
                 .append("status", getStatus())

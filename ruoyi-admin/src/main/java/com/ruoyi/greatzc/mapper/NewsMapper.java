@@ -28,6 +28,15 @@ public interface NewsMapper
     public List<News> selectNewsList(News news);
 
     /**
+     * @author akarin
+     * @description 首页获取新闻列表
+     * @date 2024/8/26 0:19
+     * @param news TODO))
+     * @return java.util.List<com.ruoyi.greatzc.domain.News>
+     **/
+    List<News> apiSelectNewsList(News news);
+
+    /**
      * 新增新闻列表
      * 
      * @param news 新闻列表

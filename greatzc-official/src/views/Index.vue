@@ -138,7 +138,7 @@
     <!-- End Choose Us Area -->
 
     <!-- Start Counter Area -->
-    <section class="counter-area bg-color pt-100 pb-70">
+    <section style="display: none;" class="counter-area bg-color pt-100 pb-70">
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">

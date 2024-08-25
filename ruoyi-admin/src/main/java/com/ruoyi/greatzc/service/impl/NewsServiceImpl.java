@@ -1,6 +1,7 @@
 package com.ruoyi.greatzc.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,6 +58,15 @@ public class NewsServiceImpl implements INewsService {
      */
     @Override
     public List<News> selectNewsList(News news) {
+        List<News> newsList = newsMapper.selectNewsList(news);
+        if (newsList.isEmpty())
+            return newsList;
+
+        return injectTypes(newsList);
+    }
+
+    @Override
+    public List<News> apiSelectNewsList(News news) {
         List<News> newsList = newsMapper.selectNewsList(news);
         if (newsList.isEmpty())
             return newsList;

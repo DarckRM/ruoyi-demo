@@ -43,7 +43,7 @@ public class Product extends BaseEntity {
      * 排序
      */
     @Excel(name = "排序")
-    private Long orderNo;
+    private Integer orderNo;
 
     /**
      * 标题

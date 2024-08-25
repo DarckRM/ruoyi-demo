@@ -50,6 +50,7 @@
 
     <el-table v-loading="loading" :data="productList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
+      <el-table-column label="排序" align="center" prop="orderNo" />
       <el-table-column label="封面" align="center" prop="banner" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.banner" :width="50" :height="50" />
@@ -101,9 +102,18 @@
         <el-form-item label="封面" prop="banner">
           <image-upload v-model="form.banner" />
         </el-form-item>
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入名称" />
-        </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="名称" prop="name">
+              <el-input v-model="form.name" placeholder="请输入名称" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="排序" prop="orderNo">
+              <el-input-number v-model="form.orderNo" controls-position="right" :min="0" />
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-row>
           <el-col :span="12">
             <el-form-item label="分类" prop="categories">
@@ -206,13 +216,13 @@ export default {
       // 表单校验
       rules: {
         name: [
-          { required: true, message: "产品名称不能为空", trigger: "blur"},
+          { required: true, message: "产品名称不能为空", trigger: "blur" },
         ],
         title: [
-          { required: true, message: "产品展示标题不能为空", trigger: "blur"},
+          { required: true, message: "产品展示标题不能为空", trigger: "blur" },
         ],
         lang: [
-          { required: true, message: "语种不能为空，请选择英语", trigger: "blur"},
+          { required: true, message: "语种不能为空，请选择英语", trigger: "blur" },
         ],
 
       },
@@ -260,15 +270,15 @@ export default {
         id: null,
         banner: null,
         name: null,
-        orderNo: null,
+        orderNo: 0,
         title: null,
         keywords: null,
         lang: null,
         content: null,
         createTime: null,
         updateTime: null,
-        status: null,
-        show: null,
+        status: 'Y',
+        show: 'Y',
         categoryIndex: null
       };
       this.resetForm("form");

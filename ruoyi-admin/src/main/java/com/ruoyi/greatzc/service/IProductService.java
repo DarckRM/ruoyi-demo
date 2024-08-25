@@ -30,6 +30,15 @@ public interface IProductService
     public List<Product> selectProductList(Product product);
 
     /**
+     * @author akarin
+     * @description 首页使用的产品查询接口
+     * @date 2024/8/25 23:16
+     * @param product TODO))
+     * @return java.util.List<com.ruoyi.greatzc.domain.Product>
+     **/
+    public List<Product> apiSelectProducts(Product product);
+
+    /**
      * 新增产品信息
      * 
      * @param product 产品信息

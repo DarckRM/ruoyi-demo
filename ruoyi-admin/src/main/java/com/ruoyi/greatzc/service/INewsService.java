@@ -27,6 +27,7 @@ public interface INewsService
      */
     public List<News> selectNewsList(News news);
 
+    List<News> apiSelectNewsList(News news);
     /**
      * 新增新闻列表
      * 

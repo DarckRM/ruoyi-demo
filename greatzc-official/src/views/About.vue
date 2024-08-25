@@ -269,7 +269,7 @@
     <!-- End Track Area -->
 
     <!-- Start Testimonials Area -->
-    <section class="testimonials-area ptb-100">
+    <section style="display: none;" class="testimonials-area ptb-100">
       <div class="container-fluid p-0">
         <div class="section-title">
           <span>Our Testimonials</span>
@@ -329,18 +329,19 @@
       <div class="container">
         <div class="shipment-content">
           <span class="top-title">Shipment</span>
-          <h2>Are You A Shipper? Please Knock Us On The Below Button</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste facere, unde nesciunt ratione amet
-            voluptatibus aut, iure magnam accusantium consequatur voluptatum nam ipsum in soluta consectetur temporibus
-            nobis itaque!</p>
+          <h2>Are You A Hardware Developer? Please Knock Us On The Below Button</h2>
 
           <div class="shipment-btn">
-            <a href="#" class="default-btn">
-              <span>Make A Shipment</span>
-            </a>
-            <a href="contact-us.html" class="default-btn active">
-              <span>Contact Us</span>
-            </a>
+            <router-link to="contact">
+              <a class="default-btn">
+                <span>Make A Quote</span>
+              </a>
+            </router-link>
+            <router-link to="contact">
+              <a class="default-btn active">
+                <span>Contact Us</span>
+              </a>
+            </router-link>
           </div>
         </div>
       </div>

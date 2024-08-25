@@ -30,7 +30,7 @@ public class ProductApi extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(Product product) {
         startPage();
-        List<Product> list = productService.selectProductList(product);
+        List<Product> list = productService.apiSelectProducts(product);
         return getDataTable(list);
     }
 

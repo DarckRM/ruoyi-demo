@@ -41,7 +41,7 @@
             <if test="status != null ">and status = #{status}</if>
             <if test="show != null ">and show = #{show}</if>
         </where>
-        ORDER BY create_time DESC
+        ORDER BY order_no ASC, create_time DESC
     </select>
 
     <select id="selectProductById" parameterType="Long" resultMap="ProductResult">
@@ -114,4 +114,24 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="apiSelectProducts" resultType="com.ruoyi.greatzc.domain.Product">
+        <include refid="selectProductVo"/>
+        LEFT JOIN product_category t2 ON t1.id = t2.product_id
+        <where>
+            <if test="categoryIndex != null and categoryIndex.size() > 0 and categoryIndex[0] > 0">
+                t2.category_id = #{categoryIndex[0]}
+            </if>
+            <if test="lang != null  and lang != ''">and lang = #{lang}</if>
+            <if test="banner != null  and banner != ''">and banner = #{banner}</if>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="orderNo != null ">and order_no = #{orderNo}</if>
+            <if test="title != null  and title != ''">and title like concat('%', #{title}, '%')</if>
+            <if test="content != null  and content != ''">and content = #{content}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="show != null ">and show = #{show}</if>
+            AND status = 'Y'
+        </where>
+        ORDER BY `order_no` ASC, create_time DESC
+    </select>
 </mapper>

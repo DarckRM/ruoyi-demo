@@ -45,7 +45,7 @@
 
     <el-table v-loading="loading" :data="newsList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="主键" align="center" prop="id" />
+      <el-table-column label="排序" align="center" prop="orderNo" />
       <el-table-column label="封面" align="center" prop="banner" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.banner" :width="50" :height="50" />
@@ -90,9 +90,18 @@
         <el-form-item label="封面" prop="banner">
           <image-upload v-model="form.banner" />
         </el-form-item>
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="form.title" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="form.title" type="textarea" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="排序" prop="orderNo">
+              <el-input-number v-model="form.orderNo" controls-position="right" :min="0" />
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-row>
           <el-col :span="12">
             <el-form-item label="标签" prop="tags">
@@ -104,7 +113,7 @@
               <el-select multiple v-model="form.typeIndex">
                 <el-option v-for="type in types" :key="type.value" :label="type.label" :value="type.value">{{
                   type.label
-                  }}</el-option>
+                }}</el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -236,9 +245,10 @@ export default {
         content: null,
         createTime: null,
         updateTime: null,
-        status: null,
+        status: 'Y',
         author: null,
-        show: null
+        show: 'Y',
+        orderNo: 0
       };
       this.resetForm("form");
     },

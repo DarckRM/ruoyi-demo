@@ -62,4 +62,13 @@ public interface ProductMapper extends BaseMapper<Product>
      * @return 结果
      */
     public int deleteProductByIds(Long[] ids);
+
+    /**
+     * @author akarin
+     * @description 提供给首页的产品查询接口
+     * @date 2024/8/25 23:12
+     * @param product 参数
+     * @return java.util.List<com.ruoyi.greatzc.domain.Product>
+     **/
+    List<Product> apiSelectProducts(Product product);
 }

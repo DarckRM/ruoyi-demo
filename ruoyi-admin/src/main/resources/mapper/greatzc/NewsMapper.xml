@@ -9,6 +9,7 @@
         <result property="banner" column="banner"/>
         <result property="title" column="title"/>
         <result property="tags" column="tags"/>
+        <result property="orderNo" column="order_no"/>
         <result property="content" column="content"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -19,7 +20,7 @@
     </resultMap>
 
     <sql id="selectNewsVo">
-        select DISTINCT t1.id, banner, title, tags, content, create_time, update_time, `status`, author, `show`, keywords from news t1
+        select DISTINCT t1.id, banner, title, tags, order_no, content, create_time, update_time, `status`, author, `show`, keywords from news t1
     </sql>
 
     <select id="selectNewsList" parameterType="News" resultMap="NewsResult">
@@ -37,7 +38,7 @@
             <if test="author != null  and author != ''">and author like concat('%', #{author}, '%')</if>
             <if test="show != null  and show != ''">and `show` = #{show}</if>
         </where>
-        ORDER BY create_time DESC
+        ORDER BY order_no ASC, create_time DESC
     </select>
 
     <select id="selectNewsById" parameterType="Long" resultMap="NewsResult">
@@ -59,6 +60,7 @@
             <if test="author != null">author,</if>
             <if test="show != null">`show`,</if>
             <if test="keywords != null">`keywords`,</if>
+            <if test="orderNo != null">`order_no`,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -72,6 +74,7 @@
             <if test="author != null">#{author},</if>
             <if test="show != null">#{show},</if>
             <if test="keywords != null">#{keywords},</if>
+            <if test="orderNo != null">#{orderNo},</if>
         </trim>
     </insert>
 
@@ -88,6 +91,7 @@
             <if test="author != null">author = #{author},</if>
             <if test="show != null">`show` = #{show},</if>
             <if test="keywords != null">`keywords` = #{keywords},</if>
+            <if test="orderNo != null">`order_no` = #{orderNo},</if>
         </trim>
         where id = #{id}
     </update>
@@ -102,4 +106,23 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="apiSelectNewsList" resultType="com.ruoyi.greatzc.domain.News">
+        <include refid="selectNewsVo"/>
+        LEFT JOIN news_type t2 ON t1.id = t2.news_id
+        <where>
+            <if test="typeIndex != null and typeIndex.size() > 0 and typeIndex[0] > 0">
+                t2.type_id = #{typeIndex[0]}
+            </if>
+            <if test="banner != null  and banner != ''">and banner = #{banner}</if>
+            <if test="title != null  and title != ''">and title like concat('%', #{title}, '%')</if>
+            <if test="tags != null  and tags != ''">and tags like concat('%', #{tags}, '%')</if>
+            <if test="content != null  and content != ''">and content = #{content}</if>
+            <if test="status != null  and status != ''">and `status` = #{status}</if>
+            <if test="author != null  and author != ''">and author like concat('%', #{author}, '%')</if>
+            <if test="show != null  and show != ''">and `show` = #{show}</if>
+            AND `status` = 'Y'
+        </where>
+        ORDER BY order_no ASC, create_time DESC
+    </select>
 </mapper>

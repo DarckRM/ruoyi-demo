@@ -1,9 +1,6 @@
 package com.ruoyi.greatzc.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import cn.hutool.core.util.IdUtil;
@@ -72,6 +69,16 @@ public class ProductServiceImpl implements IProductService {
         return injectCategories(products);
     }
 
+    @Override
+    public List<Product> apiSelectProducts(Product product) {
+        List<Product> products = productMapper.apiSelectProducts(product);
+        if (products.isEmpty())
+            return products;
+
+        // 拼装分类信息
+        return injectCategories(products);
+    }
+
     private List<Product> injectCategories(List<Product> products) {
         List<Long> productIds = products.stream()
                 .map(Product::getId)
@@ -103,6 +110,10 @@ public class ProductServiceImpl implements IProductService {
         product.setId(IdUtil.getSnowflakeNextId() / 1000);
         product.setProductId(IdUtils.fastSimpleUUID());
         product.setCreateTime(DateUtils.getNowDate());
+
+        // 默认排序为 0
+        if (ObjectUtils.isEmpty(product.getOrderNo()))
+            product.setOrderNo(0);
 
         productMapper.insertProduct(product);
         return updateCategory(product);
