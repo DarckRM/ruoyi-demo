@@ -60,4 +60,10 @@ spring:
           config:
             multi-statement-allow: true
 
+server:
+  ssl:
+    key-store: /etc/letsencrypt/live/localhost/cert.p12
+    key-store-password: 139258
+    keyStoreType: PKCS12
+
 baseUrl: http://127.0.0.1:8080/
