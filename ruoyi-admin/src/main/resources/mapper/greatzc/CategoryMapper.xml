@@ -11,10 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="status"    column="status"    />
+        <result property="orderNo"    column="order_no"    />
     </resultMap>
 
     <sql id="selectCategoryVo">
-        select id, name, major_cate, create_time, update_time, status from category
+        select id, name, major_cate, create_time, update_time, status, order_no from category
     </sql>
 
     <select id="selectCategoryList" parameterType="Category" resultMap="CategoryResult">
@@ -60,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="majorCate != null">major_cate = #{majorCate},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="orderNo != null">orderNo = #{orderNo},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
             <if test="status != null">status = #{status},</if>
         </trim>
         where id = #{id}
