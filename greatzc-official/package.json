@@ -16,6 +16,7 @@
     "bootstrap-vue-next": "^0.24.2",
     "json-bigint": "^1.0.0",
     "path": "^0.12.7",
+    "vite-plugin-ssr": "^0.4.142",
     "vue": "^3.4.31",
     "vue-router": "^4.4.1",
     "vue3-carousel": "^0.3.3"

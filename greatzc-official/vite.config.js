@@ -44,7 +44,7 @@ export default ({ mode }) => {
       Icons({
         compiler: "vue3",
         autoInstall: true,
-      }),
+      })
     ],
   });
 };

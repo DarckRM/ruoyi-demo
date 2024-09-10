@@ -22,7 +22,7 @@
           <BListGroupItem @click="clickCategory(cate)" button :active="cate.value == category"
             v-for="cate in categories">
             {{ cate.text }}
-            <BBadge style="float: right;" variant="primary">{{ cate.count }}</BBadge>
+            <!-- <BBadge style="float: right;" variant="primary">{{ cate.count }}</BBadge> -->
           </BListGroupItem>
         </BListGroup>
       </div>
