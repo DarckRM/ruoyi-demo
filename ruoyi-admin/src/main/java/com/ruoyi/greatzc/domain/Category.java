@@ -1,5 +1,6 @@
 package com.ruoyi.greatzc.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.ruoyi.common.core.domain.TreeEntity;
  * @author akarin
  * @date 2024-07-14
  */
+@Data
 public class Category extends TreeEntity
 {
     private static final long serialVersionUID = 1L;
@@ -30,52 +32,7 @@ public class Category extends TreeEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Long status;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+    @Excel(name = "排序")
+    private Integer orderNo;
 
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
-
-    public String getName() 
-    {
-        return name;
-    }
-    public void setMajorCate(Long majorCate) 
-    {
-        this.majorCate = majorCate;
-    }
-
-    public Long getMajorCate() 
-    {
-        return majorCate;
-    }
-    public void setStatus(Long status) 
-    {
-        this.status = status;
-    }
-
-    public Long getStatus() 
-    {
-        return status;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("name", getName())
-            .append("majorCate", getMajorCate())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .append("status", getStatus())
-            .toString();
-    }
 }
