@@ -1,0 +1,1001 @@
+repo_name: DarckRM/ruoyi-demo
+report_id: 50d4ffa5a9f8187da41c14712f4ec08a
+version: 0.1
+repo_type: Public
+timestamp: '2024-07-17T08:14:39+00:00'
+requested_by: DarckRM
+provider: github
+branch: master
+detected_tools_count: 76
+tools:
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  version: '1.8'
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/pom.xml
+  detection_source: Repo Metadata
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo
+  detection_source: Repo Metadata
+- name: SQL
+  description: It is a domain-specific language used in programming
+  website_url: https://en.wikipedia.org/wiki/SQL
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/sql/auditoriums.sql
+  detection_source: sql/auditoriums.sql
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: ECharts
+  description: A free, powerful charting and visualization library
+  website_url: https://echarts.apache.org/en/index.html
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Charting Libraries
+  image_url: https://img.stackshare.io/service/4230/aSzYQa43_400x400.jpg
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Sass
+  description: Syntactically Awesome Style Sheets
+  website_url: http://sass-lang.com/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: CSS Pre-processors / Extensions
+  image_url: https://img.stackshare.io/service/1171/jCR2zNJV.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Spring Framework
+  description: An application framework and inversion of control container for the
+    Java platform
+  website_url: https://spring.io/projects/spring-framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/2006/spring-framework-project-logo.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: Vue.js
+  description: A progressive framework for building user interfaces
+  website_url: http://vuejs.org/
+  version: 2.6.12
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript MVC Frameworks
+  image_url: https://img.stackshare.io/service/3837/paeckCWC.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: vuex
+  description: Centralized State Management for Vue.js.
+  website_url: https://vuex.vuejs.org
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: State Management Library
+  image_url: https://img.stackshare.io/service/6705/6128107.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: MySQL
+  description: The world's most popular open source database
+  website_url: http://www.mysql.com
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1025/logo-mysql-170x170.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Redis
+  description: Open source (BSD licensed), in-memory data structure store
+  website_url: http://redis.io/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: In-Memory Databases
+  image_url: https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Babel
+  description: Use next generation JavaScript, today.
+  website_url: http://babeljs.io/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: JavaScript Compilers
+  image_url: https://img.stackshare.io/service/2739/-1wfGjNw.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/babel.config.js
+  detection_source: ruoyi-ui/babel.config.js
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: ESLint
+  description: The fully pluggable JavaScript code quality tool
+  website_url: http://eslint.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo
+  detection_source: Repo Metadata
+- name: JUnit
+  description: A programmer-oriented testing framework for Java
+  website_url: http://junit.org/
+  license: EPL-1.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Testing Frameworks
+  image_url: https://img.stackshare.io/service/2020/874086.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Logback
+  description: A logging framework for Java applications
+  website_url: https://logback.qos.ch/
+  open_source: false
+  hosted_saas: false
+  category: Monitoring
+  sub_category: Log Management
+  image_url: https://img.stackshare.io/service/2923/05518ecaa42841e834421e9d6987b04f_400x400.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/src/main/resources/logback.xml
+  detection_source: ruoyi-admin/src/main/resources/logback.xml
+  last_updated_by: DarckRM
+  last_updated_on: 2024-07-14 09:22:33.000000000 Z
+- name: highlight.js
+  description: Syntax highlighter in JavaScript
+  website_url: https://highlightjs.org/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Text Editor
+  image_url: https://img.stackshare.io/service/6888/c17e7d9688d86bd9f9506ec1fbd6d200_400x400.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: Apache Camel
+  description: A versatile open source integration framework
+  website_url: https://camel.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Application Hosting
+  sub_category: Platform as a Service
+  image_url: https://img.stackshare.io/service/3276/xWt1RFo6_400x400.jpg
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/src/main/resources/application.yml
+  detection_source: ruoyi-admin/src/main/resources/application.yml
+  last_updated_by: DarckRM
+  last_updated_on: 2024-07-14 13:58:02.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo
+  detection_source: Repo Metadata
+- name: axios
+  description: Promise based HTTP client for the browser and node.js
+  website_url: https://github.com/mzabriskie/axios
+  version: 0.24.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/no-img-open-source.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: chalk
+  description: terminal colors
+  website_url: https://github.com/chalk/chalk
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/8072/13122722.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: lint-staged
+  website_url: https://github.com/okonet/lint-staged
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/10577/11071.jpeg
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: quill
+  description: Your powerful, rich text editor
+  package_url: https://www.npmjs.com/quill
+  version: 1.3.7
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17002/default_192373fe2b3ded7bb442c39dbf0f34ca3e5bed5d.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+  vulnerabilities:
+  - name: Cross-site Scripting in quill
+    cve_id: CVE-2021-3163
+    cve_url: https://github.com/advisories/GHSA-4943-9vgg-gr5r
+    detected_date: Aug 22
+    severity: moderate
+    first_patched:
+- name: "@vue/cli-plugin-babel"
+  description: Babel plugin for vue-cli
+  package_url: https://www.npmjs.com/@vue/cli-plugin-babel
+  version: 4.4.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16006/default_af9df0bc9fa88191d2fe609204c5bd7599c1a797.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: "@vue/cli-plugin-eslint"
+  description: Eslint plugin for vue-cli
+  package_url: https://www.npmjs.com/@vue/cli-plugin-eslint
+  version: 4.4.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16035/default_b8a893285867e41b5fc4a7631d8fc2da834d778c.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: "@vue/cli-service"
+  description: Local service for vue-cli projects
+  package_url: https://www.npmjs.com/@vue/cli-service
+  version: 4.4.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15990/default_cbd6c289400672b291755183817e9dd6abe1a612.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: babel-eslint
+  description: Custom parser for ESLint
+  package_url: https://www.npmjs.com/babel-eslint
+  version: 10.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15803/default_db4a7791d2f1174547374b9b587bc10fec088a5a.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: babel-plugin-dynamic-import-node
+  description: Babel plugin to transpile import
+  package_url: https://www.npmjs.com/babel-plugin-dynamic-import-node
+  version: 2.3.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16308/default_22cf6cee54c697b5a223902962cc57a55ee80be9.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: chalk
+  description: Terminal string styling done right
+  package_url: https://www.npmjs.com/chalk
+  version: 4.1.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15813/default_db4a7791d2f1174547374b9b587bc10fec088a5a.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: clipboard
+  description: Modern copy to clipboard. No Flash. Just 2kb
+  package_url: https://www.npmjs.com/clipboard
+  version: 2.0.8
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16838/default_5c6919c5e02b8e6c83f3a2b23db5b6962e3caca0.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: compression-webpack-plugin
+  description: Prepare compressed versions of assets to serve them with Content-Encoding
+  package_url: https://www.npmjs.com/compression-webpack-plugin
+  version: 6.1.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16347/default_17385ab3aa01d4c295c08d4a9736140df691c5e9.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: connect
+  description: High performance middleware framework
+  package_url: https://www.npmjs.com/connect
+  version: 3.6.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16202/default_2c2f2c7b016f84c0fad2576cb986cb14a5dbbc2f.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: core-js
+  description: Standard library
+  package_url: https://www.npmjs.com/core-js
+  version: 3.25.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15869/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: element-ui
+  description: A Component Library for Vue.js
+  package_url: https://www.npmjs.com/element-ui
+  version: 2.15.14
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16240/default_5dfc1810d0882ab844578a326bb8bf19e45e7227.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: eslint-plugin-vue
+  description: Official ESLint plugin for Vue.js
+  package_url: https://www.npmjs.com/eslint-plugin-vue
+  version: 7.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15950/default_f49d4c116f8ea0155f4d92673b084378bba02760.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: file-saver
+  description: An HTML5 saveAs
+  package_url: https://www.npmjs.com/file-saver
+  version: 2.0.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16795/default_6e51a44775c61dcb2888547ad406a2f0cf2c344e.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: fuse.js
+  description: Lightweight fuzzy-search
+  package_url: https://www.npmjs.com/fuse.js
+  version: 6.4.3
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17405/default_c11ea7d401c11f11d89301d0302509ab7d72e5ac.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: js-beautify
+  description: Beautifier.io for node
+  package_url: https://www.npmjs.com/js-beautify
+  version: 1.13.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16340/default_17385ab3aa01d4c295c08d4a9736140df691c5e9.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: js-cookie
+  description: A simple, lightweight JavaScript API for handling cookies
+  package_url: https://www.npmjs.com/js-cookie
+  version: 3.0.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16441/default_89ba91277e3434b03295bb11d22736632df1d04f.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: lint-staged
+  description: Lint files staged by git
+  package_url: https://www.npmjs.com/lint-staged
+  version: 10.5.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15868/default_e0a4fb1126d7400f419f0931cf1669947a5bc552.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: nprogress
+  description: Simple slim progress bars
+  package_url: https://www.npmjs.com/nprogress
+  version: 0.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17061/default_23002b02644a8cb313a0f53f43df271731022a9e.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: sass-loader
+  description: Sass loader for webpack
+  package_url: https://www.npmjs.com/sass-loader
+  version: 10.1.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15842/default_b71c906aeda030a5e2f1fe40bf12a93be52404ab.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: screenfull
+  description: Simple wrapper for cross-browser usage of the JavaScript Fullscreen
+    API
+  package_url: https://www.npmjs.com/screenfull
+  version: 5.0.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17952/default_d8903d76dded6915fe2da53370802097e7af05c2.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: script-ext-html-webpack-plugin
+  description: Enhances html-webpack-plugin functionality with async and defer attributes
+    for script elements
+  package_url: https://www.npmjs.com/script-ext-html-webpack-plugin
+  version: 2.1.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17955/default_cc042fd7c0a9cf091d301af307c99c8b7b08b8bc.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: DarckRM
+  last_updated_on: 2024-07-14 09:22:33.000000000 Z
+- name: sortablejs
+  description: JavaScript library for reorderable drag-and-drop lists on modern browsers
+    and touch devices
+  package_url: https://www.npmjs.com/sortablejs
+  version: 1.10.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17481/default_188fa5cbc974fa18aed5a9b1f0d7f2bfaf8f1648.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: svg-sprite-loader
+  description: Webpack loader for creating SVG sprites
+  package_url: https://www.npmjs.com/svg-sprite-loader
+  version: 5.1.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17006/default_88e2e076a71afdc1de87ad42c80c1606f2689af1.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: vue
+  description: Vue
+  package_url: https://www.npmjs.com/vue
+  version: 2.6.12
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15844/default_b71c906aeda030a5e2f1fe40bf12a93be52404ab.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: vue-router
+  description: Official router for Vue.js 2
+  package_url: https://www.npmjs.com/vue-router
+  version: 3.4.9
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15969/default_261820f5687b4c88a3e8f95c71b5e8dccd34c1d7.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: vue-template-compiler
+  description: Template compiler for Vue 2.0
+  package_url: https://www.npmjs.com/vue-template-compiler
+  version: 2.6.12
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15850/default_0b10af8ca19c215f781dc07442e75bdc831089d0.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: vuedraggable
+  description: Draggable component for vue
+  package_url: https://www.npmjs.com/vuedraggable
+  version: 2.24.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17468/default_911633508f32a5d5016c37ab38144cd661ceb682.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-ui/package.json
+  detection_source: ruoyi-ui/package.json
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: com.alibaba:druid-spring-boot-starter
+  description: Spring Boot with Druid support,help you simplify Druid config in Spring
+    Boot
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-framework/pom.xml
+  detection_source: ruoyi-framework/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: com.fasterxml.jackson.core:jackson-databind
+  description: 'General data-binding functionality for Jackson: works on core streaming
+    API'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: com.github.oshi:oshi-core
+  description: A JNA-based
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-framework/pom.xml
+  detection_source: ruoyi-framework/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: commons-io:commons-io
+  description: The Apache Commons IO library contains utility classes
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: io.jsonwebtoken:jjwt
+  description: 'Java JWT: JSON Web Token for Java and Android'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: io.swagger:swagger-models
+  description: Examples and server integrations for generating the Swagger API Specification
+  version: 1.6.2
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: javax.servlet:javax.servlet-api
+  description: Java.net - The Source for Java Technology Collaboration
+  license: GPL-2.0-with-classpath-exception
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: javax.xml.bind:jaxb-api
+  description: JAXB
+  license: CDDL-1.1,CNRI-Python-GPL-Compatible
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: junit:junit
+  description: JUnit is a unit testing framework for Java
+  license: EPL-1.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: mysql:mysql-connector-java
+  description: MySQL JDBC Type 4 driver
+  license: GPL-3.0-only
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.apache.commons:commons-lang3
+  description: Apache Commons Lang
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.apache.commons:commons-pool2
+  description: The Apache Commons Object Pooling Library
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.apache.poi:poi-ooxml
+  description: Apache POI - Java API To Access Microsoft Format Files
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.quartz-scheduler:quartz
+  description: Enterprise Job Scheduler
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-quartz/pom.xml
+  detection_source: ruoyi-quartz/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework.boot:spring-boot-devtools
+  description: Spring Boot Developer Tools
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-aop
+  description: Starter for aspect-oriented programming with Spring AOP and AspectJ
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-framework/pom.xml
+  detection_source: ruoyi-framework/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-data-redis
+  description: Starter for using Redis key-value data store with Spring Data Redis
+    and the Lettuce client
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-security
+  description: Starter for using Spring Security
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-test
+  description: Starter for testing Spring Boot applications with libraries including
+    JUnit
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-validation
+  description: Starter for using Java Bean Validation with Hibernate Validator
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-web
+  description: Starter for building web, including RESTful, applications using Spring
+    MVC
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-framework/pom.xml
+  detection_source: ruoyi-framework/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework.boot:spring-boot-test
+  description: Spring Boot Test
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: org.springframework:spring-context-support
+  description: Spring Context Support
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.springframework:spring-test
+  description: Spring TestContext Framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-admin/pom.xml
+  detection_source: ruoyi-admin/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-21 10:20:43.000000000 Z
+- name: org.springframework:spring-web
+  description: Spring Web
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
+- name: org.yaml:snakeyaml
+  description: YAML 1.1 parser and emitter for Java
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/DarckRM/ruoyi-demo/blob/master/ruoyi-common/pom.xml
+  detection_source: ruoyi-common/pom.xml
+  last_updated_by: akarin
+  last_updated_on: 2024-05-20 09:56:34.000000000 Z
